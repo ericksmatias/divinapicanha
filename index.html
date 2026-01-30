@@ -214,6 +214,72 @@ body.menu-open {
     border-color: #000000 !important;     /* Se houver borda, isso também muda */
 }
 
+/* Container do aviso */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 99;
+    pointer-events: none; /* Não atrapalha cliques */
+}
+
+/* O mouse (aparece mais no PC) */
+.mouse {
+    width: 26px;
+    height: 40px;
+    border: 2px solid #ffffff; /* Cor da borda */
+    border-radius: 20px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: #ffffff; /* Cor da rodinha */
+    margin: 5px auto;
+    border-radius: 2px;
+    animation: scroll-wheel 1.6s infinite;
+}
+
+/* As setinhas (visíveis em Mobile e PC) */
+.arrow span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid #ffffff; /* Cor da seta */
+    border-right: 2px solid #ffffff;
+    transform: rotate(45deg);
+    margin: -5px auto;
+    animation: arrow-down 1.6s infinite;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+/* Animações */
+@keyframes scroll-wheel {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(15px); }
+}
+
+@keyframes arrow-down {
+    0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
+}
+
+/* Esconde o desenho do mouse no mobile para ficar mais limpo */
+@media (max-width: 767px) {
+    .mouse { display: none; }
+    .scroll-indicator { bottom: 15px; }
+}
+
 /* =========================
    MOBILE – HERO CENTRAL IGUAL AO ORIGINAL
    ========================= */
@@ -377,6 +443,15 @@ body.menu-open {
       </div>
     </div>
   </div>
+	<div class="scroll-indicator">
+  <div class="mouse">
+    <div class="wheel"></div>
+  </div>
+  <div class="arrow">
+    <span></span>
+    <span></span>
+  </div>
+</div>
 
   <div class="fixed_menu">
     <div class="right_links menu_fixed">

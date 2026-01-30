@@ -222,6 +222,23 @@ body.menu-open {
     font-family: 'Cinzel', serif !important;
 }
 
+/* 1. MUDA A COR DO MENU (E ITENS DO MENU) */
+.nav-menu, .w-nav-menu, .w-dropdown-list {
+    background-color: #000000 !important; /* Troque pelo tom de preto ou cor desejada */
+}
+
+/* 2. MUDA O FUNDO DOS ÍCONES (E BOTÕES DE ÍCONE) */
+.icon-container, .w-icon-nav-menu, .social-icon-fill {
+    background-color: #333333 !important; /* Cor de fundo do ícone */
+    color: #ffffff !important;           /* Cor do desenho do ícone */
+}
+
+/* 3. TIRA O DOURADO DOS LINKS E ESTADOS ATIVOS */
+.nav-link.w--current, .w-nav-link:hover, .dropdown-link:hover {
+    color: #ffffff !important;           /* Cor do texto ao passar o mouse */
+    border-bottom-color: transparent !important; /* Remove linha dourada se houver */
+}
+
 /* =========================
    MOBILE – HERO CENTRAL IGUAL AO ORIGINAL
    ========================= */

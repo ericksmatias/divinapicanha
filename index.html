@@ -206,76 +206,48 @@ body.menu-open {
     color: #fff;
 }
 
-/* Container do aviso */
-.scroll-indicator {
+.scroll-arrows {
     position: absolute;
-    bottom: 30px;
+    bottom: 20px; /* Ajusta a altura conforme preferires */
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 30px;
+    height: 30px;
     z-index: 99;
-    pointer-events: none; /* Não atrapalha cliques */
 }
 
-/* O mouse (aparece mais no PC) */
-.mouse {
-    width: 26px;
-    height: 40px;
-    border: 2px solid #ffffff; /* Cor da borda */
-    border-radius: 20px;
+.scroll-arrows span {
     display: block;
-    margin-bottom: 5px;
-}
-
-.wheel {
-    width: 4px;
-    height: 8px;
-    background: #ffffff; /* Cor da rodinha */
-    margin: 5px auto;
-    border-radius: 2px;
-    animation: scroll-wheel 1.6s infinite;
-}
-
-/* As setinhas (visíveis em Mobile e PC) */
-.arrow span {
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-bottom: 2px solid #ffffff; /* Cor da seta */
-    border-right: 2px solid #ffffff;
+    width: 15px;
+    height: 15px;
+    border-bottom: 3px solid #ffffff; /* Cor da seta - muda para #000000 se o fundo for branco */
+    border-right: 3px solid #ffffff;
     transform: rotate(45deg);
-    margin: -5px auto;
-    animation: arrow-down 1.6s infinite;
+    margin: -8px auto;
+    animation: arrows-jump 2s infinite;
 }
 
-.arrow span:nth-child(2) {
-    animation-delay: 0.2s;
+/* Delay para as setas mexerem em sequência */
+.scroll-arrows span:nth-child(2) {
+    animation-delay: -0.2s;
 }
 
-/* Animações */
-@keyframes scroll-wheel {
-    0% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(15px); }
+.scroll-arrows span:nth-child(3) {
+    animation-delay: -0.4s;
 }
 
-@keyframes arrow-down {
-    0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
-    50% { opacity: 1; }
-    100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
-}
-
-/* Esconde o desenho do mouse no mobile para ficar mais limpo */
-@media (max-width: 767px) {
-    .mouse { display: none; }
-    .scroll-indicator { bottom: 15px; }
-}
-
-/* Esconde o desenho do mouse no mobile para ficar mais limpo */
-@media (max-width: 767px) {
-    .mouse { display: none; }
-    .scroll-indicator { bottom: 15px; }
+@keyframes arrows-jump {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-10px, -10px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(10px, 10px);
+    }
 }
 
 /* =========================
@@ -440,8 +412,7 @@ body.menu-open {
         </div>
       </div>
     </div>
-  </div>
-	<div class="scroll-arrows">
+  <div class="scroll-arrows">
   <span></span>
   <span></span>
   <span></span>

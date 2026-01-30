@@ -171,6 +171,57 @@ body.menu-open {
   }
 }
 
+/* ESTILIZAÇÃO DOS BOTÕES DO MENU MOBILE */
+.mobile_menu_link {
+    display: block !important;
+    width: 100%;
+    margin-bottom: 12px; /* Espaço entre os botões */
+    padding: 15px 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda bem discreta */
+    background-color: rgba(255, 255, 255, 0.03); /* Fundo levemente visível */
+    border-radius: 4px; /* Canto levemente arredondado (luxo) */
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* Efeito quando o botão é a página atual */
+.mobile_menu_link.w--current {
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Efeito de toque (feedback visual) */
+.mobile_menu_link:active {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(0.98); /* Dá a sensação de que o botão afundou ao clicar */
+}
+
+/* Ajuste no texto dentro do botão */
+.mobile_menu_link div {
+    font-family: 'Cinzel', serif !important;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+/* Deixar o botão de RESERVAR MESA com mais destaque que os outros */
+.reserve_table {
+    margin-top: 20px;
+    background-color: #fff !important; /* Inverte a cor para chamar atenção */
+    color: #000 !important;
+    border-radius: 4px;
+    padding: 18px !important;
+    font-weight: bold;
+    text-align: center;
+}
+
+.reserve_table div {
+    color: #000 !important;
+    font-family: 'Cinzel', serif !important;
+}
+
 /* =========================
    MOBILE – HERO CENTRAL IGUAL AO ORIGINAL
    ========================= */

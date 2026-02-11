@@ -274,18 +274,18 @@ body.menu-open {
   .header .logo img {
     height: 40px;
   }
-	.header {
-    position: relative; /* Garante que o z-index funcione */
-    z-index: 10000 !important; /* Maior que 9999 */
+
+  /* Correção: Usa absolute para não empurrar o site para baixo */
+  .header {
+    position: absolute !important; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000 !important; /* Garante que fique acima do menu aberto */
+    background-color: transparent !important; /* Garante que não tenha fundo bege */
   }
 
-  /* Opcional: Remove o fundo do header quando o menu estiver aberto 
-     para ficar transparente sobre o menu cheio */
-  body.menu-open .header {
-    background-color: transparent !important;
-  }
-  
-  /* Garante que o logo e o botão sejam clicáveis */
+  /* Garante que o logo e o botão de menu fiquem clicáveis */
   .logo, .hamburger_menu {
     position: relative;
     z-index: 10001;

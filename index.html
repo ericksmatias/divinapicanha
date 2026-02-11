@@ -274,6 +274,22 @@ body.menu-open {
   .header .logo img {
     height: 40px;
   }
+	.header {
+    position: relative; /* Garante que o z-index funcione */
+    z-index: 10000 !important; /* Maior que 9999 */
+  }
+
+  /* Opcional: Remove o fundo do header quando o menu estiver aberto 
+     para ficar transparente sobre o menu cheio */
+  body.menu-open .header {
+    background-color: transparent !important;
+  }
+  
+  /* Garante que o logo e o botão sejam clicáveis */
+  .logo, .hamburger_menu {
+    position: relative;
+    z-index: 10001;
+  }
 
   /* container geral do hero */
   .wrapper_hero.special_main {

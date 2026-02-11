@@ -70,6 +70,7 @@
       }
     }
     </script><style>
+</script><style>
 ::-webkit-scrollbar-button {transition: 0ms !important;width: 0px;height: 0px;}
 ::-webkit-scrollbar-track {background: transparent;}
 ::-webkit-scrollbar-thumb {-webkit-border-radius: 0px;border-radius: 0px;background: transparent;opacity:0;}
@@ -94,6 +95,10 @@ html.w-editor [text-split] {opacity: 1;}
 ::-moz-selection {
   background-color: #d49653;
   color: #2c2c2c;
+}
+
+.h1_hero.like_home {
+  white-space: nowrap;
 }
 
 .footer_logo_lg {
@@ -159,6 +164,20 @@ html.w-editor [text-split] {opacity: 1;}
   max-width: none;
 }
 
+	.header {
+    position: absolute !important; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000 !important; /* Garante que fique acima do menu aberto */
+    background-color: transparent !important; /* Garante que não tenha fundo bege */
+  }
+
+  /* Garante que o logo e o botão de menu fiquem clicáveis */
+  .logo, .hamburger_menu {
+    position: relative;
+    z-index: 10001;
+  }
 /* =========================
    MENU MOBILE
    ========================= */
@@ -214,9 +233,9 @@ body.menu-open {
   .hamburger_menu .line_2 {
     transition: none;
   }
-
 }
-		/* ESTILIZAÇÃO DOS BOTÕES DO MENU MOBILE */
+
+/* ESTILIZAÇÃO DOS BOTÕES DO MENU MOBILE */
 .mobile_menu_link {
     display: block !important;
     width: 100%;
@@ -274,7 +293,6 @@ body.menu-open {
     background-color: ##f5af5b !important; /* Troque o #000000 pela cor desejada */
     border-color: #000000 !important;     /* Se houver borda, isso também muda */
 }
-
 /* =========================
    MOBILE – HERO CENTRAL IGUAL AO ORIGINAL
    ========================= */
@@ -430,21 +448,24 @@ body.menu-open {
     </div>
 
     <div class="mobile_menu">
-        <div class="wrapper_menu">
-            <div class="list_menu">
-                <a href="index.html" class="mobile_menu_link w-inline-block"><div>Inicio</div></a>
-                <a href="eventos.html" class="mobile_menu_link w-inline-block"><div>Eventos</div></a>
-                <a href="sobre.htm" class="mobile_menu_link w-inline-block"><div>Sobre</div></a>
-                <a href="contato.html" class="mobile_menu_link w-inline-block"><div>Contato</div></a>
-            </div>
-            <div class="socials_contacts">
-                <div class="address_menu">
-                    <div class="title_menu">Horário de Funcionamento</div>
-                    <div class="content_box"><div class="content_menu">Seg-Dom: 10:00 às 00:00</div></div>
-                </div>
-                <div class="address_menu">
-                    <div class="title_menu">Endereço</div>
-                    <div class="content_box"><div class="content_menu">Av. Oliveira Paiva, 1373 <br/>Fortaleza, CE</div></div>
+  <div class="wrapper_menu">
+      <div class="list_menu">
+        <a href="index.html" class="mobile_menu_link w-inline-block"><div>início</div></a>
+        <a href="eventos.html" class="mobile_menu_link w-inline-block"><div>eventos</div></a>
+        <a href="sobre.html" aria-current="page" class="mobile_menu_link w-inline-block w--current"><div>sobre</div></a>
+        <a href="contato.html" class="mobile_menu_link w-inline-block"><div>contato</div></a>      </div>
+      <a href="https://wa.me/5585996377401" target="_blank" class="reserve_table w-inline-block"><div>reservar mesa</div></a>
+      <div class="socials_contacts">
+        <div class="address_menu">
+          <div class="title_menu">Horários</div>
+          <div class="content_box">
+            <div class="content_menu">Todos os dias<br/>Das 10:00 às 00:00</div>
+          </div>
+        </div>
+        <div class="address_menu">
+          <div class="title_menu">Unidades</div>
+          <div class="content_box">
+            <div class="content_menu">Cidade • Meireles • Itaperi<br/>Fortaleza, CE</div>
                 </div>
             </div>
         </div>

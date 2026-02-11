@@ -218,6 +218,20 @@ html.w-editor [text-split] {opacity: 1;}
   max-width: none;
 }
 
+	.header {
+    position: absolute !important; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000 !important; /* Garante que fique acima do menu aberto */
+    background-color: transparent !important; /* Garante que não tenha fundo bege */
+  }
+
+  /* Garante que o logo e o botão de menu fiquem clicáveis */
+  .logo, .hamburger_menu {
+    position: relative;
+    z-index: 10001;
+  }
 /* =========================
    MENU MOBILE
    ========================= */

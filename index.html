@@ -491,65 +491,49 @@ body.menu-open {
 <style>
   /* Layout das Colunas */
   .sides {
-    align-items: stretch;
+    align-items: center; /* Centraliza verticalmente */
   }
   
   .right_side.drinks {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 15px;
-    height: auto;
-    min-height: 100%;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
   }
 
-  /* O Quadro que segura a animação */
+  /* A Janela (Mask) que exibe o carrossel */
   .drink-frame {
     position: relative;
     width: 100%;
-    flex: 1;
-    min-height: 200px; /* Garante altura no mobile */
+    max-width: 400px; /* Limita largura máxima para não ficar gigante */
+    aspect-ratio: 1 / 1; /* FORÇA O FORMATO QUADRADO */
+    margin: 0 auto; /* Centraliza */
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 8px;
   }
 
-  /* Configuração Base das Imagens */
-  .drink-frame img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+  /* A trilha que se move com as imagens */
+  .slider-track {
+    display: flex;
     height: 100%;
+    width: max-content; /* Permite que a trilha seja larga o suficiente */
+    /* Animação: muda o tempo (20s) para deixar mais rápido ou lento */
+    animation: scrollSlide 25s linear infinite; 
+  }
+
+  /* As imagens dentro da trilha */
+  .slider-track img {
+    height: 100%;
+    aspect-ratio: 1 / 1; /* Garante que a imagem seja quadrada */
     object-fit: cover;
-    will-change: transform; /* Otimiza a performance da animação */
+    flex-shrink: 0; /* Impede que a imagem encolha */
   }
 
-  /* --- ANIMAÇÃO DE SLIDE LATERAL --- */
-  
-  /* Imagem 1: Começa no centro (0) */
-  .drink-frame img:nth-child(1) {
-    transform: translateX(0);
-    animation: slideOutLeft 8s infinite ease-in-out;
-  }
-  
-  /* Imagem 2: Começa escondida na direita (100%) */
-  .drink-frame img:nth-child(2) {
-    transform: translateX(100%);
-    animation: slideInRight 8s infinite ease-in-out;
-  }
-
-  /* Keyframes para a Imagem 1 */
-  @keyframes slideOutLeft {
-    0%, 45% { transform: translateX(0); }        /* Fica parada visível */
-    50%, 95% { transform: translateX(-100%); }   /* Desliza para esquerda e espera */
-    100% { transform: translateX(0); }           /* Volta deslizando para o centro */
-  }
-
-  /* Keyframes para a Imagem 2 */
-  @keyframes slideInRight {
-    0%, 45% { transform: translateX(100%); }     /* Fica escondida na direita */
-    50%, 95% { transform: translateX(0); }       /* Desliza para o centro e espera */
-    100% { transform: translateX(100%); }        /* Volta deslizando para a direita */
+  /* ANIMAÇÃO DE ROLAGEM INFINITA */
+  @keyframes scrollSlide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Move metade (já que duplicamos as imagens) */
   }
 </style>
 
@@ -579,21 +563,37 @@ body.menu-open {
     <div class="right_side drinks">
       
       <div class="drink-frame">
-        <img src="68a25157e0edb92947ffe4a2/drink1.avif" loading="lazy" alt="Drinks" />
-        <img src="68a25157e0edb92947ffe4a2/drink2.avif" loading="lazy" alt="Drinks" />
+        <div class="slider-track">
+          <img src="68a25157e0edb92947ffe4a2/drink1.avif" loading="lazy" alt="Drink 1" />
+          <img src="68a25157e0edb92947ffe4a2/drink2.avif" loading="lazy" alt="Drink 2" />
+          
+          <img src="68a25157e0edb92947ffe4a2/drink1.avif" loading="lazy" alt="Drink 1" />
+          <img src="68a25157e0edb92947ffe4a2/drink2.avif" loading="lazy" alt="Drink 2" />
+        </div>
       </div>
 
       <div class="drink-frame">
-        <img src="68a25157e0edb92947ffe4a2/prato1.avif" loading="lazy" alt="Prato" />
-		<img src="68a25157e0edb92947ffe4a2/prato2.avif" loading="lazy" alt="Prato" />
-        <img src="68a25157e0edb92947ffe4a2/prato3.avif" loading="lazy" alt="Prato" />
-        <img src="68a25157e0edb92947ffe4a2/prato4.avif" loading="lazy" alt="Prato" />
-        <img src="68a25157e0edb92947ffe4a2/prato5.avif" loading="lazy" alt="Prato" />
-		<img src="68a25157e0edb92947ffe4a2/prato6.avif" loading="lazy" alt="Prato" />
-        <img src="68a25157e0edb92947ffe4a2/prato7.avif" loading="lazy" alt="Prato" />
-        <img src="68a25157e0edb92947ffe4a2/prato8.avif" loading="lazy" alt="Prato" />
-        <img src="68a25157e0edb92947ffe4a2/prato9.avif" loading="lazy" alt="Prato" />
+        <div class="slider-track">
+          <img src="68a25157e0edb92947ffe4a2/prato1.avif" loading="lazy" alt="Prato 1" />
+          <img src="68a25157e0edb92947ffe4a2/prato2.avif" loading="lazy" alt="Prato 2" />
+          <img src="68a25157e0edb92947ffe4a2/prato3.avif" loading="lazy" alt="Prato 3" />
+          <img src="68a25157e0edb92947ffe4a2/prato4.avif" loading="lazy" alt="Prato 4" />
+          <img src="68a25157e0edb92947ffe4a2/prato5.avif" loading="lazy" alt="Prato 5" />
+          <img src="68a25157e0edb92947ffe4a2/prato6.avif" loading="lazy" alt="Prato 6" />
+          <img src="68a25157e0edb92947ffe4a2/prato7.avif" loading="lazy" alt="Prato 7" />
+          <img src="68a25157e0edb92947ffe4a2/prato8.avif" loading="lazy" alt="Prato 8" />
+          <img src="68a25157e0edb92947ffe4a2/prato9.avif" loading="lazy" alt="Prato 9" />
 
+          <img src="68a25157e0edb92947ffe4a2/prato1.avif" loading="lazy" alt="Prato 1" />
+          <img src="68a25157e0edb92947ffe4a2/prato2.avif" loading="lazy" alt="Prato 2" />
+          <img src="68a25157e0edb92947ffe4a2/prato3.avif" loading="lazy" alt="Prato 3" />
+          <img src="68a25157e0edb92947ffe4a2/prato4.avif" loading="lazy" alt="Prato 4" />
+          <img src="68a25157e0edb92947ffe4a2/prato5.avif" loading="lazy" alt="Prato 5" />
+          <img src="68a25157e0edb92947ffe4a2/prato6.avif" loading="lazy" alt="Prato 6" />
+          <img src="68a25157e0edb92947ffe4a2/prato7.avif" loading="lazy" alt="Prato 7" />
+          <img src="68a25157e0edb92947ffe4a2/prato8.avif" loading="lazy" alt="Prato 8" />
+          <img src="68a25157e0edb92947ffe4a2/prato9.avif" loading="lazy" alt="Prato 9" />
+        </div>
       </div>
 
     </div> 

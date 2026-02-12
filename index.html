@@ -488,58 +488,53 @@ body.menu-open {
   </div>
 	
 <style>
-  /* Garante que o lado direito ocupe a altura disponível sem estourar */
+  /* Estilo da Animação dos Drinks */
   .sides {
-    align-items: stretch; /* Faz as duas colunas terem a mesma altura */
+    align-items: stretch;
   }
-
+  
   .right_side.drinks {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 15px; /* Espaço entre os quadros */
+    gap: 15px;
     height: auto;
     min-height: 100%;
   }
 
-  /* O Quadro que segura a animação */
   .drink-frame {
     position: relative;
     width: 100%;
-    flex: 1; /* Divide o espaço igualmente em 3 */
-    min-height: 200px; /* Altura mínima para mobile */
+    flex: 1;
+    min-height: 200px; /* Garante altura no mobile */
     overflow: hidden;
-    border-radius: 4px; /* Opcional: canto arredondado sutil */
+    border-radius: 4px;
   }
 
-  /* As imagens sobrepostas */
   .drink-frame img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a foto preencha o quadro sem distorcer */
+    object-fit: cover;
     opacity: 0;
     animation: imageFade 10s infinite ease-in-out;
   }
 
-  /* Controle de tempo da animação */
-  /* Imagem 1: Começa visível */
+  /* Defasagem de tempo para alternar as imagens */
   .drink-frame img:nth-child(1) {
     animation-delay: 0s;
   }
   
-  /* Imagem 2: Começa invisível e entra na metade do tempo */
   .drink-frame img:nth-child(2) {
-    animation-delay: 5s; /* Metade de 10s */
+    animation-delay: 5s;
   }
 
-  /* A Mágica da Animação Fluida */
   @keyframes imageFade {
     0% { opacity: 1; transform: scale(1); }
     45% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0; transform: scale(1.05); } /* Leve zoom ao sair */
+    50% { opacity: 0; transform: scale(1.05); }
     95% { opacity: 0; transform: scale(1.05); }
     100% { opacity: 1; transform: scale(1); }
   }
@@ -566,9 +561,7 @@ body.menu-open {
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="right_side drinks">
+    </div> <div class="right_side drinks">
       
       <div class="drink-frame">
         <img src="drinks/drink1.avif" loading="lazy" alt="Drink Experience 1" />
@@ -585,10 +578,7 @@ body.menu-open {
         <img src="drinks/drink1.avif" loading="lazy" alt="Drink Experience 3b" />
       </div>
 
-    </div>
-  </div>
-</section>
-
+    </div> </div> </section>
 <section class="featured_menu">
   <div class="sides">
     <div class="left_side">

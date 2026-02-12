@@ -489,7 +489,7 @@ body.menu-open {
 </section>
 	
 <style>
-  /* Estilo da Animação dos Drinks */
+  /* Layout das Colunas */
   .sides {
     align-items: stretch;
   }
@@ -503,6 +503,7 @@ body.menu-open {
     min-height: 100%;
   }
 
+  /* O Quadro que segura a animação */
   .drink-frame {
     position: relative;
     width: 100%;
@@ -512,6 +513,7 @@ body.menu-open {
     border-radius: 4px;
   }
 
+  /* Configuração Base das Imagens */
   .drink-frame img {
     position: absolute;
     top: 0;
@@ -519,25 +521,35 @@ body.menu-open {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
-    animation: imageFade 10s infinite ease-in-out;
+    will-change: transform; /* Otimiza a performance da animação */
   }
 
-  /* Defasagem de tempo para alternar as imagens */
+  /* --- ANIMAÇÃO DE SLIDE LATERAL --- */
+  
+  /* Imagem 1: Começa no centro (0) */
   .drink-frame img:nth-child(1) {
-    animation-delay: 0s;
+    transform: translateX(0);
+    animation: slideOutLeft 8s infinite ease-in-out;
   }
   
+  /* Imagem 2: Começa escondida na direita (100%) */
   .drink-frame img:nth-child(2) {
-    animation-delay: 5s;
+    transform: translateX(100%);
+    animation: slideInRight 8s infinite ease-in-out;
   }
 
-  @keyframes imageFade {
-    0% { opacity: 1; transform: scale(1); }
-    45% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0; transform: scale(1.05); }
-    95% { opacity: 0; transform: scale(1.05); }
-    100% { opacity: 1; transform: scale(1); }
+  /* Keyframes para a Imagem 1 */
+  @keyframes slideOutLeft {
+    0%, 45% { transform: translateX(0); }        /* Fica parada visível */
+    50%, 95% { transform: translateX(-100%); }   /* Desliza para esquerda e espera */
+    100% { transform: translateX(0); }           /* Volta deslizando para o centro */
+  }
+
+  /* Keyframes para a Imagem 2 */
+  @keyframes slideInRight {
+    0%, 45% { transform: translateX(100%); }     /* Fica escondida na direita */
+    50%, 95% { transform: translateX(0); }       /* Desliza para o centro e espera */
+    100% { transform: translateX(100%); }        /* Volta deslizando para a direita */
   }
 </style>
 
@@ -562,7 +574,9 @@ body.menu-open {
           </div>
         </div>
       </div>
-    </div> <div class="right_side drinks">
+    </div> 
+
+    <div class="right_side drinks">
       
       <div class="drink-frame">
         <img src="drinks/drink1.avif" loading="lazy" alt="Drink Experience 1" />
@@ -574,12 +588,9 @@ body.menu-open {
         <img src="drinks/drink3.avif" loading="lazy" alt="Drink Experience 2b" />
       </div>
 
-      <div class="drink-frame">
-        <img src="drinks/drink3.avif" loading="lazy" alt="Drink Experience 3" />
-        <img src="drinks/drink1.avif" loading="lazy" alt="Drink Experience 3b" />
-      </div>
-
-    </div> </div> </section>
+    </div> 
+  </div> 
+</section>
 <section class="featured_menu">
   <div class="sides">
     <div class="left_side">

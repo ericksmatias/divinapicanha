@@ -487,13 +487,27 @@ body.menu-open {
     <img src="68a25157e0edb92947ffe4a2/mesaposta.avif" loading="lazy" alt="mesaposta" class="image"/>
   </div>
 </section>
-	
+
 <style>
-  /* Layout das Colunas */
+  /* Garante que o texto e as fotos fiquem lado a lado */
   .sides {
-    align-items: center; /* Centraliza verticalmente */
+    display: flex; /* ESSENCIAL PARA FICAR DE LADO */
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Garante responsividade no mobile */
   }
-  
+
+  /* Ajuste para telas grandes */
+  @media (min-width: 992px) {
+    .sides {
+      flex-wrap: nowrap;
+    }
+    .left_side, .right_side {
+      width: 48%; /* Divide o espaço */
+    }
+  }
+
+  /* Lado Direito (Fotos) */
   .right_side.drinks {
     display: flex;
     flex-direction: column;
@@ -502,38 +516,37 @@ body.menu-open {
     width: 100%;
   }
 
-  /* A Janela (Mask) que exibe o carrossel */
+  /* A Janela que exibe o carrossel */
   .drink-frame {
     position: relative;
     width: 100%;
-    max-width: 400px; /* Limita largura máxima para não ficar gigante */
-    aspect-ratio: 1 / 1; /* FORÇA O FORMATO QUADRADO */
-    margin: 0 auto; /* Centraliza */
+    max-width: 400px;
+    aspect-ratio: 1 / 1; /* Força quadrado */
+    margin: 0 auto;
     overflow: hidden;
     border-radius: 8px;
   }
 
-  /* A trilha que se move com as imagens */
+  /* A trilha que se move */
   .slider-track {
     display: flex;
     height: 100%;
-    width: max-content; /* Permite que a trilha seja larga o suficiente */
-    /* Animação: muda o tempo (20s) para deixar mais rápido ou lento */
+    width: max-content;
     animation: scrollSlide 25s linear infinite; 
   }
 
   /* As imagens dentro da trilha */
   .slider-track img {
     height: 100%;
-    aspect-ratio: 1 / 1; /* Garante que a imagem seja quadrada */
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    flex-shrink: 0; /* Impede que a imagem encolha */
+    flex-shrink: 0;
   }
 
-  /* ANIMAÇÃO DE ROLAGEM INFINITA */
+  /* Animação */
   @keyframes scrollSlide {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Move metade (já que duplicamos as imagens) */
+    100% { transform: translateX(-50%); }
   }
 </style>
 
@@ -549,6 +562,10 @@ body.menu-open {
               <div class="base_p dark">De drinks autorais à nossa refrescante caipirosca de frutas tropicais, cada gole é planejado para ser o acompanhamento perfeito para o sabor da nossa brasa.</div>
             </div>
           </div>
+          <div class="button_dark">
+            <a letters-fade-in-hover="" text-split="" href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" class="button dark w-inline-block">
+              <div class="button_box dark">
+                <div>Abrir o Menu</div>
               </div>
             </a>
           </div>
@@ -562,7 +579,6 @@ body.menu-open {
         <div class="slider-track">
           <img src="68a25157e0edb92947ffe4a2/drink1.avif" loading="lazy" alt="Drink 1" />
           <img src="68a25157e0edb92947ffe4a2/drink2.avif" loading="lazy" alt="Drink 2" />
-          
           <img src="68a25157e0edb92947ffe4a2/drink1.avif" loading="lazy" alt="Drink 1" />
           <img src="68a25157e0edb92947ffe4a2/drink2.avif" loading="lazy" alt="Drink 2" />
         </div>
@@ -579,7 +595,7 @@ body.menu-open {
           <img src="68a25157e0edb92947ffe4a2/prato7.avif" loading="lazy" alt="Prato 7" />
           <img src="68a25157e0edb92947ffe4a2/prato8.avif" loading="lazy" alt="Prato 8" />
           <img src="68a25157e0edb92947ffe4a2/prato9.avif" loading="lazy" alt="Prato 9" />
-
+          
           <img src="68a25157e0edb92947ffe4a2/prato1.avif" loading="lazy" alt="Prato 1" />
           <img src="68a25157e0edb92947ffe4a2/prato2.avif" loading="lazy" alt="Prato 2" />
           <img src="68a25157e0edb92947ffe4a2/prato3.avif" loading="lazy" alt="Prato 3" />

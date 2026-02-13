@@ -488,65 +488,60 @@ body.menu-open {
   </div>
 </section>
 <style>
-  /* Layout Compactado e Unificado */
-  .drinks-and-menu {
+  /* Layout Focado nos Drinks */
+  .drinks-section {
     width: 100%;
-    padding: 60px 0; /* Espaço em cima e embaixo da seção */
+    padding: 60px 0;
     background-color: transparent;
   }
 
-  .sides-compact {
-    display: flex;
-    align-items: flex-start; /* Essencial para o lado direito rolar junto com a tela */
-    justify-content: space-between;
-    flex-wrap: wrap; 
+  .drinks-container {
     width: 100%;
-    max-width: 1200px; /* Limita a largura máxima para não vazar nas bordas */
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px; /* Margem de segurança no mobile */
-  }
-
-  .left-col-compact {
-    width: 100%;
-  }
-
-  .right-col-compact {
-    width: 100%;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    margin-top: 40px;
+    align-items: center; /* Centraliza tudo no meio */
   }
 
-  /* Ajustes perfeitos para Computador */
-  @media (min-width: 992px) {
-    .sides-compact {
-      flex-wrap: nowrap; 
-      padding: 0 5%; 
-    }
-    .left-col-compact {
-      width: 50%;
-      padding-right: 40px; /* Espaço entre o menu e as fotos */
-    }
-    .right-col-compact {
-      width: 40%; /* Fotos ocupam 40% da tela */
-      margin-top: 0;
-      /* EFEITO STICKY: As fotos descem junto com a rolagem do menu! */
-      position: sticky;
-      top: 100px; 
-      align-self: flex-start; 
-    }
+  /* Texto dos Drinks Centralizado */
+  .drinks-text-wrapper {
+    text-align: center;
+    max-width: 700px; /* Limita a largura para o texto não ficar numa linha infinita */
+    margin-bottom: 50px; /* Espaço entre o texto e as fotos */
+  }
+
+  .drinks-text-wrapper .base_box {
+    margin-top: 15px;
+  }
+
+  /* Container dos Quadros Lado a Lado */
+  .drinks-frames-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px; /* Espaço entre os dois quadros */
+    width: 100%;
   }
 
   /* --- MÁGICA DOS QUADRADOS E ANIMAÇÃO --- */
-
   .drink-frame-square {
     width: 100%;
+    max-width: 500px; /* Limita o tamanho máximo no PC para não ficar gigante */
     aspect-ratio: 1 / 1; /* Força a ser um quadrado perfeito */
     overflow: hidden;
-    border-radius: 16px; /* Bordas bem arredondadas (luxuoso) */
+    border-radius: 16px; /* Bordas arredondadas */
     position: relative;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Sombra para dar profundidade */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Sombra para profundidade */
+  }
+
+  /* Responsividade para Celular: empilha as fotos */
+  @media (max-width: 768px) {
+    .drinks-frames-row {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .slider-track-anim {
@@ -556,25 +551,25 @@ body.menu-open {
   }
 
   .slider-track-anim img {
-    min-width: 100%; /* Garante que a foto não seja espremida (resolve o bug do print) */
+    min-width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  /* Tempo total das animações (Tempo por foto = 2.5s) */
+  /* Tempo total das animações */
   .track-2-anim { animation: animSlide2 5s infinite ease-in-out; }
   .track-9-anim { animation: animSlide9 22.5s infinite ease-in-out; }
 
   /* Animação Quadro 1 (2 Fotos) */
   @keyframes animSlide2 {
-    0%, 40%  { transform: translateX(0); }       
+    0%, 40%  { transform: translateX(0); }        
     50%, 90% { transform: translateX(-100%); }   
-    100%     { transform: translateX(0); }       
+    100%     { transform: translateX(0); }        
   }
 
   /* Animação Quadro 2 (9 Fotos) */
   @keyframes animSlide9 {
-    0%, 8%   { transform: translateX(0); }       
+    0%, 8%   { transform: translateX(0); }        
     11%, 19% { transform: translateX(-100%); }   
     22%, 30% { transform: translateX(-200%); }   
     33%, 41% { transform: translateX(-300%); }   
@@ -583,148 +578,21 @@ body.menu-open {
     66%, 74% { transform: translateX(-600%); }   
     77%, 85% { transform: translateX(-700%); }   
     88%, 96% { transform: translateX(-800%); }   
-    100%     { transform: translateX(0); }       
-  }
-
-  /* Espaço entre o título de drinks e o cardápio */
-  .spacer-menu {
-    margin-top: 60px;
-    margin-bottom: 40px;
+    100%     { transform: translateX(0); }        
   }
 </style>
 
-<section class="drinks-and-menu">
-  <div class="sides-compact">
+<section class="drinks-section">
+  <div class="drinks-container">
     
-    <div class="left-col-compact">
-      
-      <div class="headline_top">
-        <div class="heading_side drinks">
-          <div class="txt_content">
-            <h3 letters-fade-in="" text-split="" class="h3">DRINKS PARA <br />COMPLETAR <br />A EXPERIÊNCIA</h3>
-            <div class="base_box">
-              <div class="base_p dark">De drinks autorais à nossa refrescante caipirosca de frutas tropicais, cada gole é planejado para ser o acompanhamento perfeito para o sabor da nossa brasa.</div>
-            </div>
-          </div>
-        </div>
+    <div class="drinks-text-wrapper">
+      <h3 letters-fade-in="" text-split="" class="h3">DRINKS PARA COMPLETAR A EXPERIÊNCIA</h3>
+      <div class="base_box">
+        <div class="base_p dark">De drinks autorais à nossa refrescante caipirosca de frutas tropicais, cada gole é planejado para ser o acompanhamento perfeito para o sabor da nossa brasa.</div>
       </div>
-
-      <div class="box_featured spacer-menu">
-        <div class="top_menu">
-          <div class="heading_featured">
-            <h3 letters-fade-in="" text-split="" class="h3">assinatura<br />da casa</h3>
-            <div class="icon_plates">
-              <img src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" loading="lazy" alt="Menu, icon, png" class="image" />
-            </div>
-          </div>
-          <div class="cms_list">
-            <div>
-              <div>
-                <div class="featured_menu_item">
-                  <div class="menu_line">
-                    <div class="name_pr">
-                      <div class="name_txt">Parrilada Mercosul</div>
-                      <div class="price_box"><div class="price_txt"> </div></div>
-                    </div>
-                    <div class="name_desc">
-                      <div class="desc_txt menu_highlight">Picanha Importada 300g, Costela Gaúcho 300g, Maminha 300g, 02 Linguiças Toscana (Unidade), 01 Pão de Alho (Unidade), 01 Arroz Biro-Biro (Porção), 01 Maionese de Batata (Porção).</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="featured_menu_item">
-                  <div class="menu_line">
-                    <div class="name_pr">
-                      <div class="name_txt">Parrilada Nacional</div>
-                      <div class="price_box"><div class="price_txt"> </div></div>
-                    </div>
-                    <div class="name_desc">
-                      <div class="desc_txt menu_highlight">Cupim Casqueirado 300g, Picanha Suína 300g, Maminha 300g, 02 Linguiças Toscana (Unidade), 01 Pão de Alho (Unidade), 01 Baião Tradicional (Porção), 01 Batata Frita (Porção).</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="featured_menu_item">
-                  <div class="menu_line">
-                    <div class="name_pr">
-                      <div class="name_txt">Kit Tentação</div>
-                      <div class="price_box"><div class="price_txt"> </div></div>
-                    </div>
-                    <div class="name_desc">
-                      <div class="desc_txt menu_highlight">Maminha 400g, Picanha Suína 400g, 01 Baião Tradicional (Porção).</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="featured_menu_item">
-                  <div class="menu_line">
-                    <div class="name_pr">
-                      <div class="name_txt">Kit Majestoso</div>
-                      <div class="price_box"><div class="price_txt"> </div></div>
-                    </div>
-                    <div class="name_desc">
-                      <div class="desc_txt menu_highlight">Maminha 500g, Carne de Sol 500g, 02 Baiões Tradicional (Porção), 02 Batata Frita (Porção).</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="featured_menu_item">
-                  <div class="menu_line">
-                    <div class="name_pr">
-                      <div class="name_txt">Kit Divino</div>
-                      <div class="price_box"><div class="price_txt"> </div></div>
-                    </div>
-                    <div class="name_desc">
-                      <div class="desc_txt menu_highlight">Picanha Importada 400g, Picanha Suína 400g, Maminha 400g, Sobrecoxa de Frango 400g, 02 Baiões Tradicional (Porção), 02 Batata Frita (Porção).</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="featured_menu_item">
-                  <div class="menu_line">
-                    <div class="name_pr">
-                      <div class="name_txt">Picanha a Moda da Casa</div>
-                      <div class="price_box"><div class="price_txt"> </div></div>
-                    </div>
-                    <div class="name_desc">
-                      <div class="desc_txt menu_highlight">Picanha importada em fatias (400g), coberta with queijo mussarela. Acompanha arroz de alho e farofa de ovos.</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="featured_menu_item">
-                  <div class="menu_line">
-                    <div class="name_pr">
-                      <div class="name_txt">Picanha ao Alho Crocante</div>
-                      <div class="price_box"><div class="price_txt"> </div></div>
-                    </div>
-                    <div class="name_desc">
-                      <div class="desc_txt menu_highlight">Picanha importada (400g), coberta com alho crocante. Acompanha arroz à piemontese e batatas fritas.</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="featured_menu_item">
-                  <div class="menu_line">
-                    <div class="name_pr">
-                      <div class="name_txt">Costelão Gaucho</div>
-                      <div class="price_box"><div class="price_txt"> </div></div>
-                    </div>
-                    <div class="name_desc">
-                      <div class="desc_txt menu_highlight">Crocante por fora e macia por dentro, costela (500g) casqueirada na brasa. Acompanha baião de dois cremoso e macaxeira frita.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="bottom_button" style="margin-top: 30px;">
-          <a text-split="" letters-fade-in-hover="" href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" class="button dark block_ver w-inline-block">
-            <div class="button_box dark special_big">
-              <div>Veja o Menu Completo</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
     </div>
 
-    <div class="right-col-compact">
+    <div class="drinks-frames-row">
       
       <div class="drink-frame-square">
         <div class="slider-track-anim track-2-anim">

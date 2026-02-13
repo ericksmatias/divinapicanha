@@ -486,82 +486,80 @@ body.menu-open {
   <div class="background_fullsize">
     <img src="68a25157e0edb92947ffe4a2/mesaposta.avif" loading="lazy" alt="mesaposta" class="image"/>
   </div>
-</section>
-
 <style>
-  /* Container principal da seção */
   .drinks {
     width: 100%;
-    overflow: hidden; /* Evita rolagem horizontal se a animação passar da tela */
+    overflow: hidden;
   }
 
-  /* Layout das Colunas no Desktop */
   .sides {
     display: flex;
-    align-items: center; /* Centraliza verticalmente o texto com as fotos */
+    align-items: center; 
     justify-content: space-between;
-    flex-wrap: wrap; /* Permite quebrar no mobile */
+    flex-wrap: wrap; 
     width: 100%;
   }
 
-  /* Ajustes específicos para Desktop (telas maiores que 991px) */
   @media (min-width: 992px) {
     .sides {
-      flex-wrap: nowrap; /* Impede quebra de linha */
+      flex-wrap: nowrap; 
     }
     
     .left_side {
-      width: 50%; /* O texto ocupa metade da tela */
-      padding-right: 5%; /* Dá um respiro antes das fotos */
+      width: 50%;
+      padding-right: 5%; 
     }
 
     .right_side.drinks {
-      width: 50%; /* As fotos ocupam a outra metade */
+      width: 50%; 
       display: flex;
       flex-direction: column;
-      gap: 20px; /* Espaço entre as duas fileiras de fotos */
-      /* Remove o padding direito para colar na borda, se houver no CSS original */
+      gap: 20px;
       padding-right: 0 !important; 
     }
   }
 
-  /* A Janela que exibe o carrossel */
   .drink-frame {
     position: relative;
     width: 100%;
-    /* Removemos o max-width: 400px para que a imagem cresça até a borda */
     max-width: none; 
-    aspect-ratio: 16 / 9; /* Mudei para retangular panorâmico (opcional, volte para 1/1 se quiser quadrado) */
+    aspect-ratio: 16 / 9; /* Pode mudar para 1 / 1 se quiser que fique um quadrado perfeito */
     overflow: hidden;
-    border-radius: 8px 0 0 8px; /* Arredonda só o lado esquerdo, cola o direito na tela */
+    border-radius: 8px 0 0 8px; 
   }
 
-  /* Força a imagem a ser quadrada, caso prefira quadrado e não 16/9 */
-  /* Descomente a linha abaixo se quiser manter estritamente quadrado */
-  /* .drink-frame { aspect-ratio: 1 / 1; border-radius: 8px; } */
-
-  /* A trilha que se move */
   .slider-track {
     display: flex;
     height: 100%;
-    width: max-content;
-    animation: scrollSlide 25s linear infinite; 
+    width: 100%; /* Trilha ocupa o tamanho exato do quadro */
   }
 
-  /* As imagens dentro da trilha */
   .slider-track img {
+    flex: 0 0 100%; /* Cada imagem ocupa 100% da tela visível */
     height: 100%;
-    /* Se a janela (drink-frame) for 1/1, a imagem aqui também deve ser 1/1 */
-    /* Como mudei a janela para 16/9 para preencher melhor o espaço, a imagem acompanha a altura */
-    aspect-ratio: 1 / 1; /* Mantém a proporção quadrada da foto em si */
     object-fit: cover;
-    flex-shrink: 0;
   }
 
-  /* Animação */
-  @keyframes scrollSlide {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  /* --- ANIMAÇÕES DE "PULO" (SLIDESHOW) --- */
+  
+  /* Quadro 1: 2 imagens. Duração total = 2 x 1.5s = 3s */
+  .track-2 {
+    animation: slide2 3s steps(2, end) infinite;
+  }
+  
+  /* Quadro 2: 9 imagens. Duração total = 9 x 1.5s = 13.5s */
+  .track-9 {
+    animation: slide9 13.5s steps(9, end) infinite;
+  }
+
+  /* Move 2 vezes o tamanho do quadro */
+  @keyframes slide2 {
+    100% { transform: translateX(-200%); }
+  }
+
+  /* Move 9 vezes o tamanho do quadro */
+  @keyframes slide9 {
+    100% { transform: translateX(-900%); }
   }
 </style>
 
@@ -577,40 +575,21 @@ body.menu-open {
               <div class="base_p dark">De drinks autorais à nossa refrescante caipirosca de frutas tropicais, cada gole é planejado para ser o acompanhamento perfeito para o sabor da nossa brasa.</div>
             </div>
           </div>
-          <div class="button_dark">
-            <a letters-fade-in-hover="" text-split="" href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" class="button dark w-inline-block">
-              <div class="button_box dark">
-                <div>Abrir o Menu</div>
-              </div>
-            </a>
-          </div>
         </div>
       </div>
-    </div> 
+    </div>
 
     <div class="right_side drinks">
       
       <div class="drink-frame">
-        <div class="slider-track">
-          <img src="68a25157e0edb92947ffe4a2/drink1.avif" loading="lazy" alt="Drink 1" />
-          <img src="68a25157e0edb92947ffe4a2/drink2.avif" loading="lazy" alt="Drink 2" />
+        <div class="slider-track track-2">
           <img src="68a25157e0edb92947ffe4a2/drink1.avif" loading="lazy" alt="Drink 1" />
           <img src="68a25157e0edb92947ffe4a2/drink2.avif" loading="lazy" alt="Drink 2" />
         </div>
       </div>
 
       <div class="drink-frame">
-        <div class="slider-track">
-          <img src="68a25157e0edb92947ffe4a2/prato1.avif" loading="lazy" alt="Prato 1" />
-          <img src="68a25157e0edb92947ffe4a2/prato2.avif" loading="lazy" alt="Prato 2" />
-          <img src="68a25157e0edb92947ffe4a2/prato3.avif" loading="lazy" alt="Prato 3" />
-          <img src="68a25157e0edb92947ffe4a2/prato4.avif" loading="lazy" alt="Prato 4" />
-          <img src="68a25157e0edb92947ffe4a2/prato5.avif" loading="lazy" alt="Prato 5" />
-          <img src="68a25157e0edb92947ffe4a2/prato6.avif" loading="lazy" alt="Prato 6" />
-          <img src="68a25157e0edb92947ffe4a2/prato7.avif" loading="lazy" alt="Prato 7" />
-          <img src="68a25157e0edb92947ffe4a2/prato8.avif" loading="lazy" alt="Prato 8" />
-          <img src="68a25157e0edb92947ffe4a2/prato9.avif" loading="lazy" alt="Prato 9" />
-          
+        <div class="slider-track track-9">
           <img src="68a25157e0edb92947ffe4a2/prato1.avif" loading="lazy" alt="Prato 1" />
           <img src="68a25157e0edb92947ffe4a2/prato2.avif" loading="lazy" alt="Prato 2" />
           <img src="68a25157e0edb92947ffe4a2/prato3.avif" loading="lazy" alt="Prato 3" />

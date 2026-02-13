@@ -489,43 +489,56 @@ body.menu-open {
 </section>
 
 <style>
-  /* Garante que o texto e as fotos fiquem lado a lado */
-  .sides {
-    display: flex; /* ESSENCIAL PARA FICAR DE LADO */
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Garante responsividade no mobile */
+  /* Container principal da seção */
+  .drinks {
+    width: 100%;
+    overflow: hidden; /* Evita rolagem horizontal se a animação passar da tela */
   }
 
-  /* Ajuste para telas grandes */
+  /* Layout das Colunas no Desktop */
+  .sides {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente o texto com as fotos */
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permite quebrar no mobile */
+    width: 100%;
+  }
+
+  /* Ajustes específicos para Desktop (telas maiores que 991px) */
   @media (min-width: 992px) {
     .sides {
-      flex-wrap: nowrap;
+      flex-wrap: nowrap; /* Impede quebra de linha */
     }
-    .left_side, .right_side {
-      width: 48%; /* Divide o espaço */
+    
+    .left_side {
+      width: 50%; /* O texto ocupa metade da tela */
+      padding-right: 5%; /* Dá um respiro antes das fotos */
     }
-  }
 
-  /* Lado Direito (Fotos) */
-  .right_side.drinks {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
+    .right_side.drinks {
+      width: 50%; /* As fotos ocupam a outra metade */
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Espaço entre as duas fileiras de fotos */
+      /* Remove o padding direito para colar na borda, se houver no CSS original */
+      padding-right: 0 !important; 
+    }
   }
 
   /* A Janela que exibe o carrossel */
   .drink-frame {
     position: relative;
     width: 100%;
-    max-width: 400px;
-    aspect-ratio: 1 / 1; /* Força quadrado */
-    margin: 0 auto;
+    /* Removemos o max-width: 400px para que a imagem cresça até a borda */
+    max-width: none; 
+    aspect-ratio: 16 / 9; /* Mudei para retangular panorâmico (opcional, volte para 1/1 se quiser quadrado) */
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 8px 0 0 8px; /* Arredonda só o lado esquerdo, cola o direito na tela */
   }
+
+  /* Força a imagem a ser quadrada, caso prefira quadrado e não 16/9 */
+  /* Descomente a linha abaixo se quiser manter estritamente quadrado */
+  /* .drink-frame { aspect-ratio: 1 / 1; border-radius: 8px; } */
 
   /* A trilha que se move */
   .slider-track {
@@ -538,7 +551,9 @@ body.menu-open {
   /* As imagens dentro da trilha */
   .slider-track img {
     height: 100%;
-    aspect-ratio: 1 / 1;
+    /* Se a janela (drink-frame) for 1/1, a imagem aqui também deve ser 1/1 */
+    /* Como mudei a janela para 16/9 para preencher melhor o espaço, a imagem acompanha a altura */
+    aspect-ratio: 1 / 1; /* Mantém a proporção quadrada da foto em si */
     object-fit: cover;
     flex-shrink: 0;
   }

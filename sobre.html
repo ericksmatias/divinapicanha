@@ -640,61 +640,30 @@ body.menu-open {
 
 <section class="testimonials">
   <div class="wrapper_base special_marque">
-    <div class="flexbox_testimonials">
+    <div class="flexbox_testimonials" style="justify-content: center; text-align: center;">
       <div>
         <h2 letters-fade-in="" text-split="" class="h2">O que dizem<br/>Nossos Clientes</h2>
       </div>
-      <div class="review_box testimonials_box">
-        <div class="review_wrapper">
-          <div class="flex_review">
-            <div class="stars_flex">
-              <div class="star_icon">
-                <img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star icobn, png, primary color" class="image"/>
-              </div>
-              <div class="star_icon">
-                <img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star icobn, png, primary color" class="image"/>
-              </div>
-              <div class="star_icon">
-                <img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star icobn, png, primary color" class="image"/>
-              </div>
-              <div class="star_icon">
-                <img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star icobn, png, primary color" class="image"/>
-              </div>
-              <div class="star_icon">
-                <img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star icobn, png, primary color" class="image"/>
-              </div>
-            </div>
-            <div class="google_icon">
-              <img src="68a25157e0edb92947ffe4a2/68ab6f5c31e3e7b0a84252b6_google-icon.png" loading="lazy" alt="Google icon, png" class="image"/>
-            </div>
-          </div>
-          <div class="number_txt">
-            <div class="big_number">4.5</div>
-            <div class="small_number">/5</div>
-            <div class="txt_review">
-              <div class="title_review">Excelente</div>
-              <div class="base_caption">Baseado em <span class="reviews_count">5.5K</span> reviews</div>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
   </div>
+  
   <div class="marquee_reviews">
     <div class="w-embed">
       <style>
         .marquee_track {
           will-change: transform;
           animation: marquee 27s linear infinite;
+        } /* <-- Esta foi a chave que adicionei para consertar a animação! */
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-  </style>
-</div><div class="marquee"><div class="marquee_track">
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+      </style>
+    </div>
+    <div class="marquee">
+      <div class="marquee_track">
 
-  <!-- LISTA 1 -->
   <div class="marquee_list w-dyn-list">
     <div role="list" class="marquee_flex w-dyn-items">
 

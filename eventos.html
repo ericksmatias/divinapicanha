@@ -1063,6 +1063,7 @@ body.menu-open {
     if (yearEl) yearEl.textContent = new Date().getFullYear();
   });
 </script>
+<script async type="module" src="https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/attributes.js" fs-copyclip></script>
 
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@0.2.28/bundled/lenis.js"></script>
 
@@ -1206,6 +1207,7 @@ body.menu-open {
 </script>
 
 <script src="https://unpkg.com/split-type"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
 <script>
   window.addEventListener("DOMContentLoaded", () => {
@@ -1296,8 +1298,7 @@ document.addEventListener("DOMContentLoaded", () => {
     yearEl.textContent = currentYear;
   }
 });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.2.2/dist/js/splide.min.js"></script>
+</script><script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.2.2/dist/js/splide.min.js"></script>
 <script>
 
 function slider1() {
@@ -1310,7 +1311,7 @@ for ( let i = 0, splideLength = splides.length; i < splideLength; i++ ) {
 	perMove: 1,
   focus: 0, // 0 = left and 'center' = center
   type: 'slide', // 'loop' or 'slide'
-  gap: '0px', // space between slides
+  gap: '8px', // space between slides
   arrows: 'false', // 'slider' or false
   pagination: 'slider', // 'slider' or false
   speed : 800, // transition speed in miliseconds
@@ -1343,6 +1344,15 @@ for ( let i = 0, splideLength = splides.length; i < splideLength; i++ ) {
 
 }
 slider1();
+</script>
+
+<script>
+var Webflow = Webflow || [];
+Webflow.push(function() {
+	window.addEventListener('resize', function() {
+	    window.Webflow.require("lottie").lottie.resize();
+	});	
+});
 </script>
 <script>
 /* Mobile menu (fix) — binds after DOM is ready and works without extra Webflow files */
@@ -1407,4 +1417,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-</script></body></html>
+</script>
+
+</body></html>
+

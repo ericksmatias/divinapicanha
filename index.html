@@ -488,103 +488,115 @@ body.menu-open {
   </div>
 </section>
 <style>
-  .drinks {
+  /* Layout Compactado e Unificado */
+  .drinks-and-menu {
     width: 100%;
-    overflow: hidden;
+    padding: 60px 0; /* Espaço em cima e embaixo da seção */
+    background-color: transparent;
   }
 
-  .sides {
+  .sides-compact {
     display: flex;
-    /* Alterado para flex-start para alinhar os itens no topo, já que o menu é longo */
-    align-items: flex-start; 
+    align-items: flex-start; /* Essencial para o lado direito rolar junto com a tela */
     justify-content: space-between;
     flex-wrap: wrap; 
     width: 100%;
+    max-width: 1200px; /* Limita a largura máxima para não vazar nas bordas */
+    margin: 0 auto;
+    padding: 0 20px; /* Margem de segurança no mobile */
   }
 
-  /* Ajustes para Desktop */
-  @media (min-width: 992px) {
-    .sides {
-      flex-wrap: nowrap; 
-    }
-    
-    .left_side {
-      width: 50%;
-      padding-right: 5%; 
-    }
+  .left-col-compact {
+    width: 100%;
+  }
 
-    .right_side.drinks {
-      width: 50%; 
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end; 
-      gap: 20px;
-      padding-right: 0 !important; 
-      /* EFEITO STICKY: As fotos vão descer acompanhando a leitura do menu longo */
+  .right-col-compact {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  /* Ajustes perfeitos para Computador */
+  @media (min-width: 992px) {
+    .sides-compact {
+      flex-wrap: nowrap; 
+      padding: 0 5%; 
+    }
+    .left-col-compact {
+      width: 50%;
+      padding-right: 40px; /* Espaço entre o menu e as fotos */
+    }
+    .right-col-compact {
+      width: 40%; /* Fotos ocupam 40% da tela */
+      margin-top: 0;
+      /* EFEITO STICKY: As fotos descem junto com a rolagem do menu! */
       position: sticky;
       top: 100px; 
+      align-self: flex-start; 
     }
   }
 
-  /* A Janela dos Drinks/Pratos */
-  .drink-frame {
-    position: relative;
+  /* --- MÁGICA DOS QUADRADOS E ANIMAÇÃO --- */
+
+  .drink-frame-square {
     width: 100%;
-    max-width: 450px; 
-    aspect-ratio: 1 / 1; 
+    aspect-ratio: 1 / 1; /* Força a ser um quadrado perfeito */
     overflow: hidden;
-    border-radius: 8px; 
+    border-radius: 16px; /* Bordas bem arredondadas (luxuoso) */
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Sombra para dar profundidade */
   }
 
-  /* A Trilha que segura as fotos */
-  .slider-track {
+  .slider-track-anim {
     display: flex;
-    height: 100%;
     width: 100%;
+    height: 100%;
   }
 
-  /* As Fotos */
-  .slider-track img {
-    flex: 0 0 100%; 
+  .slider-track-anim img {
+    min-width: 100%; /* Garante que a foto não seja espremida (resolve o bug do print) */
     height: 100%;
     object-fit: cover;
   }
 
-  /* --- DEFINIÇÃO DO TEMPO DAS ANIMAÇÕES --- */
-  .track-2 { animation: slide2 4s infinite ease-in-out; }
-  .track-9 { animation: slide9 18s infinite ease-in-out; }
+  /* Tempo total das animações (Tempo por foto = 2.5s) */
+  .track-2-anim { animation: animSlide2 5s infinite ease-in-out; }
+  .track-9-anim { animation: animSlide9 22.5s infinite ease-in-out; }
 
-  /* --- ANIMAÇÃO QUADRO 1 (2 IMAGENS) --- */
-  @keyframes slide2 {
-    0%, 40%   { transform: translateX(0); }       
-    50%, 90%  { transform: translateX(-100%); }   
-    100%      { transform: translateX(0); }       
+  /* Animação Quadro 1 (2 Fotos) */
+  @keyframes animSlide2 {
+    0%, 40%  { transform: translateX(0); }       
+    50%, 90% { transform: translateX(-100%); }   
+    100%     { transform: translateX(0); }       
   }
 
-  /* --- ANIMAÇÃO QUADRO 2 (9 IMAGENS) --- */
-  @keyframes slide9 {
-    0%, 9%    { transform: translateX(0); }       
-    11%, 20%  { transform: translateX(-100%); }   
-    22%, 31%  { transform: translateX(-200%); }   
-    33%, 42%  { transform: translateX(-300%); }   
-    44%, 53%  { transform: translateX(-400%); }   
-    55%, 64%  { transform: translateX(-500%); }   
-    66%, 75%  { transform: translateX(-600%); }   
-    77%, 86%  { transform: translateX(-700%); }   
-    88%, 95%  { transform: translateX(-800%); }   
-    100%      { transform: translateX(0); }       
+  /* Animação Quadro 2 (9 Fotos) */
+  @keyframes animSlide9 {
+    0%, 8%   { transform: translateX(0); }       
+    11%, 19% { transform: translateX(-100%); }   
+    22%, 30% { transform: translateX(-200%); }   
+    33%, 41% { transform: translateX(-300%); }   
+    44%, 52% { transform: translateX(-400%); }   
+    55%, 63% { transform: translateX(-500%); }   
+    66%, 74% { transform: translateX(-600%); }   
+    77%, 85% { transform: translateX(-700%); }   
+    88%, 96% { transform: translateX(-800%); }   
+    100%     { transform: translateX(0); }       
   }
 
-  /* Espaçamento entre o título de drinks e o cardápio */
-  .menu-spacing {
+  /* Espaço entre o título de drinks e o cardápio */
+  .spacer-menu {
     margin-top: 60px;
+    margin-bottom: 40px;
   }
 </style>
 
-<section class="drinks">
-  <div class="sides">
+<section class="drinks-and-menu">
+  <div class="sides-compact">
     
-    <div class="left_side biege">
+    <div class="left-col-compact">
       
       <div class="headline_top">
         <div class="heading_side drinks">
@@ -597,7 +609,7 @@ body.menu-open {
         </div>
       </div>
 
-      <div class="box_featured menu-spacing">
+      <div class="box_featured spacer-menu">
         <div class="top_menu">
           <div class="heading_featured">
             <h3 letters-fade-in="" text-split="" class="h3">assinatura<br />da casa</h3>
@@ -712,17 +724,17 @@ body.menu-open {
 
     </div>
 
-    <div class="right_side drinks">
+    <div class="right-col-compact">
       
-      <div class="drink-frame">
-        <div class="slider-track track-2">
+      <div class="drink-frame-square">
+        <div class="slider-track-anim track-2-anim">
           <img src="68a25157e0edb92947ffe4a2/drink1.avif" loading="lazy" alt="Drink 1" />
           <img src="68a25157e0edb92947ffe4a2/drink2.avif" loading="lazy" alt="Drink 2" />
         </div>
       </div>
 
-      <div class="drink-frame">
-        <div class="slider-track track-9">
+      <div class="drink-frame-square">
+        <div class="slider-track-anim track-9-anim">
           <img src="68a25157e0edb92947ffe4a2/prato1.avif" loading="lazy" alt="Prato 1" />
           <img src="68a25157e0edb92947ffe4a2/prato2.avif" loading="lazy" alt="Prato 2" />
           <img src="68a25157e0edb92947ffe4a2/prato3.avif" loading="lazy" alt="Prato 3" />
@@ -736,7 +748,8 @@ body.menu-open {
       </div>
 
     </div> 
-  </div> 
+
+  </div>
 </section>
 
 <section class="testimonials">

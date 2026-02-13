@@ -501,6 +501,7 @@ body.menu-open {
     width: 100%;
   }
 
+  /* Ajustes para Desktop */
   @media (min-width: 992px) {
     .sides {
       flex-wrap: nowrap; 
@@ -515,52 +516,65 @@ body.menu-open {
       width: 50%; 
       display: flex;
       flex-direction: column;
+      align-items: flex-end; /* Alinha os quadrados à direita */
       gap: 20px;
       padding-right: 0 !important; 
     }
   }
 
+  /* A Janela dos Drinks */
   .drink-frame {
     position: relative;
     width: 100%;
-    max-width: none; 
-    aspect-ratio: 16 / 9; /* Pode mudar para 1 / 1 se quiser que fique um quadrado perfeito */
+    max-width: 450px; /* Tamanho máximo do quadrado para não ficar gigante no PC */
+    aspect-ratio: 1 / 1; /* GARANTE O FORMATO 100% QUADRADO */
     overflow: hidden;
-    border-radius: 8px 0 0 8px; 
+    border-radius: 8px; /* Cantos arredondados */
   }
 
+  /* A Trilha que segura as fotos */
   .slider-track {
     display: flex;
     height: 100%;
-    width: 100%; /* Trilha ocupa o tamanho exato do quadro */
+    width: 100%;
   }
 
+  /* As Fotos */
   .slider-track img {
-    flex: 0 0 100%; /* Cada imagem ocupa 100% da tela visível */
+    flex: 0 0 100%; /* Cada foto ocupa exatamente o espaço do quadrado */
     height: 100%;
     object-fit: cover;
   }
 
-  /* --- ANIMAÇÕES DE "PULO" (SLIDESHOW) --- */
-  
-  /* Quadro 1: 2 imagens. Duração total = 2 x 1.5s = 3s */
+  /* --- DEFINIÇÃO DO TEMPO DAS ANIMAÇÕES --- */
   .track-2 {
-    animation: slide2 3s steps(2, end) infinite;
+    animation: slide2 4s infinite ease-in-out; /* Tempo total quadro 1 */
   }
   
-  /* Quadro 2: 9 imagens. Duração total = 9 x 1.5s = 13.5s */
   .track-9 {
-    animation: slide9 13.5s steps(9, end) infinite;
+    animation: slide9 18s infinite ease-in-out; /* Tempo total quadro 2 */
   }
 
-  /* Move 2 vezes o tamanho do quadro */
+  /* --- ANIMAÇÃO QUADRO 1 (2 IMAGENS) --- */
   @keyframes slide2 {
-    100% { transform: translateX(-200%); }
+    0%, 40%   { transform: translateX(0); }       /* Fica na Imagem 1 */
+    50%, 90%  { transform: translateX(-100%); }   /* Desliza suave para a Imagem 2 e fica */
+    100%      { transform: translateX(0); }       /* "Rebobina" rápido pro início */
   }
 
-  /* Move 9 vezes o tamanho do quadro */
+  /* --- ANIMAÇÃO QUADRO 2 (9 IMAGENS) --- */
+  /* Ele para em cada foto, depois desliza pra próxima. No final, volta tudo de uma vez */
   @keyframes slide9 {
-    100% { transform: translateX(-900%); }
+    0%, 9%    { transform: translateX(0); }       /* Foto 1 */
+    11%, 20%  { transform: translateX(-100%); }   /* Foto 2 */
+    22%, 31%  { transform: translateX(-200%); }   /* Foto 3 */
+    33%, 42%  { transform: translateX(-300%); }   /* Foto 4 */
+    44%, 53%  { transform: translateX(-400%); }   /* Foto 5 */
+    55%, 64%  { transform: translateX(-500%); }   /* Foto 6 */
+    66%, 75%  { transform: translateX(-600%); }   /* Foto 7 */
+    77%, 86%  { transform: translateX(-700%); }   /* Foto 8 */
+    88%, 95%  { transform: translateX(-800%); }   /* Foto 9 (Última) */
+    100%      { transform: translateX(0); }       /* Volta TODAS DE UMA VEZ pro início */
   }
 </style>
 

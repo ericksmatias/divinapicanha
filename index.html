@@ -505,18 +505,18 @@ body.menu-open {
     align-items: center; /* Centraliza tudo no container principal */
   }
 
-  /* Texto dos Drinks - Forçando Centralização Absoluta */
+  /* Texto dos Drinks - Centralização Garantida */
   .drinks-text-wrapper {
     width: 100%;
     max-width: 800px; 
-    margin: 0 auto 50px auto; /* O 'auto' nas laterais garante que a caixa fique no meio */
+    margin: 0 auto 50px auto; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  /* Sobrescreve as regras originais do site (impede que fiquem à esquerda) */
+  /* Impede herança de alinhamento à esquerda de outras partes do site */
   .drinks-text-wrapper .h3,
   .drinks-text-wrapper .base_p {
     text-align: center !important;
@@ -527,6 +527,7 @@ body.menu-open {
   .drinks-text-wrapper .base_box {
     margin-top: 15px;
     width: 100%;
+    max-width: 650px; /* Ajuda a quebrar a linha do parágrafo exatamente como no print */
     display: flex;
     justify-content: center;
   }
@@ -540,18 +541,18 @@ body.menu-open {
     width: 100%;
   }
 
-  /* --- MÁGICA DOS QUADRADOS E ANIMAÇÃO --- */
+  /* Estilo dos Quadros (Mágica do Quadrado) */
   .drink-frame-square {
     width: 100%;
-    max-width: 500px; /* Limita o tamanho máximo no PC */
-    aspect-ratio: 1 / 1; /* Força a ser um quadrado perfeito */
+    max-width: 500px; 
+    aspect-ratio: 1 / 1; 
     overflow: hidden;
-    border-radius: 16px; /* Bordas arredondadas */
+    border-radius: 16px; 
     position: relative;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Sombra para profundidade */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
   }
 
-  /* Responsividade para Celular: empilha as fotos */
+  /* Responsividade para Celular */
   @media (max-width: 768px) {
     .drinks-frames-row {
       flex-direction: column;
@@ -571,28 +572,32 @@ body.menu-open {
     object-fit: cover;
   }
 
-  /* Tempo total das animações */
-  .track-2-anim { animation: animSlide2 5s infinite ease-in-out; }
-  .track-9-anim { animation: animSlide9 22.5s infinite ease-in-out; }
+  /* --- NOVAS ANIMAÇÕES (Recalculadas para 6 e 5 fotos) --- */
+  
+  /* Tempo total: 6 fotos x 2.5s = 15s */
+  .track-6-anim { animation: animSlide6 15s infinite ease-in-out; }
+  
+  /* Tempo total: 5 fotos x 2.5s = 12.5s */
+  .track-5-anim { animation: animSlide5 12.5s infinite ease-in-out; }
 
-  /* Animação Quadro 1 (2 Fotos) */
-  @keyframes animSlide2 {
-    0%, 40%  { transform: translateX(0); }        
-    50%, 90% { transform: translateX(-100%); }   
+  /* Animação Quadro 1 (6 Fotos - Drinks) */
+  @keyframes animSlide6 {
+    0%, 12%  { transform: translateX(0); }        
+    16%, 29% { transform: translateX(-100%); }   
+    33%, 46% { transform: translateX(-200%); }   
+    50%, 63% { transform: translateX(-300%); }   
+    66%, 79% { transform: translateX(-400%); }   
+    83%, 96% { transform: translateX(-500%); }   
     100%     { transform: translateX(0); }        
   }
 
-  /* Animação Quadro 2 (9 Fotos) */
-  @keyframes animSlide9 {
-    0%, 8%   { transform: translateX(0); }        
-    11%, 19% { transform: translateX(-100%); }   
-    22%, 30% { transform: translateX(-200%); }   
-    33%, 41% { transform: translateX(-300%); }   
-    44%, 52% { transform: translateX(-400%); }   
-    55%, 63% { transform: translateX(-500%); }   
-    66%, 74% { transform: translateX(-600%); }   
-    77%, 85% { transform: translateX(-700%); }   
-    88%, 96% { transform: translateX(-800%); }   
+  /* Animação Quadro 2 (5 Fotos - Pratos) */
+  @keyframes animSlide5 {
+    0%, 15%  { transform: translateX(0); }        
+    20%, 35% { transform: translateX(-100%); }   
+    40%, 55% { transform: translateX(-200%); }   
+    60%, 75% { transform: translateX(-300%); }   
+    80%, 95% { transform: translateX(-400%); }   
     100%     { transform: translateX(0); }        
   }
 </style>
@@ -610,23 +615,23 @@ body.menu-open {
     <div class="drinks-frames-row">
       
       <div class="drink-frame-square">
-        <div class="slider-track-anim track-2-anim">
+        <div class="slider-track-anim track-6-anim">
           <img src="68a25157e0edb92947ffe4a2/drink1.avif" loading="lazy" alt="Drink 1" />
           <img src="68a25157e0edb92947ffe4a2/drink2.avif" loading="lazy" alt="Drink 2" />
+          <img src="68a25157e0edb92947ffe4a2/drink3.avif" loading="lazy" alt="Drink 3" />
+          <img src="68a25157e0edb92947ffe4a2/drink4.avif" loading="lazy" alt="Drink 4" />
+          <img src="68a25157e0edb92947ffe4a2/drink5.avif" loading="lazy" alt="Drink 5" />
+          <img src="68a25157e0edb92947ffe4a2/drink6.avif" loading="lazy" alt="Drink 6" />
         </div>
       </div>
 
       <div class="drink-frame-square">
-        <div class="slider-track-anim track-9-anim">
+        <div class="slider-track-anim track-5-anim">
           <img src="68a25157e0edb92947ffe4a2/prato1.avif" loading="lazy" alt="Prato 1" />
           <img src="68a25157e0edb92947ffe4a2/prato2.avif" loading="lazy" alt="Prato 2" />
           <img src="68a25157e0edb92947ffe4a2/prato3.avif" loading="lazy" alt="Prato 3" />
           <img src="68a25157e0edb92947ffe4a2/prato4.avif" loading="lazy" alt="Prato 4" />
           <img src="68a25157e0edb92947ffe4a2/prato5.avif" loading="lazy" alt="Prato 5" />
-          <img src="68a25157e0edb92947ffe4a2/prato6.avif" loading="lazy" alt="Prato 6" />
-          <img src="68a25157e0edb92947ffe4a2/prato7.avif" loading="lazy" alt="Prato 7" />
-          <img src="68a25157e0edb92947ffe4a2/prato8.avif" loading="lazy" alt="Prato 8" />
-          <img src="68a25157e0edb92947ffe4a2/prato9.avif" loading="lazy" alt="Prato 9" />
         </div>
       </div>
 

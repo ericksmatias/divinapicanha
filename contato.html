@@ -99,8 +99,7 @@
       }
     }
     </script>
-</head>
-</script><style>
+<style>
 ::-webkit-scrollbar-button {transition: 0ms !important;width: 0px;height: 0px;}
 ::-webkit-scrollbar-track {background: transparent;}
 ::-webkit-scrollbar-thumb {-webkit-border-radius: 0px;border-radius: 0px;background: transparent;opacity:0;}
@@ -402,9 +401,7 @@ body.menu-open {
 
 </style>
 
-<!-- [Attributes by Finsweet] Auto Video -->
-<script defer src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-autovideo@1/autovideo.js"></script><!-- Mapbox Resources -->
-<link href="https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css" rel="stylesheet">
+<script defer src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-autovideo@1/autovideo.js"></script><link href="https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.js"></script>
 
 <style>
@@ -456,13 +453,11 @@ body.menu-open {
             </a>
             <div class="menu_header">
               <a href="index.html" class="h-link w-inline-block"><div>Início</div></a>
-              <link rel="prerender" href="index.html"/>
               <a href="eventos.html" class="h-link w-inline-block"><div>Eventos</div></a>
-              <link rel="prerender" href="eventos.html"/>
+              <a href="area-kids.html" class="h-link w-inline-block"><div>Área Kids</div></a>
+              <a href="program.html" class="h-link w-inline-block"><div>Programação Musical</div></a>
               <a href="sobre.html" class="h-link w-inline-block"><div>Sobre</div></a>
-              <link rel="prerender" href="sobre.html"/>
               <a href="contato.html" aria-current="page" class="h-link w-inline-block w--current"><div>Contato</div></a>
-              <link rel="prerender" href="contato.html"/>
             </div>
           </div>
         </div>
@@ -496,6 +491,8 @@ body.menu-open {
       <div class="list_menu">
         <a href="index.html" class="mobile_menu_link w-inline-block"><div>início</div></a>
         <a href="eventos.html" class="mobile_menu_link w-inline-block"><div>eventos</div></a>
+        <a href="area-kids.html" class="mobile_menu_link w-inline-block"><div>área kids</div></a>
+        <a href="program.html" class="mobile_menu_link w-inline-block"><div>programação musical</div></a>
         <a href="sobre.html" class="mobile_menu_link w-inline-block"><div>sobre</div></a>
         <a href="contato.html" aria-current="page" class="mobile_menu_link w-inline-block w--current"><div>contato</div></a>
       </div>
@@ -681,6 +678,8 @@ body.menu-open {
         <div class="footer_links">
           <a href="index.html" class="txt_footer w-inline-block"><div>Início</div></a>
           <a href="eventos.html" class="txt_footer w-inline-block"><div>Eventos</div></a>
+          <a href="area-kids.html" class="txt_footer w-inline-block"><div>Área Kids</div></a>
+          <a href="program.html" class="txt_footer w-inline-block"><div>Programação Musical</div></a>
           <a href="sobre.html" class="txt_footer w-inline-block"><div>Sobre</div></a>
           <a href="contato.html" class="txt_footer w-inline-block"><div>Contato</div></a>
         </div>
@@ -744,10 +743,8 @@ body.menu-open {
 <script async type="module" src="https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/attributes.js" fs-copyclip></script>
 
 
-<!-- Lenis Smooth Scroll -->
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@0.2.28/bundled/lenis.js"></script>
 
-<!-- Google Reviews -->
 <script>
   const PLACE_ID = "ChIJN321Sd7U54gRadJaaCru2x8";
   const SELECTORS = {
@@ -795,7 +792,6 @@ body.menu-open {
   }
 </script>
 
-<!-- Maps API -->
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm6ilZ5T-guRbA7cN4Lh1nP7ZuNT00co0&libraries=places&callback=initReviews">
 </script>
@@ -811,7 +807,6 @@ body.menu-open {
   }
 </style>
 
-<!-- Lenis -->
 <script>
   const lenis = new Lenis({
     duration: 1.2,
@@ -834,7 +829,6 @@ body.menu-open {
   requestAnimationFrame(raf);
 </script>
 
-<!-- Header color change logic -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector(".header");
@@ -890,7 +884,6 @@ body.menu-open {
   });
 </script>
 
-<!-- GSAP Animations -->
 <script src="https://unpkg.com/split-type"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
@@ -957,7 +950,6 @@ body.menu-open {
   });
 </script>
 
-<!-- Autoplay mobile videos -->
 <script>
 for (video of document.getElementsByTagName("video")) {
   video.setAttribute("playsinline", "");

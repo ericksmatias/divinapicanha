@@ -502,18 +502,33 @@ body.menu-open {
     padding: 0 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza tudo no meio */
+    align-items: center; /* Centraliza tudo no container principal */
   }
 
-  /* Texto dos Drinks Centralizado */
+  /* Texto dos Drinks - Forçando Centralização Absoluta */
   .drinks-text-wrapper {
-    text-align: center;
-    max-width: 700px; /* Limita a largura para o texto não ficar numa linha infinita */
-    margin-bottom: 50px; /* Espaço entre o texto e as fotos */
+    width: 100%;
+    max-width: 800px; 
+    margin: 0 auto 50px auto; /* O 'auto' nas laterais garante que a caixa fique no meio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Sobrescreve as regras originais do site (impede que fiquem à esquerda) */
+  .drinks-text-wrapper .h3,
+  .drinks-text-wrapper .base_p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .drinks-text-wrapper .base_box {
     margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   /* Container dos Quadros Lado a Lado */
@@ -528,7 +543,7 @@ body.menu-open {
   /* --- MÁGICA DOS QUADRADOS E ANIMAÇÃO --- */
   .drink-frame-square {
     width: 100%;
-    max-width: 500px; /* Limita o tamanho máximo no PC para não ficar gigante */
+    max-width: 500px; /* Limita o tamanho máximo no PC */
     aspect-ratio: 1 / 1; /* Força a ser um quadrado perfeito */
     overflow: hidden;
     border-radius: 16px; /* Bordas arredondadas */
@@ -619,7 +634,6 @@ body.menu-open {
 
   </div>
 </section>
-
 <section class="testimonials">
   <div class="wrapper_base special_marque">
     <div class="flexbox_testimonials">

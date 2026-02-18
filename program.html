@@ -346,10 +346,9 @@ body.menu-open { overflow: hidden; touch-action: none; }
         </video>
       </div>
 
-    <div class="content_layer layer_1">
-        <h1 class="h1_immersive" text-split letters-fade-in>Música<br>Ao Vivo</span></h1>
-        <div class="scroll_indicator"> </div>
-      </div>
+    <h1 class="h1_immersive" text-split letters-fade-in>
+  Música<br>Ao Vivo
+</h1>
 
       <div class="content_layer layer_2">
         <h2 class="h2_immersive" text-split letters-fade-in>Nossa Agenda</h2>
@@ -453,17 +452,39 @@ body.menu-open { overflow: hidden; touch-action: none; }
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@0.2.28/bundled/lenis.js"></script>
 
 <script>
+  // registra plugin (evita erro se ScrollTrigger não estiver pronto)
   gsap.registerPlugin(ScrollTrigger);
 
-  // 1. ANIMAÇÃO DE SCROLL (THE FLIP EFFECT)
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".immersive_scroll_wrapper",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1
-    }
+  // quebra texto em letras
+  const typeSplit = new SplitType("[text-split]", {
+    types: "words, chars",
+    tagName: "span"
   });
+
+  // anima letra por letra quando entra na tela
+  gsap.utils.toArray("[letters-fade-in]").forEach((el) => {
+    const chars = el.querySelectorAll(".char");
+
+    gsap.fromTo(
+      chars,
+      { opacity: 0, yPercent: 20 },
+      {
+        opacity: 1,
+        yPercent: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        stagger: 0.03,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+  });
+
+  // garante que nada fique invisível por causa do CSS [text-split]{opacity:0;}
+  gsap.set("[text-split]", { opacity: 1 });
 
   // FASE 1: Título desaparece
   tl.to(".layer_1", {

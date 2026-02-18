@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
-<title>Programação</title>
+<title>Programação Musical - Divina Picanha</title>
 <meta content="Confira a agenda de música ao vivo da Divina Picanha." name="description"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <link href="68a25157e0edb92947ffe4a2/css/webflow%20divina%20picanha.css" rel="stylesheet" type="text/css"/>
@@ -27,34 +27,30 @@ body { background-color: #0c0c0c; color: #fff; margin: 0; overflow-x: hidden; }
 
 ::selection { background-color: #d49653; color: #2c2c2c; }
 
-/* --- HEADER IGUAL AO INDEX --- */
-.header { 
+/* --- HEADER EXACT COPY CSS (DO INDEX) --- */
+/* Forçamos fixed apenas para acompanhar o scroll longo, mas mantendo as propriedades visuais do index */
+.header {
   position: fixed !important; 
-  top: 0; left: 0; width: 100%;
+  top: 0; 
+  left: 0; 
+  width: 100%;
   z-index: 10000 !important; 
-  background-color: transparent; /* Transparente no início */
-  transition: background-color 0.4s ease, padding 0.4s ease;
-  padding: 20px 0;
+  /* O estilo inline no HTML define o background inicial, aqui gerenciamos transição */
+  transition: background-color 0.3s ease; 
 }
 
+/* Apenas escurece o fundo ao rolar, SEM alterar padding/tamanho */
 .header.is-scrolled {
-  background-color: rgba(0, 0, 0, 0.9) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background-color: rgba(0, 0, 0, 0.95) !important;
 }
 
-.header .logo img { 
-  height: 40px; 
-  width: auto; 
-  max-width: none; 
-  transition: height 0.4s ease;
+.header .logo img {
+  height: 40px;
+  width: auto;
+  max-width: none;
 }
 
-/* Opcional: Se quiser que diminua levemente ao rolar, descomente abaixo. Se quiser fixo, deixe comentado. */
-/* .header.is-scrolled .logo img { height: 32px; } */
-
+/* Correção de cores do menu para fundo escuro */
 .h-link div, .link_header div { color: #fff !important; }
 .h-link.w--current div { color: #d49653 !important; opacity: 1 !important; }
 
@@ -68,11 +64,11 @@ body.menu-open { overflow: hidden; touch-action: none; }
 .mobile_menu_link { display: block !important; width: 100%; margin-bottom: 12px; padding: 15px 20px !important; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.03); border-radius: 4px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
 .mobile_menu_link div { font-family: 'Cinzel', serif !important; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
 
-/* --- IMMERSIVE SCROLL SECTION (O NOVO MIOLO) --- */
+/* --- IMMERSIVE SCROLL SECTION --- */
 .immersive_scroll_wrapper {
   position: relative;
   width: 100%;
-  height: 350vh; /* Altura longa para permitir o scroll da animação */
+  height: 350vh; /* Altura para controlar a duração da animação */
 }
 
 .sticky_container {
@@ -96,22 +92,22 @@ body.menu-open { overflow: hidden; touch-action: none; }
 .bg_video_wrapper video {
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: brightness(0.4); /* Escurece para o texto aparecer */
+  filter: brightness(0.4);
 }
 
-/* Camadas de Texto */
+/* Camadas de Texto (Animação) */
 .content_layer {
   position: absolute;
   z-index: 2;
   text-align: center;
   width: 100%;
   padding: 0 20px;
-  opacity: 0; /* Começa invisível, GSAP controla */
-  will-change: transform, opacity;
+  opacity: 0;
+  will-change: transform, opacity; /* Otimização de GPU */
 }
 
-/* Estilo do Título Principal (Fase 1) */
-.layer_1 { opacity: 1; } /* Esse começa visível */
+/* Layer 1: Título */
+.layer_1 { opacity: 1; } 
 .h1_immersive {
   font-family: 'Cinzel', serif;
   font-size: clamp(3.5rem, 8vw, 7rem);
@@ -137,10 +133,8 @@ body.menu-open { overflow: hidden; touch-action: none; }
   60% {transform: translateY(-5px);}
 }
 
-/* Estilo do Texto de Eventos (Fase 2 - Aparece por trás/zoom) */
-.layer_2 {
-  max-width: 900px;
-}
+/* Layer 2: Agenda */
+.layer_2 { max-width: 900px; }
 
 .h2_immersive {
   font-family: 'Cinzel', serif;
@@ -159,6 +153,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
 .event_item {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   padding: 20px 30px;
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.1);
@@ -189,19 +184,19 @@ body.menu-open { overflow: hidden; touch-action: none; }
 
 <body data-w-id="program-body">
   
-  <div class="header">
+  <div class="header" style="backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); background-color: rgba(0, 0, 0, 0.4);">
     <div class="wrapper_header">
       <div class="flex_header">
         <div class="left-side">
           <div class="flexbox">
             <a href="index.html" class="logo w-inline-block">
-              <img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png" alt="Divina Picanha Logo"/>
+              <img src="68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png" loading="lazy" alt="Divina Picanha Logo"/>
             </a>
             <div class="menu_header">
               <a href="index.html" class="h-link w-inline-block"><div>Início</div></a>
               <a href="eventos.html" class="h-link w-inline-block"><div>Eventos</div></a>
               <a href="area-kids.html" class="h-link w-inline-block"><div>Área Kids</div></a>
-              <a href="program.html" aria-current="page" class="h-link w-inline-block w--current"><div>Programação</div></a>
+              <a href="program.html" aria-current="page" class="h-link w-inline-block w--current"><div>Programação Musical</div></a>
               <a href="sobre.html" class="h-link w-inline-block"><div>Sobre</div></a>
               <a href="contato.html" class="h-link w-inline-block"><div>Contato</div></a>
             </div>
@@ -209,14 +204,14 @@ body.menu-open { overflow: hidden; touch-action: none; }
         </div>
         <div class="right-side">
           <div class="right_links">
-            <a href="https://heyzine.com/flip-book/dfcb818a5b.html" target="_blank" class="link_header w-inline-block">
+            <a href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" target="_blank" class="link_header w-inline-block">
               <div>Menu</div>
-              <div class="icon_box"><img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" alt="Menu" class="image"/></div>
+              <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" loading="lazy" alt="Menu Icon" class="image"/></div>
             </a>
             <div class="line_splitter"></div>
             <a href="https://www.ifood.com.br/delivery/fortaleza-ce/divina-picanha-cidade-dos-funcionarios/67b715be-fd94-4d46-9285-78f643700591" target="_blank" class="link_header w-inline-block">
               <div>Peça agora</div>
-              <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" alt="Order" class="image"/></div>
+              <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" loading="lazy" alt="Order Icon" class="image"/></div>
             </a>
           </div>
           <div class="hamburger_menu">
@@ -238,11 +233,25 @@ body.menu-open { overflow: hidden; touch-action: none; }
         <a href="index.html" class="mobile_menu_link w-inline-block"><div>início</div></a>
         <a href="eventos.html" class="mobile_menu_link w-inline-block"><div>eventos</div></a>
         <a href="area-kids.html" class="mobile_menu_link w-inline-block"><div>área kids</div></a>
-        <a href="program.html" aria-current="page" class="mobile_menu_link w-inline-block w--current"><div>programação</div></a>
+        <a href="program.html" aria-current="page" class="mobile_menu_link w-inline-block w--current"><div>programação musical</div></a>
         <a href="sobre.html" class="mobile_menu_link w-inline-block"><div>sobre</div></a>
         <a href="contato.html" class="mobile_menu_link w-inline-block"><div>contato</div></a>
       </div>
       <a href="https://wa.me/5585996377401" target="_blank" class="reserve_table w-inline-block"><div>reservar mesa</div></a>
+    </div>
+  </div>
+
+  <div class="fixed_menu">
+    <div class="right_links menu_fixed">
+      <a href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" target="_blank" class="link_header link_menu w-inline-block">
+        <div class="menu_rest">Menu</div>
+        <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" loading="lazy" alt="Menu" class="image"/></div>
+      </a>
+      <div class="line_splitter"></div>
+      <a href="https://www.ifood.com.br/delivery/fortaleza-ce/divina-picanha-cidade-dos-funcionarios/67b715be-fd94-4d46-9285-78f643700591" target="_blank" class="link_header link_order w-inline-block">
+        <div class="order_now">Peça agora</div>
+        <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" loading="lazy" alt="Order" class="image"/></div>
+      </a>
     </div>
   </div>
 
@@ -251,13 +260,13 @@ body.menu-open { overflow: hidden; touch-action: none; }
       
       <div class="bg_video_wrapper">
         <video autoplay loop muted playsinline>
-          <source src="68a25157e0edb92947ffe4a2/fundoprogram.mp4" type="video/mp4">
+          <source src="fundoprogram.mp4" type="video/mp4">
         </video>
       </div>
 
       <div class="content_layer layer_1">
         <h1 class="h1_immersive">Música<br><span style="color: #d49653;">ao Vivo</span></h1>
-        <div class="scroll_indicator">__________</div>
+        <div class="scroll_indicator">Role para descobrir</div>
       </div>
 
       <div class="content_layer layer_2">
@@ -378,7 +387,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
     }
   });
 
-  // FASE 1: O Título inicial sobe e desaparece
+  // FASE 1: Título desaparece
   tl.to(".layer_1", {
     opacity: 0,
     scale: 0.8,
@@ -387,37 +396,24 @@ body.menu-open { overflow: hidden; touch-action: none; }
     ease: "power2.inOut"
   });
 
-  // FASE 2: O Texto de Eventos aparece
+  // FASE 2: Informações aparecem
   tl.fromTo(".layer_2", 
-    { 
-      opacity: 0, 
-      scale: 1.2, 
-      filter: "blur(20px)" 
-    },
-    { 
-      opacity: 1, 
-      scale: 1, 
-      filter: "blur(0px)",
-      duration: 1,
-      ease: "power2.inOut"
-    }, 
+    { opacity: 0, scale: 1.2, filter: "blur(20px)" },
+    { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.inOut" }, 
     "-=0.5"
   );
 
   // Pausa dramática
-  tl.to(".layer_2", {
-    scale: 1,
-    duration: 1
-  });
+  tl.to(".layer_2", { scale: 1, duration: 1 });
 
-  // FASE 3: Sai para o footer
+  // FASE 3: Informações saem
   tl.to(".layer_2", {
     opacity: 0,
     y: -50,
     duration: 0.5
   });
 
-  // 2. HEADER SHRINK EFFECT (Para ficar preto ao sair do topo)
+  // 2. HEADER COLOR CHANGE ON SCROLL
   window.addEventListener('scroll', function() {
     const header = document.querySelector('.header');
     if (window.scrollY > 50) {
@@ -427,11 +423,12 @@ body.menu-open { overflow: hidden; touch-action: none; }
     }
   });
 
-  // 3. SMOOTH SCROLL (LENIS)
+  // 3. SMOOTH SCROLL
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smooth: true,
+    infinite: false
   });
   function raf(time) {
     lenis.raf(time);
@@ -463,7 +460,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
     }
   });
   
-  // COPYRIGHT YEAR
+  // COPYRIGHT
   document.addEventListener("DOMContentLoaded", () => {
     const yearEl = document.querySelector("[data-year]");
     if (yearEl) yearEl.textContent = new Date().getFullYear();

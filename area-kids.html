@@ -2,15 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
+<base href=""/>
 <title>Área Kids - Divina Picanha</title>
-<meta content="Tranquilidade para os pais e muita diversão para as crianças. Conheça nosso espaço com monitores e segurança total." name="description"/>
+<meta content="Tranquilidade para os pais e muita diversão para as crianças. Conheça a Área Kids da Divina Picanha." name="description"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
 <link href="68a25157e0edb92947ffe4a2/css/webflow%20divina%20picanha.css" rel="stylesheet" type="text/css"/>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap&subset=latin,latin-ext" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+<script type="text/javascript">WebFont.load({  google: {    families: ["Cinzel:regular,700", "Outfit:300,400,500,700"]  }});</script>
 <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
 <link href="68a25157e0edb92947ffe4a2/68bf08843cbc855ea7ecfe60_32x32.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="68a25157e0edb92947ffe4a2/68bf088790486c34f092093a_256x256.png" rel="apple-touch-icon"/>
@@ -24,52 +25,52 @@
 ::-webkit-scrollbar {width: 0px;}
 
 body { background-color: #0c0c0c; color: #fff; margin: 0; overflow-x: hidden; }
-
 ::selection { background-color: #d49653; color: #2c2c2c; }
 
-/* --- HEADER IGUAL AO PROGRAM (4) --- */
-.header { 
-  transition: background-color 0.4s ease, padding 0.4s ease; 
-  position: fixed !important; 
-  top: 0; left: 0; width: 100%;
-  z-index: 10000 !important; 
-  background-color: transparent;
-  padding: 20px 0;
-}
+/* --- HEADER COPIADO DO INDEX (ESTRITAMENTE IGUAL) --- */
+.header { position: fixed !important; top: 0; left: 0; width: 100%; z-index: 10000 !important; background-color: transparent !important; transition: background-color 0.4s ease; }
+/* Adicionei apenas a cor de fundo ao rolar para legibilidade, mantendo o tamanho */
+.header.is-scrolled { background-color: rgba(0, 0, 0, 0.9) !important; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
-.header.is-scrolled {
-  background-color: rgba(0, 0, 0, 0.9) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
+.header .logo img { height: 40px; width: auto; max-width: none; }
+.logo, .hamburger_menu { position: relative; z-index: 10001; }
 
-.header .logo img { 
-  height: 40px !important; 
-  width: auto; 
-  max-width: none; 
-}
-
-/* Cores do Menu */
-.h-link div, .link_header div { color: #fff !important; }
+.h-link div, .link_header div { color: #fff !important; } /* Força branco no menu */
 .h-link.w--current div { color: #d49653 !important; opacity: 1 !important; }
 
-/* Menu Mobile Styles */
+/* MENU MOBILE (DO INDEX) */
 .mobile_menu { position: fixed; top: 0; right: 0; width: 100vw; height: 100vh; transform: translateX(100%); opacity: 0; pointer-events: none; transition: transform 280ms ease, opacity 280ms ease; z-index: 9999; }
 .mobile_menu.is-open { transform: translateX(0); opacity: 1; pointer-events: auto; }
 body.menu-open { overflow: hidden; touch-action: none; }
 .hamburger_menu .line_1, .hamburger_menu .line_2 { transition: transform 280ms ease, opacity 180ms ease; transform-origin: center; background-color: #fff !important; }
 .hamburger_menu.is-open .line_1 { transform: translateY(4px) rotate(45deg); }
 .hamburger_menu.is-open .line_2 { transform: translateY(-4px) rotate(-45deg); }
+
 .mobile_menu_link { display: block !important; width: 100%; margin-bottom: 12px; padding: 15px 20px !important; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.03); border-radius: 4px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
+.mobile_menu_link.w--current { border-color: rgba(255, 255, 255, 0.4); background-color: rgba(255, 255, 255, 0.08); }
+.mobile_menu_link:active { background-color: rgba(255, 255, 255, 0.15); transform: scale(0.98); }
 .mobile_menu_link div { font-family: 'Cinzel', serif !important; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
 
-/* --- IMMERSIVE SCROLL SECTION (ÁREA KIDS) --- */
+.reserve_table { margin-top: 20px; background-color: #fff !important; color: #000 !important; border-radius: 4px; padding: 18px !important; font-weight: bold; text-align: center; }
+.reserve_table div { color: #000 !important; font-family: 'Cinzel', serif !important; }
+
+/* SETINHAS DE SCROLL (DO INDEX) */
+.scroll-arrows { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; z-index: 99; pointer-events: none; }
+.scroll-arrows span { display: block; width: 15px; height: 15px; border-bottom: 3px solid #ffffff; border-right: 3px solid #ffffff; transform: rotate(45deg); margin: -8px auto; animation: arrows-jump 2s infinite; }
+.scroll-arrows span:nth-child(2) { animation-delay: -0.2s; }
+.scroll-arrows span:nth-child(3) { animation-delay: -0.4s; }
+
+@keyframes arrows-jump {
+    0% { opacity: 0; transform: rotate(45deg) translate(-10px, -10px); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: rotate(45deg) translate(10px, 10px); }
+}
+
+/* --- IMMERSIVE SCROLL (LÓGICA DO PROGRAM) --- */
 .immersive_scroll_wrapper {
   position: relative;
   width: 100%;
-  height: 350vh; /* Mantém o scroll longo */
+  height: 350vh; /* Altura do scroll */
 }
 
 .sticky_container {
@@ -93,68 +94,51 @@ body.menu-open { overflow: hidden; touch-action: none; }
 .bg_video_wrapper video {
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: brightness(0.5); /* Um pouco mais claro que o program para ser kids-friendly */
+  filter: brightness(0.6);
 }
 
-/* Camadas de Texto */
+/* Camadas de Conteúdo */
 .content_layer {
   position: absolute;
   z-index: 2;
   text-align: center;
   width: 100%;
   padding: 0 20px;
-  opacity: 0; 
+  opacity: 0;
   will-change: transform, opacity;
 }
 
-/* Layer 1: Título Inicial */
+/* Layer 1: Título Kids */
 .layer_1 { opacity: 1; } 
 
 .h1_immersive {
   font-family: 'Cinzel', serif;
-  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-size: clamp(3.5rem, 8vw, 7rem);
   text-transform: uppercase;
   color: #fff;
   line-height: 1;
   text-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.scroll_indicator {
-  margin-top: 30px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #d49653;
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-  40% {transform: translateY(-10px);}
-  60% {transform: translateY(-5px);}
-}
-
-/* Layer 2: Detalhes Kids */
-.layer_2 { 
-  max-width: 1000px; 
-}
+/* Layer 2: Informações Kids */
+.layer_2 { max-width: 1000px; }
 
 .h2_immersive {
   font-family: 'Cinzel', serif;
   font-size: clamp(2rem, 5vw, 4rem);
   color: #d49653;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .subtitle_kids {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #eee;
-  margin-bottom: 40px;
-  max-width: 600px;
+  margin-bottom: 50px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.6;
 }
 
 .kids_grid {
@@ -165,45 +149,46 @@ body.menu-open { overflow: hidden; touch-action: none; }
 }
 
 .kids_item {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 30px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
   text-align: center;
-  flex: 1 1 220px;
+  flex: 1 1 250px;
   transition: transform 0.3s ease;
 }
 
 .kids_item:hover {
-  background: rgba(212, 150, 83, 0.15);
   border-color: #d49653;
-}
-
-.kids_icon {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  display: block;
+  transform: translateY(-5px);
 }
 
 .kids_title {
   font-family: 'Cinzel', serif;
-  font-size: 1.3rem;
-  color: #fff;
-  margin-bottom: 8px;
+  font-size: 1.4rem;
+  color: #d49653;
+  margin-bottom: 10px;
 }
 
 .kids_desc {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #ddd;
 }
 
-/* Footer Fix */
-.footer { position: relative; z-index: 5; background-color: #0c0c0c; }
+/* Footer (Estilo Index) */
 .footer_logo_lg { width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; grid-column: 1 / -1; margin: 40px 0; }
 .footer_espeto_logo { display: block; margin: 0 auto; max-width: 420px; width: 100%; height: auto; opacity: 0.08; }
 
+/* Responsividade */
+@media (max-width: 768px) {
+  .header .logo img { height: 40px; }
+  .header { padding: 15px 0; }
+  .h1_immersive { font-size: 3rem; }
+  .scroll-arrows { bottom: 100px; }
+}
 </style>
 </head>
 
@@ -215,13 +200,13 @@ body.menu-open { overflow: hidden; touch-action: none; }
         <div class="left-side">
           <div class="flexbox">
             <a href="index.html" class="logo w-inline-block">
-              <img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png" alt="Divina Picanha Logo"/>
+              <img src="68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png" loading="lazy" alt="Divina Picanha Logo"/>
             </a>
             <div class="menu_header">
               <a href="index.html" class="h-link w-inline-block"><div>Início</div></a>
               <a href="eventos.html" class="h-link w-inline-block"><div>Eventos</div></a>
               <a href="area-kids.html" aria-current="page" class="h-link w-inline-block w--current"><div>Área Kids</div></a>
-              <a href="program.html" class="h-link w-inline-block"><div>Programação Musical</div></a>
+              <a href="program.html" class="h-link w-inline-block"><div>Programação</div></a>
               <a href="sobre.html" class="h-link w-inline-block"><div>Sobre</div></a>
               <a href="contato.html" class="h-link w-inline-block"><div>Contato</div></a>
             </div>
@@ -231,12 +216,12 @@ body.menu-open { overflow: hidden; touch-action: none; }
           <div class="right_links">
             <a href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" target="_blank" class="link_header w-inline-block">
               <div>Menu</div>
-              <div class="icon_box"><img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" alt="Menu Icon" class="image"/></div>
+              <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" loading="lazy" alt="Menu Icon" class="image"/></div>
             </a>
             <div class="line_splitter"></div>
             <a href="https://wa.me/5585996377401" target="_blank" class="link_header w-inline-block">
-              <div>Reservar</div>
-              <div class="icon_box"><img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" alt="Reserve Icon" class="image"/></div>
+              <div>Peça agora</div>
+              <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" loading="lazy" alt="Order Icon" class="image"/></div>
             </a>
           </div>
           <div class="hamburger_menu">
@@ -258,11 +243,25 @@ body.menu-open { overflow: hidden; touch-action: none; }
         <a href="index.html" class="mobile_menu_link w-inline-block"><div>início</div></a>
         <a href="eventos.html" class="mobile_menu_link w-inline-block"><div>eventos</div></a>
         <a href="area-kids.html" aria-current="page" class="mobile_menu_link w-inline-block w--current"><div>área kids</div></a>
-        <a href="program.html" class="mobile_menu_link w-inline-block"><div>programação musical</div></a>
+        <a href="program.html" class="mobile_menu_link w-inline-block"><div>programação</div></a>
         <a href="sobre.html" class="mobile_menu_link w-inline-block"><div>sobre</div></a>
         <a href="contato.html" class="mobile_menu_link w-inline-block"><div>contato</div></a>
       </div>
       <a href="https://wa.me/5585996377401" target="_blank" class="reserve_table w-inline-block"><div>reservar mesa</div></a>
+      <div class="socials_contacts">
+        <div class="address_menu">
+          <div class="title_menu">Horários</div>
+          <div class="content_box">
+            <div class="content_menu">Todos os dias<br/>Das 10:00 às 00:00</div>
+          </div>
+        </div>
+        <div class="address_menu">
+          <div class="title_menu">Unidades</div>
+          <div class="content_box">
+            <div class="content_menu">Cidade • Meireles • Itaperi<br/>Fortaleza, CE</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -291,27 +290,31 @@ body.menu-open { overflow: hidden; touch-action: none; }
 
       <div class="content_layer layer_1">
         <h1 class="h1_immersive">Espaço<br><span style="color: #d49653;">Kids</span></h1>
-        <div class="scroll_indicator">Diversão Garantida</div>
+        
+        <div class="scroll-arrows">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
 
       <div class="content_layer layer_2">
         <h2 class="h2_immersive">Diversão & Segurança</h2>
-        <div class="subtitle_kids">Tranquilidade para os pais e muita alegria para as crianças. Monitoria especializada todos os dias.</div>
+        <div class="subtitle_kids">
+          Tranquilidade para os pais e muita alegria para as crianças. A Divina Picanha conta com uma Área Kids completa, projetada para garantir a segurança e o entretenimento dos pequenos.
+        </div>
         
         <div class="kids_grid">
-          <div class="kids_item kids_1">
-            <span class="kids_icon">🎈</span>
+          <div class="kids_item">
             <div class="kids_title">Monitores</div>
-            <div class="kids_desc">Equipe treinada para cuidar e brincar.</div>
+            <div class="kids_desc">Equipe treinada para cuidar e brincar com segurança.</div>
           </div>
-          <div class="kids_item kids_2">
-            <span class="kids_icon">🎮</span>
+          <div class="kids_item">
             <div class="kids_title">Jogos</div>
-            <div class="kids_desc">Eletrônicos e brinquedão para todas as idades.</div>
+            <div class="kids_desc">Videogames, brinquedão e piscina de bolinhas.</div>
           </div>
-          <div class="kids_item kids_3">
-            <span class="kids_icon">🛡️</span>
-            <div class="kids_title">Segurança</div>
+          <div class="kids_item">
+            <div class="kids_title">Conforto</div>
             <div class="kids_desc">Ambiente climatizado e monitorado.</div>
           </div>
         </div>
@@ -407,7 +410,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
 <script>
   gsap.registerPlugin(ScrollTrigger);
 
-  // 1. ANIMAÇÃO DE SCROLL (NOVA LÓGICA KIDS: ELASTIC / POP-UP)
+  // 1. ANIMAÇÃO DE SCROLL (ELASTIC/POPUP EFFECT PARA KIDS)
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".immersive_scroll_wrapper",
@@ -417,8 +420,8 @@ body.menu-open { overflow: hidden; touch-action: none; }
     }
   });
 
-  // FASE 1: Título sobe e some
-  tl.to(".layer_1", {
+  // FASE 1: Título e Setas somem
+  tl.to([".layer_1", ".scroll-arrows"], {
     y: -100,
     opacity: 0,
     scale: 0.9,
@@ -426,21 +429,12 @@ body.menu-open { overflow: hidden; touch-action: none; }
     ease: "power2.inOut"
   });
 
-  // FASE 2: Cards "Pulam" para a tela (Elastic Effect)
+  // FASE 2: Cards "Pulam" para a tela (Efeito Elástico)
   tl.fromTo(".layer_2", 
     { opacity: 0, scale: 0.5, y: 100 },
     { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "elastic.out(1, 0.8)" }, 
     "-=0.5"
   );
-
-  // Animação interna dos cards (Stagger)
-  tl.from(".kids_item", {
-    y: 50,
-    opacity: 0,
-    stagger: 0.2,
-    duration: 0.5,
-    ease: "back.out(1.7)"
-  }, "-=1");
 
   // Pausa para leitura
   tl.to(".layer_2", { scale: 1, duration: 1 });
@@ -462,7 +456,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
     }
   });
 
-  // 3. SMOOTH SCROLL (LENIS)
+  // 3. SMOOTH SCROLL
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

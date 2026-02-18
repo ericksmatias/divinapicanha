@@ -145,6 +145,15 @@ html.w-editor [text-split] {opacity: 1;}
   opacity: 0.08;
 }
 
+/* GARANTIA DE VISIBILIDADE DO MAPA */
+.mapbox {
+  width: 100%;
+  height: 100%;
+  min-height: 450px; /* Garante altura se o container pai falhar */
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 /* =========================
    TÍTULOS – SEM CORTAR ACENTOS
    ========================= */
@@ -648,6 +657,9 @@ body.menu-open {
                   map.fitBounds(bounds, { padding: [50, 50] });
                 }
               }
+
+              // CORREÇÃO: Chamada da função para iniciar o mapa quando a página carregar
+              document.addEventListener('DOMContentLoaded', initMap);
             </script>
           </div>
         </div>

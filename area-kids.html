@@ -37,6 +37,41 @@ html.w-editor [text-split] {opacity: 1;}
 ::selection { background-color: #d49653; color: #2c2c2c; }
 ::-moz-selection { background-color: #d49653; color: #2c2c2c; }
 
+/* --- CORREÇÃO DE ALINHAMENTO DO HERO (GLOBAL) --- */
+/* Força o alinhamento central em TODAS as resoluções */
+.hero_headline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center !important; /* Centraliza horizontalmente os filhos */
+  justify-content: center;
+  width: 100%;
+}
+
+.wrapper_hero.special_main {
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* Garante que o container do texto "Kids" seja flex e centralizado */
+.flex_heading.our_story {
+  display: flex;
+  justify-content: center !important;
+  width: 100%;
+}
+
+.h1_hero, .caption_heading {
+  text-align: center !important;
+}
+
+/* --- CORREÇÃO DO FOOTER (Igual ao Index) --- */
+.footer_logo_lg { width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; grid-column: 1 / -1; margin: 40px 0; }
+.footer_espeto_logo { display: block; margin: 0 auto; max-width: 420px; width: 100%; height: auto; opacity: 0.08; }
+
 /* Menu e Header Premium */
 .header {
   position: absolute !important; 
@@ -122,51 +157,34 @@ body.menu-open { overflow: hidden; touch-action: none; }
   display: block;
 }
 
-/* --- CORREÇÃO DO FOOTER (Igual ao Index) --- */
-.footer_logo_lg { width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; grid-column: 1 / -1; margin: 40px 0; }
-.footer_espeto_logo { display: block; margin: 0 auto; max-width: 420px; width: 100%; height: auto; opacity: 0.08; }
-
 /* --- CORREÇÃO DO BOTÃO --- */
 .button.dark {
-  display: inline-block; /* Impede que o botão ocupe 100% da largura */
+  display: inline-block;
   width: auto;
   text-decoration: none;
 }
 
 .button_box.dark {
-  padding: 14px 32px; /* Adiciona respiro para o botão ficar proporcional */
+  padding: 14px 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Se precisar de borda, descomente abaixo: */
-  /* border: 1px solid #111; */
 }
 
-/* Responsividade Mobile - Hero Centralizado */
+/* Responsividade Mobile */
 @media (max-width: 991px) {
   .kids-info-section { grid-template-columns: 1fr; gap: 40px; padding: 60px 20px; }
   
-  /* Ajuste de Texto do Hero no Mobile */
-  .wrapper_hero.special_main { 
+  /* Reforço para Mobile (embora o global já resolva) */
+  .wrapper_hero.special_main, .hero_headline { 
     text-align: center; 
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 100% !important;
-  }
-  .hero_headline { 
-    align-items: center; 
-    width: 100%;
   }
   .h1_hero, .picanha-overlay { 
     left: auto !important; 
     right: auto !important; 
     transform: none !important; 
     text-align: center;
-  }
-  .flex_heading {
-    justify-content: center !important;
-    width: 100%;
   }
 }
 
@@ -256,7 +274,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
   <div class="wrapper_hero special_main">
     <div class="hero_headline">
       <h1 letters-fade-in="" text-split="" class="h1_hero like_home dark no-wrap">Espaço</h1>
-      <div class="flex_heading our_story" style="justify-content: center; width: 100%;">
+      <div class="flex_heading our_story">
         <h1 letters-fade-in="" text-split="" class="h1_hero like_home dark">Kids<br/></h1>
       </div>
       <div style="margin-top: 20px;">
@@ -281,11 +299,11 @@ body.menu-open { overflow: hidden; touch-action: none; }
     </div>
     
     <ul>
-      <li>Monitores atenciosos</li>
-      <li>Videogames para diversão</li>
+      <li>Monitores especializados e atenciosos</li>
+      <li>Videogames de última geração</li>
       <li>Brinquedão com piscina de bolinhas e escorregador</li>
       <li>Ambiente climatizado e totalmente seguro</li>
-      <li>Atividades</li>
+      <li>Atividades lúdicas para diversas idades</li>
     </ul>
 
     <div style="margin-top: 40px;">
@@ -328,98 +346,6 @@ body.menu-open { overflow: hidden; touch-action: none; }
         <div class="marquee">
           <div class="marquee_track">
             
-            <div class="marquee_list w-dyn-list">
-              <div role="list" class="marquee_flex w-dyn-items">
-                <div role="listitem" class="marquee_item w-dyn-item">
-                  <div class="box_testimonial">
-                    <div class="header_testimonial">
-                      <div class="stars_flex testimonials">
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                      </div>
-                      <div class="platform"><div class="txt_platform">Google</div></div>
-                    </div>
-                    <div class="testimonial_txt">
-                      <div class="testimonial_p">Um dos melhores custo-benefício da cidade para realização de eventos. Comida boa, atendimento bom, preço justo. Fiz a recepção do meu casamento lá e os convidados foram só elogios.</div>
-                    </div>
-                    <div class="author_box">
-                      <div class="author_title">Autora</div>
-                      <div class="author_name">Camila Mariz</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div role="listitem" class="marquee_item w-dyn-item">
-                  <div class="box_testimonial">
-                    <div class="header_testimonial">
-                      <div class="stars_flex testimonials">
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                      </div>
-                      <div class="platform"><div class="txt_platform">Google</div></div>
-                    </div>
-                    <div class="testimonial_txt">
-                      <div class="testimonial_p">Tudo muito bom. Me surpreendeu positivamente o valor do prato executivo.</div>
-                    </div>
-                    <div class="author_box">
-                      <div class="author_title">Autor</div>
-                      <div class="author_name">Marcos</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div role="listitem" class="marquee_item w-dyn-item">
-                  <div class="box_testimonial">
-                    <div class="header_testimonial">
-                      <div class="stars_flex testimonials">
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                      </div>
-                      <div class="platform"><div class="txt_platform">Google</div></div>
-                    </div>
-                    <div class="testimonial_txt">
-                      <div class="testimonial_p">Experiência fantástica! Ambiente limpo e bem iluminado, funcionários dedicados e sempre sorridentes.</div>
-                    </div>
-                    <div class="author_box">
-                      <div class="author_title">Autor</div>
-                      <div class="author_name">Sandro Murilo</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div role="listitem" class="marquee_item w-dyn-item">
-                  <div class="box_testimonial">
-                    <div class="header_testimonial">
-                      <div class="stars_flex testimonials">
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                        <div class="star_review"><img src="68a25157e0edb92947ffe4a2/68ab6f5c7f6ef175306f18bb_star-icon.png" loading="lazy" alt="Star" class="image stars"/></div>
-                      </div>
-                      <div class="platform"><div class="txt_platform">Google</div></div>
-                    </div>
-                    <div class="testimonial_txt">
-                      <div class="testimonial_p">Superou minhas expectativas, no atendimento, nos pratos e sabores. Voltarei mais vezes.</div>
-                    </div>
-                    <div class="author_box">
-                      <div class="author_title">Autora</div>
-                      <div class="author_name">Annie Lima Ximenes</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div class="marquee_list w-dyn-list">
               <div role="list" class="marquee_flex w-dyn-items">
                 <div role="listitem" class="marquee_item w-dyn-item">

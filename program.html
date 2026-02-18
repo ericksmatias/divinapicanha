@@ -16,64 +16,110 @@
 <link href="68a25157e0edb92947ffe4a2/68bf088790486c34f092093a_256x256.png" rel="apple-touch-icon"/>
 
 <style>
-/* --- CSS GERAL --- */
+/* CSS GERAL E RESET */
 ::-webkit-scrollbar-button {transition: 0ms !important;width: 0px;height: 0px;}
 ::-webkit-scrollbar-track {background: transparent;}
 ::-webkit-scrollbar-thumb {-webkit-border-radius: 0px;border-radius: 0px;background: transparent;opacity:0;}
 ::-webkit-resizer {width: 0px;height: 0px;}
 ::-webkit-scrollbar {width: 0px;}
+  
+[text-split] {opacity: 0;}
+html.w-editor [text-split] {opacity: 1;}
 
-body { background-color: #0c0c0c; color: #fff; margin: 0; overflow-x: hidden; }
-
+.word { overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; transform-origin: bottom; }
 ::selection { background-color: #d49653; color: #2c2c2c; }
+::-moz-selection { background-color: #d49653; color: #2c2c2c; }
 
-/* --- AJUSTES DO HEADER (Para funcionar nesta página com vídeo) --- */
-.header {
-  position: fixed !important; /* Fixo para acompanhar o vídeo */
-  top: 0; left: 0; width: 100%;
-  z-index: 10000 !important;
-  background-color: transparent; /* Começa transparente */
-  transition: background-color 0.4s ease;
+.footer_logo_lg { width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; grid-column: 1 / -1; margin: 40px 0; }
+.footer_espeto_logo { display: block; margin: 0 auto; max-width: 420px; width: 100%; height: auto; opacity: 0.08; }
+
+.hero_headline h1, .hero_headline .h1_hero, .hero_headline .middle { font-family: 'Cinzel', serif !important; text-transform: uppercase; line-height: 0.9 !important; overflow: visible !important; padding-top: 0.12em !important; margin-top: -0.12em !important; }
+.hero_headline { position: relative; display: flex; flex-direction: column; align-items: center; }
+.flex_heading_new { display: flex; justify-content: center; width: 100%; text-align: center; }
+.since_1962 { white-space: nowrap; letter-spacing: 0.12em; }
+.header .logo img { height: 40px; width: auto; max-width: none; }
+
+/* MENU MOBILE */
+.mobile_menu { position: fixed; top: 0; right: 0; width: 100vw; height: 100vh; transform: translateX(100%); opacity: 0; pointer-events: none; transition: transform 280ms ease, opacity 280ms ease; z-index: 9999; }
+.mobile_menu.is-open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+body.menu-open { overflow: hidden; touch-action: none; }
+.hamburger_menu .line_1, .hamburger_menu .line_2 { transition: transform 280ms ease, opacity 180ms ease; transform-origin: center; }
+.hamburger_menu.is-open .line_1 { transform: translateY(4px) rotate(45deg); }
+.hamburger_menu.is-open .line_2 { transform: translateY(-4px) rotate(-45deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile_menu { transition: none; }
+  .hamburger_menu .line_1, .hamburger_menu .line_2 { transition: none; }
 }
 
-.header.is-scrolled {
-  background-color: rgba(0, 0, 0, 0.95); /* Fica escuro ao rolar */
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+.mobile_menu_link { display: block !important; width: 100%; margin-bottom: 12px; padding: 15px 20px !important; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.03); border-radius: 4px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
+.mobile_menu_link.w--current { border-color: rgba(255, 255, 255, 0.4); background-color: rgba(255, 255, 255, 0.08); }
+.mobile_menu_link:active { background-color: rgba(255, 255, 255, 0.15); transform: scale(0.98); }
+.mobile_menu_link div { font-family: 'Cinzel', serif !important; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+
+.scroll-arrows { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; z-index: 99; }
+.scroll-arrows span { display: block; width: 15px; height: 15px; border-bottom: 3px solid #ffffff; border-right: 3px solid #ffffff; transform: rotate(45deg); margin: -8px auto; animation: arrows-jump 2s infinite; }
+.scroll-arrows span:nth-child(2) { animation-delay: -0.2s; }
+.scroll-arrows span:nth-child(3) { animation-delay: -0.4s; }
+
+@keyframes arrows-jump {
+    0% { opacity: 0; transform: rotate(45deg) translate(-10px, -10px); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: rotate(45deg) translate(10px, 10px); }
 }
 
-.header .logo img {
-  height: 40px; width: auto; max-width: none;
+@media (max-width: 768px) {
+  .flex_heading_new { gap: 40px; margin-top: 12px; justify-content: center !important; text-align: center !important; }
+  .footer_espeto_logo { max-width: 260px; opacity: 0.06; }
+  h1, .h1, .middle { line-height: 0.9 !important; }
+  .header .logo img { height: 40px; }
+  .header { position: absolute !important; top: 0; left: 0; width: 100%; z-index: 10000 !important; background-color: transparent !important; }
+  .logo, .hamburger_menu { position: relative; z-index: 10001; }
+  .wrapper_hero.special_main { width: 100% !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important; padding-left: 16px !important; padding-right: 16px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; }
+  .hero_headline.brand-container { width: 100% !important; max-width: 100% !important; margin: 0 auto !important; display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; }
+  .h1_hero, .picanha-overlay { left: auto !important; right: auto !important; transform: none !important; }
+  .h1_hero { position: relative !important; width: 100% !important; margin: 0 !important; text-align: center !important; font-size: clamp(52px, 14vw, 92px) !important; line-height: 0.95 !important; }
+  .picanha-overlay { width: 100% !important; display: flex !important; justify-content: center !important; }
+  .desc_fs .base_p { text-align: justify; text-justify: inter-word; }
 }
 
-/* --- OVERRIDE DE CORES DO MENU (CRÍTICO) --- */
-/* O header do Index tem classes 'dark' que deixam o texto preto. 
-   Aqui forçamos branco para ver em cima do vídeo. */
-.header .h-link.dark div, 
-.header .link_header.dark div,
-.header .menu_txt.dark,
-.hamburger_menu .line_1.dark,
-.hamburger_menu .line_2.dark {
-    color: #FFFFFF !important;
-    background-color: transparent !important; /* Para linhas do menu */
+/* --- DRINKS SECTION (COMPACTO NO HEAD) --- */
+.drinks-section { width: 100%; padding: 60px 0; background-color: transparent; }
+.drinks-container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; flex-direction: column; align-items: center; }
+.drinks-text-wrapper { width: 100%; max-width: 800px; margin: 0 auto 50px auto; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.drinks-text-wrapper .h3, .drinks-text-wrapper .base_p { text-align: center !important; margin-left: auto !important; margin-right: auto !important; }
+.drinks-text-wrapper .base_box { margin-top: 15px; width: 100%; max-width: 650px; display: flex; justify-content: center; }
+.drinks-frames-row { display: flex; flex-direction: row; justify-content: center; gap: 30px; width: 100%; }
+.drink-frame-square { width: 100%; max-width: 500px; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 16px; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+@media (max-width: 768px) { .drinks-frames-row { flex-direction: column; align-items: center; } }
+.slider-track-anim { display: flex; width: 100%; height: 100%; }
+.slider-track-anim img { min-width: 100%; height: 100%; object-fit: cover; }
+.track-6-anim { animation: animSlide6 15s infinite ease-in-out; }
+.track-5-anim { animation: animSlide5 12.5s infinite ease-in-out; }
+@keyframes animSlide6 {
+  0%, 12%  { transform: translateX(0); }        
+  16%, 29% { transform: translateX(-100%); }   
+  33%, 46% { transform: translateX(-200%); }   
+  50%, 63% { transform: translateX(-300%); }   
+  66%, 79% { transform: translateX(-400%); }   
+  83%, 96% { transform: translateX(-500%); }   
+  100%     { transform: translateX(0); }        
+}
+@keyframes animSlide5 {
+  0%, 15%  { transform: translateX(0); }        
+  20%, 35% { transform: translateX(-100%); }   
+  40%, 55% { transform: translateX(-200%); }   
+  60%, 75% { transform: translateX(-300%); }   
+  80%, 95% { transform: translateX(-400%); }   
+  100%     { transform: translateX(0); }        
 }
 
-/* As linhas do hamburger precisam de background branco */
-.hamburger_menu .line_1.dark,
-.hamburger_menu .line_2.dark {
-    background-color: #FFFFFF !important;
-}
-
-/* Link ativo dourado */
-.h-link.w--current div { 
-    color: #d49653 !important; 
-    opacity: 1 !important; 
-}
-
-/* --- IMMERSIVE SCROLL (MIOLO) --- */
+/* --- 1. ESTRUTURA DE SCROLL IMERSIVO (O MIOLO) --- */
 .immersive_scroll_wrapper {
   position: relative;
   width: 100%;
-  height: 350vh; /* Altura do scroll da animação */
+  height: 350vh; /* Define a duração do scroll */
+  background-color: #0c0c0c;
 }
 
 .sticky_container {
@@ -87,31 +133,38 @@ body { background-color: #0c0c0c; color: #fff; margin: 0; overflow-x: hidden; }
   align-items: center;
 }
 
-/* Vídeo Fixo */
+/* --- 2. VÍDEO DE FUNDO FIXO --- */
 .bg_video_wrapper {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
   z-index: 0;
 }
 
 .bg_video_wrapper video {
-  width: 100%; height: 100%;
+  width: 100%; 
+  height: 100%;
   object-fit: cover;
-  filter: brightness(0.4);
+  filter: brightness(0.4); /* Escurece o vídeo para o texto aparecer */
 }
 
-/* Camadas de Texto */
+/* --- 3. CAMADAS DE TEXTO (ANIMAÇÃO) --- */
 .content_layer {
   position: absolute;
   z-index: 2;
   text-align: center;
   width: 100%;
   padding: 0 20px;
-  opacity: 0;
+  opacity: 0; /* Controlado via JS (GSAP) */
   will-change: transform, opacity;
 }
 
-.layer_1 { opacity: 1; } /* Título inicial visível */
+/* Camada 1: Título Inicial */
+.layer_1 { 
+  opacity: 1; /* Começa visível */
+}
 
 .h1_immersive {
   font-family: 'Cinzel', serif;
@@ -132,13 +185,10 @@ body { background-color: #0c0c0c; color: #fff; margin: 0; overflow-x: hidden; }
   animation: bounce 2s infinite;
 }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-  40% {transform: translateY(-10px);}
-  60% {transform: translateY(-5px);}
+/* Camada 2: Agenda / Informações */
+.layer_2 { 
+  max-width: 900px; 
 }
-
-.layer_2 { max-width: 900px; }
 
 .h2_immersive {
   font-family: 'Cinzel', serif;
@@ -178,24 +228,31 @@ body { background-color: #0c0c0c; color: #fff; margin: 0; overflow-x: hidden; }
   color: #ccc;
 }
 
-/* Footer Fix */
-.footer { position: relative; z-index: 5; background-color: #0c0c0c; }
-.footer_logo_lg { width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; grid-column: 1 / -1; margin: 40px 0; }
-.footer_espeto_logo { display: block; margin: 0 auto; max-width: 420px; width: 100%; height: auto; opacity: 0.08; }
+/* Animação da setinha "Role para descobrir" */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-10px);}
+  60% {transform: translateY(-5px);}
+}
 
-/* Menu Mobile (Estilos do Index) */
-.mobile_menu { position: fixed; top: 0; right: 0; width: 100vw; height: 100vh; transform: translateX(100%); opacity: 0; pointer-events: none; transition: transform 280ms ease, opacity 280ms ease; z-index: 9999; }
-.mobile_menu.is-open { transform: translateX(0); opacity: 1; pointer-events: auto; }
-body.menu-open { overflow: hidden; touch-action: none; }
-.mobile_menu_link { display: block !important; width: 100%; margin-bottom: 12px; padding: 15px 20px !important; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.03); border-radius: 4px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
-.mobile_menu_link div { font-family: 'Cinzel', serif !important; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
-.reserve_table { margin-top: 20px; background-color: #fff !important; color: #000 !important; border-radius: 4px; padding: 18px !important; font-weight: bold; text-align: center; }
-.reserve_table div { color: #000 !important; font-family: 'Cinzel', serif !important; }
+/* --- 4. CABEÇALHO ESCURO AO ROLAR --- */
+/* Adicione a classe 'is-scrolled' via JS no header */
+.header {
+  transition: background-color 0.4s ease;
+}
 
-/* Responsividade Header */
-@media (max-width: 768px) {
-  .header .logo img { height: 40px; }
-  .header { padding: 15px 0; }
+.header.is-scrolled {
+  background-color: rgba(0, 0, 0, 0.95) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Forçar cor branca nos links do menu nesta página específica */
+.header .h-link div, 
+.header .link_header div { 
+    color: #fff !important; 
+}
+.header .h-link.w--current div { 
+    color: #d49653 !important; 
 }
 </style>
 </head>

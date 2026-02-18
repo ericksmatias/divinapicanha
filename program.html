@@ -18,7 +18,7 @@
 <link href="68a25157e0edb92947ffe4a2/68bf088790486c34f092093a_256x256.png" rel="apple-touch-icon"/>
 
 <style>
-/* --- CSS GERAL --- */
+/* --- CSS GERAL & RESET --- */
 ::-webkit-scrollbar-button {transition: 0ms !important;width: 0px;height: 0px;}
 ::-webkit-scrollbar-track {background: transparent;}
 ::-webkit-scrollbar-thumb {-webkit-border-radius: 0px;border-radius: 0px;background: transparent;opacity:0;}
@@ -27,49 +27,73 @@
 
 body { background-color: #0c0c0c; color: #fff; }
 
-/* Animações de Texto */
+/* --- ANIMAÇÕES DE TEXTO (IGUAL AO INDEX) --- */
 [text-split] {opacity: 0;}
 html.w-editor [text-split] {opacity: 1;}
-.word { overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; transform-origin: bottom; }
+
+.word {
+	overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+  transform-origin: bottom;
+}
 
 ::selection { background-color: #d49653; color: #2c2c2c; }
+::-moz-selection { background-color: #d49653; color: #2c2c2c; }
 
-/* --- HEADER SHRINK & STYLE --- */
+/* --- HEADER FIX (BASEADO NO INDEX) --- */
 .header {
   position: fixed !important; 
   top: 0; left: 0; width: 100%;
   z-index: 10000 !important; 
-  background-color: rgba(0, 0, 0, 0.2); /* Começa mais transparente */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.4s ease-in-out;
-  padding: 20px 0; /* Padding inicial */
+  background-color: transparent; /* Inicialmente transparente */
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+  padding: 20px 0;
 }
 
-/* Classe adicionada via JS ao rolar */
-.header.shrink {
-  padding: 10px 0;
+/* Classe ativada ao rolar a página */
+.header.is-scrolled {
   background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .header .logo img { 
   height: 40px; 
   width: auto; 
+  max-width: none; 
   transition: height 0.4s ease;
 }
 
-.header.shrink .logo img {
-  height: 32px; /* Logo diminui */
+.header.is-scrolled .logo img {
+  height: 32px; /* Encolhe levemente */
 }
 
 /* Força cor branca nos menus */
 .h-link div, .link_header div { color: #fff !important; }
 .h-link.w--current div { color: #d49653 !important; opacity: 1 !important; }
 
+/* Menu Mobile */
+.mobile_menu {
+  position: fixed; top: 0; right: 0; width: 100vw; height: 100vh;
+  transform: translateX(100%); opacity: 0; pointer-events: none;
+  transition: transform 280ms ease, opacity 280ms ease; z-index: 9999;
+}
+.mobile_menu.is-open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+body.menu-open { overflow: hidden; touch-action: none; }
+
+.hamburger_menu .line_1, .hamburger_menu .line_2 { transition: transform 280ms ease, opacity 180ms ease; transform-origin: center; background-color: #fff !important; }
+.hamburger_menu.is-open .line_1 { transform: translateY(4px) rotate(45deg); }
+.hamburger_menu.is-open .line_2 { transform: translateY(-4px) rotate(-45deg); }
+
+.mobile_menu_link { display: block !important; width: 100%; margin-bottom: 12px; padding: 15px 20px !important; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.03); border-radius: 4px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
+.mobile_menu_link div { font-family: 'Cinzel', serif !important; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+
 /* --- HERO SECTION --- */
 .hero_section {
-  height: 80vh;
+  height: 85vh;
   min-height: 600px;
   position: relative;
   display: flex;
@@ -84,10 +108,10 @@ html.w-editor [text-split] {opacity: 1;}
   z-index: 0;
 }
 
-.hero_bg_video img, .hero_bg_video video {
+.hero_bg_video img {
   width: 100%; height: 100%; object-fit: cover;
-  filter: brightness(0.6);
-  transform: scale(1.1); /* Leve zoom inicial */
+  filter: brightness(0.5);
+  transform: scale(1.05);
 }
 
 .hero_content {
@@ -97,11 +121,12 @@ html.w-editor [text-split] {opacity: 1;}
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 20px;
 }
 
 .h1_hero {
   font-family: 'Cinzel', serif;
-  font-size: clamp(3rem, 5vw, 5rem);
+  font-size: clamp(3.5rem, 6vw, 6rem);
   line-height: 1;
   text-transform: uppercase;
   color: #fff;
@@ -110,47 +135,20 @@ html.w-editor [text-split] {opacity: 1;}
 
 .hero_subtitle {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 2px;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: #d49653;
-  margin-top: 20px;
+  margin-top: 25px;
+  font-weight: 500;
 }
 
-/* --- INFO SECTION --- */
-.info_section {
-  padding: 80px 20px;
-  text-align: center;
-  background: linear-gradient(to bottom, #0c0c0c, #161616);
-}
-
-.info_grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  max-width: 1100px;
-  margin: 40px auto 0;
-}
-
-.info_item h3 {
-  font-family: 'Cinzel', serif;
-  font-size: 1.5rem;
-  color: #d49653;
-  margin-bottom: 10px;
-}
-
-.info_item p {
-  font-family: 'Outfit', sans-serif;
-  color: #ccc;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-/* --- AGENDA SLIDER (CARDS) --- */
+/* --- AGENDA SLIDER (CARDS PREMIUM) --- */
 .agenda_section {
-  padding: 50px 0 100px 0;
-  background-color: #161616;
+  padding: 100px 0;
+  background-color: #0c0c0c;
   overflow: hidden;
+  position: relative;
 }
 
 .agenda_container {
@@ -159,19 +157,30 @@ html.w-editor [text-split] {opacity: 1;}
   padding: 0 20px;
 }
 
+.section_title_wrapper {
+  margin-bottom: 60px; 
+  text-align: center;
+}
+
+.h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+}
+
 .agenda_card {
   position: relative;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  background-color: #1a1a1a;
-  height: 450px;
-  transition: transform 0.3s ease;
+  background-color: #141414;
+  height: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(255,255,255,0.05);
 }
 
 .card_image_wrapper {
   width: 100%;
-  height: 65%;
+  height: 70%;
   overflow: hidden;
   position: relative;
 }
@@ -180,41 +189,44 @@ html.w-editor [text-split] {opacity: 1;}
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Efeito de Zoom no Hover */
+/* Zoom na foto ao passar o mouse */
 .agenda_card:hover .card_image {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 .card_date_badge {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: #d49653;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(212, 150, 83, 0.95);
   color: #000;
-  padding: 8px 15px;
+  padding: 8px 16px;
   border-radius: 4px;
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   z-index: 2;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  backdrop-filter: blur(4px);
 }
 
 .card_info {
-  padding: 20px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 35%;
+  height: 30%;
   position: relative;
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 .artist_name {
   font-family: 'Cinzel', serif;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: #fff;
   margin-bottom: 5px;
   line-height: 1.1;
@@ -225,33 +237,40 @@ html.w-editor [text-split] {opacity: 1;}
   color: #888;
   font-size: 0.9rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
 }
 
 .location_badge {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-family: 'Outfit', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #d49653;
-  border: 1px solid rgba(212, 150, 83, 0.3);
-  padding: 5px 12px;
-  border-radius: 20px;
-  width: fit-content;
+}
+
+.location_badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background-color: #d49653;
+  border-radius: 50%;
 }
 
 /* Splide Customization */
-.splide__pagination { bottom: -30px; }
+.splide__pagination { bottom: -40px; }
+.splide__pagination__page { background: #444; opacity: 1; }
 .splide__pagination__page.is-active { background: #d49653; transform: scale(1.2); }
 
 /* Footer fix */
-.footer_logo_lg { width: 100%; display: flex; justify-content: center; margin: 40px 0; }
-.footer_espeto_logo { max-width: 420px; opacity: 0.08; }
+.footer_logo_lg { width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; grid-column: 1 / -1; margin: 40px 0; }
+.footer_espeto_logo { display: block; margin: 0 auto; max-width: 420px; width: 100%; height: auto; opacity: 0.08; }
 
 /* Responsividade */
 @media (max-width: 991px) {
-  .info_grid { grid-template-columns: 1fr; gap: 30px; }
-  .h1_hero { font-size: 2.5rem; }
+  .agenda_card { height: 450px; }
+  .h1_hero { font-size: 3rem; }
 }
 </style>
 </head>
@@ -312,10 +331,11 @@ html.w-editor [text-split] {opacity: 1;}
   </div>
 </div>
 
-<section class="hero_section">
+<section id="hero-section" class="hero_section">
   <div class="hero_bg_video">
     <img src="68a25157e0edb92947ffe4a2/68af49e2f002d2c50022786b_Story%20Image-min.avif" alt="Música ao vivo" loading="eager">
   </div>
+  
   <div class="hero_content">
     <div class="hero_headline">
       <h1 text-split="" letters-fade-in="" class="h1_hero">Música ao Vivo</h1>
@@ -327,32 +347,10 @@ html.w-editor [text-split] {opacity: 1;}
   </div>
 </section>
 
-<section class="info_section">
-  <h2 class="h2" text-split="" letters-fade-in="">Harmonia Perfeita</h2>
-  <div class="base_p" style="margin-top: 15px; max-width: 700px; margin-left: auto; margin-right: auto;">
-    Acompanhe o melhor da nossa gastronomia com uma trilha sonora selecionada. Artistas locais trazem o melhor da música para tornar sua noite inesquecível.
-  </div>
-  
-  <div class="info_grid">
-    <div class="info_item">
-      <h3>Jantar</h3>
-      <p>Todos os dias a partir das 19h30</p>
-    </div>
-    <div class="info_item">
-      <h3>Almoço</h3>
-      <p>Sexta, Sábado e Domingo a partir das 12h30</p>
-    </div>
-    <div class="info_item">
-      <h3>Couvert</h3>
-      <p>Valor artístico opcional revertido 100% aos músicos</p>
-    </div>
-  </div>
-</section>
-
 <section class="agenda_section">
   <div class="agenda_container">
-    <div style="margin-bottom: 40px; text-align: center;">
-      <h2 class="h2" style="font-size: 2.5rem;">Agenda da Semana</h2>
+    <div class="section_title_wrapper">
+      <h2 class="h2" text-split="" letters-fade-in="">Agenda da Semana</h2>
     </div>
 
     <div class="splide" id="music-slider">
@@ -505,7 +503,7 @@ html.w-editor [text-split] {opacity: 1;}
     </div>
 
     <div class="last_line">
-      <div class="copyright"><div class="txt_footer">© 2026 DIVINA PICANHA</div></div>
+      <div class="copyright"><div class="txt_footer">© <span data-year="">2026</span> DIVINA PICANHA</div></div>
       <div class="reserved"><div class="txt_footer">Todos os Direitos Reservados</div></div>
       <div class="made_by"><div class="txt_footer">Desenvolvido por <a href="#" target="_blank" class="spec_art_link">Erick Matias</a></div></div>
     </div>
@@ -523,69 +521,68 @@ html.w-editor [text-split] {opacity: 1;}
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 
 <script>
-  // 1. INICIALIZAÇÃO DO SLIDER (AGENDA)
-  document.addEventListener( 'DOMContentLoaded', function() {
-    var splide = new Splide( '#music-slider', {
-      type   : 'loop',        // Loop infinito
-      perPage: 3,             // 3 cards por vez no desktop
-      perMove: 1,
-      gap    : '30px',        // Espaço entre cards
-      autoplay: true,         // Passa sozinho
-      interval: 3000,         // 3 segundos
-      pauseOnHover: true,     // Para ao passar o mouse
-      arrows: false,          // Sem setas (clean)
-      pagination: true,       // Bolinhas embaixo
-      breakpoints: {
-        991: { perPage: 2, gap: '20px' }, // Tablet
-        767: { perPage: 1, gap: '15px', padding: '10%' } // Mobile (com leve visualização do próximo)
-      }
-    } );
-    splide.mount();
-  });
-
-  // 2. HEADER SHRINK ON SCROLL (Encolher menu)
-  window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 50) {
-      header.classList.add('shrink');
-    } else {
-      header.classList.remove('shrink');
-    }
-  });
-
-  // 3. ANIMAÇÕES GSAP (TEXTO FADE IN)
+  // 1. ANIMAÇÕES DE TEXTO GSAP (LETRAS SUBINDO) - IGUAL AO INDEX
   window.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(ScrollTrigger);
     
+    // Divide o texto em caracteres e palavras
     const typeSplit = new SplitType("[text-split]", {
       types: "words, chars",
       tagName: "span"
     });
 
+    // Função para criar o gatilho de scroll
+    function createScrollTrigger(triggerElement, timeline) {
+      ScrollTrigger.create({
+        trigger: triggerElement,
+        start: "top 80%", // Começa quando o elemento está 80% visível
+        onEnter: () => timeline.play()
+      });
+    }
+
+    // Aplica animação em cada elemento com o atributo letters-fade-in
     $("[letters-fade-in]").each(function () {
       const el = $(this);
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      });
+      const tl = gsap.timeline({ paused: true });
       
       tl.from(el.find(".char"), {
         opacity: 0,
-        y: 10,
-        duration: 0.4,
-        ease: "power1.out",
-        stagger: { amount: 0.3 }
+        y: 20, // Move de baixo para cima
+        duration: 0.6,
+        ease: "power2.out",
+        stagger: { amount: 0.4 } // Efeito cascata
       });
+      
+      createScrollTrigger(el, tl);
     });
     
-    // Mostra o texto após carregar para evitar flash
+    // Evita o "flash" de texto sem estilo
     gsap.set("[text-split]", { opacity: 1 });
   });
 
-  // 4. SMOOTH SCROLL (LENIS)
+  // 2. HEADER INTERATIVO (FICA ESCURO AO SAIR DO HERO)
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector(".header");
+    const hero = document.getElementById("hero-section");
+
+    if (header && hero) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          // Se o Hero NÃO está na tela (usuário rolou para baixo)
+          if (!entry.isIntersecting) {
+            header.classList.add("is-scrolled");
+          } else {
+            // Se o Hero está na tela (topo)
+            header.classList.remove("is-scrolled");
+          }
+        },
+        { threshold: 0.1 } // Dispara quando 10% do hero ainda está visível
+      );
+      observer.observe(hero);
+    }
+  });
+
+  // 3. SMOOTH SCROLL (LENIS)
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -596,6 +593,26 @@ html.w-editor [text-split] {opacity: 1;}
     requestAnimationFrame(raf);
   }
   requestAnimationFrame(raf);
+
+  // 4. SLIDER DA AGENDA (SPLIDE)
+  document.addEventListener( 'DOMContentLoaded', function() {
+    var splide = new Splide( '#music-slider', {
+      type   : 'loop',
+      perPage: 3,
+      perMove: 1,
+      gap    : '30px',
+      autoplay: true,
+      interval: 3500,
+      pauseOnHover: true,
+      arrows: false,
+      pagination: true,
+      breakpoints: {
+        991: { perPage: 2, gap: '20px' },
+        767: { perPage: 1, gap: '15px', padding: '5%' }
+      }
+    } );
+    splide.mount();
+  });
 
   // 5. MENU MOBILE
   document.addEventListener('DOMContentLoaded', () => {
@@ -619,6 +636,12 @@ html.w-editor [text-split] {opacity: 1;}
         });
       });
     }
+  });
+  
+  // Data Copyright Atualizada
+  document.addEventListener("DOMContentLoaded", () => {
+    const yearEl = document.querySelector("[data-year]");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   });
 </script>
 

@@ -33,6 +33,8 @@
     <link href="68a25157e0edb92947ffe4a2/68bf088790486c34f092093a_256x256.png" rel="apple-touch-icon"/>
     <link href="contato.html" rel="canonical"/>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -45,7 +47,6 @@
         "name": "Divina Picanha",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://cdn.prod.website-files.com/68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png"
         },
         "email": "contato@divinapicanha.com.br",
         "telephone": "+55-85-3279-1111",
@@ -149,14 +150,13 @@ html.w-editor [text-split] {opacity: 1;}
 .mapbox {
   width: 100%;
   height: 100%;
-  min-height: 450px; /* Garante altura se o container pai falhar */
+  min-height: 450px;
   border-radius: 12px;
   overflow: hidden;
+  z-index: 1; /* Garante que o mapa não fique escondido */
 }
 
-/* =========================
-   TÍTULOS – SEM CORTAR ACENTOS
-   ========================= */
+/* Títulos Hero */
 .hero_headline h1,
 .hero_headline .h1_hero,
 .hero_headline .middle {
@@ -168,7 +168,6 @@ html.w-editor [text-split] {opacity: 1;}
   margin-top: -0.12em !important;
 }
 
-/* Container do título */
 .hero_headline {
   position: relative;
   display: flex;
@@ -176,7 +175,6 @@ html.w-editor [text-split] {opacity: 1;}
   align-items: center;
 }
 
-/* Subtítulo */
 .flex_heading_new {
   display: flex;
   justify-content: center;
@@ -189,20 +187,14 @@ html.w-editor [text-split] {opacity: 1;}
   letter-spacing: 0.12em;
 }
 
-/* =========================
-   LOGO HEADER
-   ========================= */
+/* Header */
 .header .logo img {
   height: 40px;
   width: auto;
   max-width: none;
 }
 
-/* =========================
-   MENU MOBILE
-   ========================= */
-
-/* fechado */
+/* Mobile Menu */
 .mobile_menu {
   position: fixed;
   top: 0;
@@ -216,20 +208,17 @@ html.w-editor [text-split] {opacity: 1;}
   z-index: 9999;
 }
 
-/* aberto */
 .mobile_menu.is-open {
   transform: translateX(0);
   opacity: 1;
   pointer-events: auto;
 }
 
-/* trava scroll */
 body.menu-open {
   overflow: hidden;
   touch-action: none;
 }
 
-/* animação hamburger → X */
 .hamburger_menu .line_1,
 .hamburger_menu .line_2 {
   transition: transform 280ms ease, opacity 180ms ease;
@@ -244,18 +233,6 @@ body.menu-open {
   transform: translateY(-4px) rotate(-45deg);
 }
 
-/* reduz motion */
-@media (prefers-reduced-motion: reduce) {
-  .mobile_menu {
-    transition: none;
-  }
-  .hamburger_menu .line_1,
-  .hamburger_menu .line_2 {
-    transition: none;
-  }
-}
-
-/* ESTILIZAÇÃO DOS BOTÕES DO MENU MOBILE */
 .mobile_menu_link {
     display: block !important;
     width: 100%;
@@ -310,9 +287,7 @@ body.menu-open {
     border-color: #000000 !important;     
 }
 
-/* =========================
-   MOBILE – HERO CENTRAL IGUAL AO ORIGINAL
-   ========================= */
+/* Responsividade Mobile */
 @media (max-width: 768px) {
   .flex_heading_new {
     gap: 40px;
@@ -394,45 +369,32 @@ body.menu-open {
     justify-content: center !important;
   }
 }
-</style>
 
-<script defer src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-autovideo@1/autovideo.js"></script>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-<style>
-/* Estilo popups Leaflet para se parecer com o Mapbox antigo */
+/* Customização dos Popups do Mapa */
 .custom-leaflet-popup .leaflet-popup-content-wrapper {
-    border-radius: 3px;
-    box-shadow: none;
-    background-color: #d49653;
-    color: #161616;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    background-color: #1a1a1a;
+    color: #fff;
     padding: 0;
 }
 .custom-leaflet-popup .leaflet-popup-content {
-    margin: 12px 16px;
-    width: max-content !important;
+    margin: 15px;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.4;
 }
 .custom-leaflet-popup .leaflet-popup-tip {
-    background-color: #d49653;
+    background-color: #1a1a1a;
 }
-
-/* Manter o estilo invisível do alfinete caso use divs clicáveis */
-.custom-pin {
-    width: 44px;
-    height: 44px;
-    background-color: transparent;
-    color: transparent;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 44px;
-    font-size: 16px;
+.custom-leaflet-popup a {
+    color: #d49653;
+    text-decoration: none;
     font-weight: bold;
-    font-family: sans-serif;
-    cursor: pointer;
 }
 </style>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-autovideo@1/autovideo.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <script src="https://js.stripe.com/v3/" type="text/javascript"></script>
 <script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"BRL","symbol":"R$","decimal":",","fractionDigits":2,"group":".","template":"{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }}","hideDecimalForWholeNumbers":false};</script>
@@ -586,80 +548,78 @@ body.menu-open {
           <div id="map" class="mapbox"></div>
           
           <div class="embed_map_code w-embed w-script">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
             <script>
               function initMap() {
-                if (window.map) return; // Evita dupla inicialização
+                // Previne re-inicialização se o script rodar 2x
+                if (window.mapInstance) return;
 
-                // Inicializa o mapa Leaflet
-                window.map = L.map('map', {
-                  zoomControl: false
-                }).setView([-3.76, -38.52], 11);
+                var mapContainer = document.getElementById('map');
+                if (!mapContainer) return;
 
-                // Coloca o controle de zoom em cima e à esquerda (como era no Mapbox)
+                // Inicializa o mapa com CartoDB Dark Matter (não exige API Key, mais estável)
+                var map = L.map('map', {
+                  zoomControl: false,
+                  scrollWheelZoom: false
+                }).setView([-3.76, -38.52], 12);
+                
+                window.mapInstance = map;
+
                 L.control.zoom({ position: 'topleft' }).addTo(map);
 
-                // Desabilita o zoom de scroll do mouse
-                map.scrollWheelZoom.disable();
-
-                // Adiciona o provedor Stadia Maps com tema Dark (Leaflet JS)
-                L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-                  maxZoom: 20,
-                  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                // Camada do Mapa (CartoDB Dark Matter)
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                  attribution: '&copy; OpenStreetMap &copy; CARTO',
+                  subdomains: 'abcd',
+                  maxZoom: 20
                 }).addTo(map);
 
-                const mapLocations = [];
-                const items = document.querySelectorAll('.w-dyn-item');
-                
-                // Formata número das coordenadas
-                const parseNum = (v) => parseFloat(String(v).replace(',', '.'));
+                // Ícone Customizado (Bolinha Dourada)
+                var createIcon = function() {
+                    return L.divIcon({
+                        className: 'custom-pin-icon',
+                        html: '<div style="background-color: #d49653; width: 18px; height: 18px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"></div>',
+                        iconSize: [24, 24],
+                        iconAnchor: [12, 12],
+                        popupAnchor: [0, -12]
+                    });
+                };
 
-                items.forEach((item) => {
-                  const host = item.querySelector('.location');
+                // Adicionar Pontos
+                var items = document.querySelectorAll('.w-dyn-item');
+                var bounds = [];
+
+                items.forEach(function(item) {
+                  var host = item.querySelector('.location');
                   if (!host) return;
 
-                  const id = host.dataset.id;
-                  const lat = parseNum(host.dataset.lat);
-                  const lng = parseNum(host.dataset.lng);
-                  const html = item.querySelector('.location-map_card')?.innerHTML || '';
+                  var lat = parseFloat(host.getAttribute('data-lat').replace(',', '.'));
+                  var lng = parseFloat(host.getAttribute('data-lng').replace(',', '.'));
                   
-                  // O Leaflet precisa das coordenadas na ordem [Latitude, Longitude]
-                  const coords = [lat, lng];
-                  mapLocations.push({ id, coordinates: coords, description: html });
+                  if (!isNaN(lat) && !isNaN(lng)) {
+                      var content = item.querySelector('.location-map_card').innerHTML;
+                      var marker = L.marker([lat, lng], { icon: createIcon() }).addTo(map);
+                      
+                      marker.bindPopup(content, {
+                          closeButton: false,
+                          className: 'custom-leaflet-popup'
+                      });
 
-                  // Cria o ícone invisível para a bolinha customizada
-                  const customIcon = L.divIcon({
-                    className: 'custom-pin-wrapper',
-                    html: '<div class="custom-pin"></div>',
-                    iconSize: [44, 44],
-                    iconAnchor: [22, 22],
-                    popupAnchor: [0, -22] // Faz o popup abrir um pouco acima
-                  });
+                      marker.on('click', function() {
+                          map.flyTo([lat, lng], 15, { duration: 1 });
+                      });
 
-                  // Adiciona o marker na tela
-                  const marker = L.marker(coords, { icon: customIcon }).addTo(map);
-
-                  // Binda o popup HTML puxado da lista escondida e adiciona classe customizada do CSS
-                  marker.bindPopup(html, {
-                    closeButton: false,
-                    className: 'custom-leaflet-popup'
-                  });
-
-                  // Faz o mapa "voar" e dar zoom sempre que um pin é clicado
-                  marker.on('click', () => {
-                    map.flyTo(coords, 14, { duration: 0.7 });
-                  });
+                      bounds.push([lat, lng]);
+                  }
                 });
 
-                // Centraliza e ajusta o zoom baseado em todos os pins
-                if (mapLocations.length) {
-                  const bounds = L.latLngBounds(mapLocations.map(loc => loc.coordinates));
-                  map.fitBounds(bounds, { padding: [50, 50] });
+                // Centralizar mapa nos pontos
+                if (bounds.length > 0) {
+                    map.fitBounds(bounds, { padding: [80, 80] });
                 }
               }
 
-              // CORREÇÃO: Chamada da função para iniciar o mapa quando a página carregar
-              document.addEventListener('DOMContentLoaded', initMap);
+              // Garante que o mapa inicie apenas após o carregamento total
+              window.addEventListener('load', initMap);
             </script>
           </div>
         </div>

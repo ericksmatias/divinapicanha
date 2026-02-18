@@ -17,317 +17,173 @@
 <link href="68a25157e0edb92947ffe4a2/68bf08843cbc855ea7ecfe60_32x32.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="68a25157e0edb92947ffe4a2/68bf088790486c34f092093a_256x256.png" rel="apple-touch-icon"/>
 
+</script>
+
 <style>
-/* --- CSS GERAL & RESET --- */
+/* CSS GERAL E RESET */
 ::-webkit-scrollbar-button {transition: 0ms !important;width: 0px;height: 0px;}
 ::-webkit-scrollbar-track {background: transparent;}
 ::-webkit-scrollbar-thumb {-webkit-border-radius: 0px;border-radius: 0px;background: transparent;opacity:0;}
 ::-webkit-resizer {width: 0px;height: 0px;}
 ::-webkit-scrollbar {width: 0px;}
-
-body { background-color: #0c0c0c; color: #fff; }
-
-/* --- ANIMAÇÕES DE TEXTO (IGUAL AO INDEX) --- */
+  
 [text-split] {opacity: 0;}
 html.w-editor [text-split] {opacity: 1;}
 
-.word {
-	overflow: hidden;
-  padding-bottom: 0.1em;
-  margin-bottom: -0.1em;
-  transform-origin: bottom;
-}
-
+.word { overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; transform-origin: bottom; }
 ::selection { background-color: #d49653; color: #2c2c2c; }
 ::-moz-selection { background-color: #d49653; color: #2c2c2c; }
 
-/* --- HEADER FIX (BASEADO NO INDEX) --- */
-.header {
-  position: fixed !important; 
-  top: 0; left: 0; width: 100%;
-  z-index: 10000 !important; 
-  background-color: transparent; /* Inicialmente transparente */
-  transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
-  padding: 20px 0;
-}
-
-/* Classe ativada ao rolar a página */
-.header.is-scrolled {
-  background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.header .logo img { 
-  height: 40px; 
-  width: auto; 
-  max-width: none; 
-  transition: height 0.4s ease;
-}
-
-.header.is-scrolled .logo img {
-  height: 32px; /* Encolhe levemente */
-}
-
-/* Força cor branca nos menus */
-.h-link div, .link_header div { color: #fff !important; }
-.h-link.w--current div { color: #d49653 !important; opacity: 1 !important; }
-
-/* Menu Mobile */
-.mobile_menu {
-  position: fixed; top: 0; right: 0; width: 100vw; height: 100vh;
-  transform: translateX(100%); opacity: 0; pointer-events: none;
-  transition: transform 280ms ease, opacity 280ms ease; z-index: 9999;
-}
-.mobile_menu.is-open { transform: translateX(0); opacity: 1; pointer-events: auto; }
-body.menu-open { overflow: hidden; touch-action: none; }
-
-.hamburger_menu .line_1, .hamburger_menu .line_2 { transition: transform 280ms ease, opacity 180ms ease; transform-origin: center; background-color: #fff !important; }
-.hamburger_menu.is-open .line_1 { transform: translateY(4px) rotate(45deg); }
-.hamburger_menu.is-open .line_2 { transform: translateY(-4px) rotate(-45deg); }
-
-.mobile_menu_link { display: block !important; width: 100%; margin-bottom: 12px; padding: 15px 20px !important; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.03); border-radius: 4px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
-.mobile_menu_link div { font-family: 'Cinzel', serif !important; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
-
-/* --- HERO SECTION --- */
-.hero_section {
-  height: 85vh;
-  min-height: 600px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.hero_bg_video {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  z-index: 0;
-}
-
-.hero_bg_video img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: brightness(0.5);
-  transform: scale(1.05);
-}
-
-.hero_content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.h1_hero {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(3.5rem, 6vw, 6rem);
-  line-height: 1;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.hero_subtitle {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #d49653;
-  margin-top: 25px;
-  font-weight: 500;
-}
-
-/* --- AGENDA SLIDER (CARDS PREMIUM) --- */
-.agenda_section {
-  padding: 100px 0;
-  background-color: #0c0c0c;
-  overflow: hidden;
-  position: relative;
-}
-
-.agenda_container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.section_title_wrapper {
-  margin-bottom: 60px; 
-  text-align: center;
-}
-
-.h2 {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  color: #fff;
-}
-
-.agenda_card {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: #141414;
-  height: 500px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.card_image_wrapper {
-  width: 100%;
-  height: 70%;
-  overflow: hidden;
-  position: relative;
-}
-
-.card_image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Zoom na foto ao passar o mouse */
-.agenda_card:hover .card_image {
-  transform: scale(1.15);
-}
-
-.card_date_badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: rgba(212, 150, 83, 0.95);
-  color: #000;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  z-index: 2;
-  backdrop-filter: blur(4px);
-}
-
-.card_info {
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 30%;
-  position: relative;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.artist_name {
-  font-family: 'Cinzel', serif;
-  font-size: 1.8rem;
-  color: #fff;
-  margin-bottom: 5px;
-  line-height: 1.1;
-}
-
-.music_genre {
-  font-family: 'Outfit', sans-serif;
-  color: #888;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-
-.location_badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.8rem;
-  color: #d49653;
-}
-
-.location_badge::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background-color: #d49653;
-  border-radius: 50%;
-}
-
-/* Splide Customization */
-.splide__pagination { bottom: -40px; }
-.splide__pagination__page { background: #444; opacity: 1; }
-.splide__pagination__page.is-active { background: #d49653; transform: scale(1.2); }
-
-/* Footer fix */
 .footer_logo_lg { width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; grid-column: 1 / -1; margin: 40px 0; }
 .footer_espeto_logo { display: block; margin: 0 auto; max-width: 420px; width: 100%; height: auto; opacity: 0.08; }
 
-/* Responsividade */
-@media (max-width: 991px) {
-  .agenda_card { height: 450px; }
-  .h1_hero { font-size: 3rem; }
+.hero_headline h1, .hero_headline .h1_hero, .hero_headline .middle { font-family: 'Cinzel', serif !important; text-transform: uppercase; line-height: 0.9 !important; overflow: visible !important; padding-top: 0.12em !important; margin-top: -0.12em !important; }
+.hero_headline { position: relative; display: flex; flex-direction: column; align-items: center; }
+.flex_heading_new { display: flex; justify-content: center; width: 100%; text-align: center; }
+.since_1962 { white-space: nowrap; letter-spacing: 0.12em; }
+.header .logo img { height: 40px; width: auto; max-width: none; }
+
+/* MENU MOBILE */
+.mobile_menu { position: fixed; top: 0; right: 0; width: 100vw; height: 100vh; transform: translateX(100%); opacity: 0; pointer-events: none; transition: transform 280ms ease, opacity 280ms ease; z-index: 9999; }
+.mobile_menu.is-open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+body.menu-open { overflow: hidden; touch-action: none; }
+.hamburger_menu .line_1, .hamburger_menu .line_2 { transition: transform 280ms ease, opacity 180ms ease; transform-origin: center; }
+.hamburger_menu.is-open .line_1 { transform: translateY(4px) rotate(45deg); }
+.hamburger_menu.is-open .line_2 { transform: translateY(-4px) rotate(-45deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile_menu { transition: none; }
+  .hamburger_menu .line_1, .hamburger_menu .line_2 { transition: none; }
+}
+
+.mobile_menu_link { display: block !important; width: 100%; margin-bottom: 12px; padding: 15px 20px !important; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.03); border-radius: 4px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
+.mobile_menu_link.w--current { border-color: rgba(255, 255, 255, 0.4); background-color: rgba(255, 255, 255, 0.08); }
+.mobile_menu_link:active { background-color: rgba(255, 255, 255, 0.15); transform: scale(0.98); }
+.mobile_menu_link div { font-family: 'Cinzel', serif !important; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+
+.scroll-arrows { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; z-index: 99; }
+.scroll-arrows span { display: block; width: 15px; height: 15px; border-bottom: 3px solid #ffffff; border-right: 3px solid #ffffff; transform: rotate(45deg); margin: -8px auto; animation: arrows-jump 2s infinite; }
+.scroll-arrows span:nth-child(2) { animation-delay: -0.2s; }
+.scroll-arrows span:nth-child(3) { animation-delay: -0.4s; }
+
+@keyframes arrows-jump {
+    0% { opacity: 0; transform: rotate(45deg) translate(-10px, -10px); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: rotate(45deg) translate(10px, 10px); }
+}
+
+@media (max-width: 768px) {
+  .flex_heading_new { gap: 40px; margin-top: 12px; justify-content: center !important; text-align: center !important; }
+  .footer_espeto_logo { max-width: 260px; opacity: 0.06; }
+  h1, .h1, .middle { line-height: 0.9 !important; }
+  .header .logo img { height: 40px; }
+  .header { position: absolute !important; top: 0; left: 0; width: 100%; z-index: 10000 !important; background-color: transparent !important; }
+  .logo, .hamburger_menu { position: relative; z-index: 10001; }
+  .wrapper_hero.special_main { width: 100% !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important; padding-left: 16px !important; padding-right: 16px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; }
+  .hero_headline.brand-container { width: 100% !important; max-width: 100% !important; margin: 0 auto !important; display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; }
+  .h1_hero, .picanha-overlay { left: auto !important; right: auto !important; transform: none !important; }
+  .h1_hero { position: relative !important; width: 100% !important; margin: 0 !important; text-align: center !important; font-size: clamp(52px, 14vw, 92px) !important; line-height: 0.95 !important; }
+  .picanha-overlay { width: 100% !important; display: flex !important; justify-content: center !important; }
+  .desc_fs .base_p { text-align: justify; text-justify: inter-word; }
+}
+
+/* --- DRINKS SECTION (COMPACTO NO HEAD) --- */
+.drinks-section { width: 100%; padding: 60px 0; background-color: transparent; }
+.drinks-container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; flex-direction: column; align-items: center; }
+.drinks-text-wrapper { width: 100%; max-width: 800px; margin: 0 auto 50px auto; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.drinks-text-wrapper .h3, .drinks-text-wrapper .base_p { text-align: center !important; margin-left: auto !important; margin-right: auto !important; }
+.drinks-text-wrapper .base_box { margin-top: 15px; width: 100%; max-width: 650px; display: flex; justify-content: center; }
+.drinks-frames-row { display: flex; flex-direction: row; justify-content: center; gap: 30px; width: 100%; }
+.drink-frame-square { width: 100%; max-width: 500px; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 16px; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+@media (max-width: 768px) { .drinks-frames-row { flex-direction: column; align-items: center; } }
+.slider-track-anim { display: flex; width: 100%; height: 100%; }
+.slider-track-anim img { min-width: 100%; height: 100%; object-fit: cover; }
+.track-6-anim { animation: animSlide6 15s infinite ease-in-out; }
+.track-5-anim { animation: animSlide5 12.5s infinite ease-in-out; }
+@keyframes animSlide6 {
+  0%, 12%  { transform: translateX(0); }        
+  16%, 29% { transform: translateX(-100%); }   
+  33%, 46% { transform: translateX(-200%); }   
+  50%, 63% { transform: translateX(-300%); }   
+  66%, 79% { transform: translateX(-400%); }   
+  83%, 96% { transform: translateX(-500%); }   
+  100%     { transform: translateX(0); }        
+}
+@keyframes animSlide5 {
+  0%, 15%  { transform: translateX(0); }        
+  20%, 35% { transform: translateX(-100%); }   
+  40%, 55% { transform: translateX(-200%); }   
+  60%, 75% { transform: translateX(-300%); }   
+  80%, 95% { transform: translateX(-400%); }   
+  100%     { transform: translateX(0); }        
 }
 </style>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.2.2/dist/css/splide-core.min.css">
+<style>
+.splide__track { overflow: visible; }
+.splide__arrows, .splide__pagination { display: none; }
+</style>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-autovideo@1/autovideo.js"></script>
+<script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"BRL","symbol":"R$","decimal":",","fractionDigits":2,"group":".","template":"{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }}","hideDecimalForWholeNumbers":false};</script>
 </head>
-
-<body data-w-id="68af48dc6668f51c7e8eb9ce">
-
-<div class="header">
-  <div class="wrapper_header">
-    <div class="flex_header">
-      <div class="left-side">
-        <div class="flexbox">
-          <a href="index.html" class="logo w-inline-block">
-            <img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png" alt="Divina Picanha Logo"/>
-          </a>
-          <div class="menu_header">
-            <a href="index.html" class="h-link w-inline-block"><div>Início</div></a>
-            <a href="eventos.html" class="h-link w-inline-block"><div>Eventos</div></a>
-            <a href="area-kids.html" class="h-link w-inline-block"><div>Área Kids</div></a>
-            <a href="program.html" aria-current="page" class="h-link w-inline-block w--current"><div>Programação Musical</div></a>
-            <a href="sobre.html" class="h-link w-inline-block"><div>Sobre</div></a>
-            <a href="contato.html" class="h-link w-inline-block"><div>Contato</div></a>
+<body data-w-id="68a25157e0edb92947ffe4ad">
+  
+  <div class="header">
+    <div class="wrapper_header">
+      <div class="flex_header">
+        <div class="left-side">
+          <div class="flexbox">
+            <a href="index.html" aria-current="page" class="logo w-inline-block w--current">
+              <img src="68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png" loading="lazy" alt="Divina Picanha Logo"/>
+            </a>
+            <div class="menu_header">
+              <a href="index.html" aria-current="page" class="h-link w-inline-block w--current"><div>Início</div></a>
+              <a href="eventos.html" class="h-link w-inline-block"><div>Eventos</div></a>
+              <a href="area-kids.html" class="h-link w-inline-block"><div>Área Kids</div></a>
+              <a href="program.html" class="h-link w-inline-block"><div>Programação Musical</div></a>
+              <a href="sobre.html" class="h-link w-inline-block"><div>Sobre</div></a>
+              <a href="contato.html" class="h-link w-inline-block"><div>Contato</div></a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="right-side">
-        <div class="right_links">
-          <a href="https://heyzine.com/flip-book/dfcb818a5b.html" target="_blank" class="link_header w-inline-block">
-            <div>Menu</div>
-            <div class="icon_box"><img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" alt="Menu" class="image"/></div>
-          </a>
-          <div class="line_splitter"></div>
-          <a href="https://wa.me/5585996377401" target="_blank" class="link_header w-inline-block">
-            <div>Reservar</div>
-            <div class="icon_box"><img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" alt="Order" class="image"/></div>
-          </a>
-        </div>
-        <div class="hamburger_menu">
-          <div class="menu_txt close">Fechar</div>
-          <div class="menu_txt open">Menu</div>
-          <div class="hamburger_box"><div class="line_1"></div><div class="line_2"></div></div>
+        <div class="right-side">
+          <div class="right_links">
+            <a href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" target="_blank" class="link_header w-inline-block">
+              <div>Menu</div>
+              <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" loading="lazy" alt="Menu Icon" class="image"/></div>
+            </a>
+            <div class="line_splitter"></div>
+            <a href="https://www.ifood.com.br/delivery/fortaleza-ce/divina-picanha-cidade-dos-funcionarios/67b715be-fd94-4d46-9285-78f643700591" target="_blank" class="link_header w-inline-block">
+              <div>Peça agora</div>
+              <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" loading="lazy" alt="iFood Icon" class="image"/></div>
+            </a>
+          </div>
+          <div data-w-id="34cfe2f8-63a9-540e-1311-a4fee5f7e4ae" class="hamburger_menu">
+            <div class="menu_txt close">Fechar</div>
+            <div class="menu_txt open">Menu</div>
+            <div class="hamburger_box">
+              <div class="line_1"></div>
+              <div class="line_2"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="mobile_menu">
-  <div class="wrapper_menu">
-    <div class="list_menu">
-      <a href="index.html" class="mobile_menu_link w-inline-block"><div>início</div></a>
-      <a href="eventos.html" class="mobile_menu_link w-inline-block"><div>eventos</div></a>
-      <a href="area-kids.html" class="mobile_menu_link w-inline-block"><div>área kids</div></a>
-      <a href="program.html" aria-current="page" class="mobile_menu_link w-inline-block w--current"><div>programação musical</div></a>
-      <a href="sobre.html" class="mobile_menu_link w-inline-block"><div>sobre</div></a>
-      <a href="contato.html" class="mobile_menu_link w-inline-block"><div>contato</div></a>
-    </div>
-    <a href="https://wa.me/5585996377401" target="_blank" class="reserve_table w-inline-block"><div>reservar mesa</div></a>
+  <div class="mobile_menu">
+    <div class="wrapper_menu">
+      <div class="list_menu">
+        <a href="index.html" aria-current="page" class="mobile_menu_link w-inline-block w--current"><div>início</div></a>
+        <a href="eventos.html" class="mobile_menu_link w-inline-block"><div>eventos</div></a>
+        <a href="area-kids.html" class="mobile_menu_link w-inline-block"><div>área kids</div></a>
+        <a href="program.html" class="mobile_menu_link w-inline-block"><div>programação musical</div></a>
+        <a href="sobre.html" class="mobile_menu_link w-inline-block"><div>sobre</div></a>
+        <a href="contato.html" class="mobile_menu_link w-inline-block"><div>contato</div></a>
+      </div>
+      <a href="https://wa.me/5585996377401" target="_blank" class="reserve_table w-inline-block"><div>reservar mesa</div></a>
   </div>
 </div>
 

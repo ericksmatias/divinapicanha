@@ -2,16 +2,14 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
-<title>Programação</title>
-<meta content="Confira a agenda de música ao vivo da Divina Picanha. O melhor da MPB, Pop Rock e Sertanejo para acompanhar seu jantar." name="description"/>
+<title>Programação Musical - Divina Picanha</title>
+<meta content="Confira a agenda de música ao vivo da Divina Picanha." name="description"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <link href="68a25157e0edb92947ffe4a2/css/webflow%20divina%20picanha.css" rel="stylesheet" type="text/css"/>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap&subset=latin,latin-ext" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 
 <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
 <link href="68a25157e0edb92947ffe4a2/68bf08843cbc855ea7ecfe60_32x32.png" rel="shortcut icon" type="image/x-icon"/>
@@ -25,22 +23,21 @@
 ::-webkit-resizer {width: 0px;height: 0px;}
 ::-webkit-scrollbar {width: 0px;}
 
-body { background-color: #0c0c0c; color: #fff; }
-
-/* Animações de Texto */
-[text-split] {opacity: 0;}
-html.w-editor [text-split] {opacity: 1;}
-.word { overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; transform-origin: bottom; }
+body { background-color: #0c0c0c; color: #fff; margin: 0; overflow-x: hidden; }
 
 ::selection { background-color: #d49653; color: #2c2c2c; }
 
-/* --- HEADER FIX (CORRIGIDO: LOGO NÃO ENCOLHE MAIS) --- */
+/* --- HEADER INTACTO (Com lógica de Shrink) --- */
 .header { 
   transition: background-color 0.4s ease, padding 0.4s ease; 
+  position: fixed !important; 
+  top: 0; left: 0; width: 100%;
+  z-index: 10000 !important; 
+  background-color: transparent;
+  padding: 20px 0;
 }
 
 .header.is-scrolled {
-  position: fixed !important;
   background-color: rgba(0, 0, 0, 0.9) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -48,209 +45,145 @@ html.w-editor [text-split] {opacity: 1;}
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* LOGO FIXO - IGUAL AO CONTATO */
 .header .logo img { 
-  height: 40px !important; /* Força o tamanho correto */
+  height: 40px !important; 
   width: auto; 
   max-width: none; 
 }
 
-/* Força cor branca nos menus */
 .h-link div, .link_header div { color: #fff !important; }
 .h-link.w--current div { color: #d49653 !important; opacity: 1 !important; }
 
-/* --- HERO STYLE --- */
-.hero_section {
-  height: 80vh;
-  min-height: 600px;
+/* Menu Mobile Styles (Mantidos) */
+.mobile_menu { position: fixed; top: 0; right: 0; width: 100vw; height: 100vh; transform: translateX(100%); opacity: 0; pointer-events: none; transition: transform 280ms ease, opacity 280ms ease; z-index: 9999; }
+.mobile_menu.is-open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+body.menu-open { overflow: hidden; touch-action: none; }
+.hamburger_menu .line_1, .hamburger_menu .line_2 { transition: transform 280ms ease, opacity 180ms ease; transform-origin: center; background-color: #fff !important; }
+.hamburger_menu.is-open .line_1 { transform: translateY(4px) rotate(45deg); }
+.hamburger_menu.is-open .line_2 { transform: translateY(-4px) rotate(-45deg); }
+.mobile_menu_link { display: block !important; width: 100%; margin-bottom: 12px; padding: 15px 20px !important; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.03); border-radius: 4px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
+.mobile_menu_link div { font-family: 'Cinzel', serif !important; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
+
+/* --- IMMERSIVE SCROLL SECTION (O NOVO MIOLO) --- */
+.immersive_scroll_wrapper {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  width: 100%;
+  height: 350vh; /* Altura longa para permitir o scroll da animação */
 }
 
-.hero_bg_video {
+.sticky_container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Vídeo de Fundo */
+.bg_video_wrapper {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   z-index: 0;
 }
 
-.hero_bg_video img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: brightness(0.6);
-  transform: scale(1.05);
+.bg_video_wrapper video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4); /* Escurece para o texto aparecer */
 }
 
-.hero_content {
-  position: relative;
+/* Camadas de Texto */
+.content_layer {
+  position: absolute;
   z-index: 2;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
   padding: 0 20px;
+  opacity: 0; /* Começa invisível, GSAP controla */
+  will-change: transform, opacity;
 }
 
-.hero_headline h1, .hero_headline .h1_hero { 
-  font-family: 'Cinzel', serif !important; 
-  text-transform: uppercase; 
-  line-height: 1 !important; 
+/* Estilo do Título Principal (Fase 1) */
+.layer_1 { opacity: 1; } /* Esse começa visível */
+.h1_immersive {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  text-transform: uppercase;
   color: #fff;
-  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.hero_subtitle {
+.scroll_indicator {
+  margin-top: 30px;
   font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 3px;
+  font-size: 0.9rem;
+  letter-spacing: 4px;
   text-transform: uppercase;
   color: #d49653;
-  margin-top: 20px;
+  animation: bounce 2s infinite;
 }
 
-/* --- AGENDA / SLIDER STYLE --- */
-.agenda_section {
-  padding: 80px 0 120px 0;
-  background-color: #0c0c0c;
-  overflow: hidden;
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-10px);}
+  60% {transform: translateY(-5px);}
 }
 
-.agenda_container {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 20px;
+/* Estilo do Texto de Eventos (Fase 2 - Aparece por trás/zoom) */
+.layer_2 {
+  max-width: 900px;
 }
 
-.section_title_wrapper {
-  margin-bottom: 50px;
-  text-align: center;
-}
-
-.h2 {
+.h2_immersive {
   font-family: 'Cinzel', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  color: #fff;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #d49653;
+  margin-bottom: 30px;
 }
 
-/* Cards */
-.agenda_card {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: #141414;
-  height: 480px;
-  transition: transform 0.3s ease;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.card_image_wrapper {
-  width: 100%;
-  height: 65%;
-  overflow: hidden;
-  position: relative;
-}
-
-.card_image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.agenda_card:hover .card_image {
-  transform: scale(1.15); /* Zoom Effect */
-}
-
-.card_date_badge {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: #d49653;
-  color: #000;
-  padding: 6px 14px;
-  border-radius: 4px;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 700;
-  font-size: 0.85rem;
-  z-index: 2;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.card_info {
-  padding: 25px;
+.events_grid {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
-  height: 35%;
-  position: relative;
+  gap: 30px;
 }
 
-.artist_name {
+.event_item {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  padding: 20px 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  flex: 1 1 200px;
+}
+
+.event_day {
   font-family: 'Cinzel', serif;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   color: #fff;
   margin-bottom: 5px;
-  line-height: 1.1;
 }
 
-.music_genre {
+.event_desc {
   font-family: 'Outfit', sans-serif;
-  color: #999;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 12px;
+  font-size: 1rem;
+  color: #ccc;
 }
 
-.location_badge {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.8rem;
-  color: #d49653;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.location_badge::before { content: ''; display: block; width: 6px; height: 6px; background: #d49653; border-radius: 50%; }
-
-/* Splide Dots */
-.splide__pagination { bottom: -40px; }
-.splide__pagination__page.is-active { background: #d49653; transform: scale(1.2); }
-
-/* Footer fix */
+/* Footer Fix */
+.footer { position: relative; z-index: 5; background-color: #0c0c0c; }
 .footer_logo_lg { width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; grid-column: 1 / -1; margin: 40px 0; }
 .footer_espeto_logo { display: block; margin: 0 auto; max-width: 420px; width: 100%; height: auto; opacity: 0.08; }
 
-/* --- MENU MOBILE --- */
-.mobile_menu { position: fixed; top: 0; right: 0; width: 100vw; height: 100vh; transform: translateX(100%); opacity: 0; pointer-events: none; transition: transform 280ms ease, opacity 280ms ease; z-index: 9999; }
-.mobile_menu.is-open { transform: translateX(0); opacity: 1; pointer-events: auto; }
-body.menu-open { overflow: hidden; touch-action: none; }
-.hamburger_menu .line_1, .hamburger_menu .line_2 { transition: transform 280ms ease, opacity 180ms ease; transform-origin: center; }
-.hamburger_menu.is-open .line_1 { transform: translateY(4px) rotate(45deg); }
-.hamburger_menu.is-open .line_2 { transform: translateY(-4px) rotate(-45deg); }
-
-@media (prefers-reduced-motion: reduce) {
-  .mobile_menu { transition: none; }
-  .hamburger_menu .line_1, .hamburger_menu .line_2 { transition: none; }
-}
-
-.mobile_menu_link { display: block !important; width: 100%; margin-bottom: 12px; padding: 15px 20px !important; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.03); border-radius: 4px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
-.mobile_menu_link.w--current { border-color: rgba(255, 255, 255, 0.4); background-color: rgba(255, 255, 255, 0.08); }
-.mobile_menu_link:active { background-color: rgba(255, 255, 255, 0.15); transform: scale(0.98); }
-.mobile_menu_link div { font-family: 'Cinzel', serif !important; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #fff; }
-
-@media (max-width: 768px) {
-  .flex_heading_new { gap: 40px; margin-top: 12px; justify-content: center !important; text-align: center !important; }
-  .footer_espeto_logo { max-width: 260px; opacity: 0.06; }
-  .header .logo img { height: 40px; }
-  .header { position: absolute !important; top: 0; left: 0; width: 100%; z-index: 10000 !important; background-color: transparent !important; }
-  .logo, .hamburger_menu { position: relative; z-index: 10001; }
-  .h1_hero { font-size: 2.8rem; }
-}
 </style>
 </head>
 
-<body data-w-id="68a25157e0edb92947ffe4ad">
+<body data-w-id="program-body">
   
   <div class="header">
     <div class="wrapper_header">
@@ -258,13 +191,13 @@ body.menu-open { overflow: hidden; touch-action: none; }
         <div class="left-side">
           <div class="flexbox">
             <a href="index.html" class="logo w-inline-block">
-              <img src="68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png" loading="lazy" alt="Divina Picanha Logo"/>
+              <img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png" alt="Divina Picanha Logo"/>
             </a>
             <div class="menu_header">
               <a href="index.html" class="h-link w-inline-block"><div>Início</div></a>
               <a href="eventos.html" class="h-link w-inline-block"><div>Eventos</div></a>
               <a href="area-kids.html" class="h-link w-inline-block"><div>Área Kids</div></a>
-              <a href="program.html" aria-current="page" class="h-link w-inline-block w--current"><div>Programação</div></a>
+              <a href="program.html" aria-current="page" class="h-link w-inline-block w--current"><div>Programação Musical</div></a>
               <a href="sobre.html" class="h-link w-inline-block"><div>Sobre</div></a>
               <a href="contato.html" class="h-link w-inline-block"><div>Contato</div></a>
             </div>
@@ -272,14 +205,14 @@ body.menu-open { overflow: hidden; touch-action: none; }
         </div>
         <div class="right-side">
           <div class="right_links">
-            <a href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" target="_blank" class="link_header w-inline-block">
+            <a href="https://heyzine.com/flip-book/dfcb818a5b.html" target="_blank" class="link_header w-inline-block">
               <div>Menu</div>
-              <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" loading="lazy" alt="Menu Icon" class="image"/></div>
+              <div class="icon_box"><img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab6aad6d37e1980d319ac9_menu-icon.png" alt="Menu Icon" class="image"/></div>
             </a>
             <div class="line_splitter"></div>
-            <a href="https://www.ifood.com.br/delivery/fortaleza-ce/divina-picanha-cidade-dos-funcionarios/67b715be-fd94-4d46-9285-78f643700591" target="_blank" class="link_header w-inline-block">
-              <div>Peça agora</div>
-              <div class="icon_box"><img src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" loading="lazy" alt="iFood Icon" class="image"/></div>
+            <a href="https://wa.me/5585996377401" target="_blank" class="link_header w-inline-block">
+              <div>Reservar</div>
+              <div class="icon_box"><img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" alt="Reserve Icon" class="image"/></div>
             </a>
           </div>
           <div class="hamburger_menu">
@@ -301,7 +234,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
         <a href="index.html" class="mobile_menu_link w-inline-block"><div>início</div></a>
         <a href="eventos.html" class="mobile_menu_link w-inline-block"><div>eventos</div></a>
         <a href="area-kids.html" class="mobile_menu_link w-inline-block"><div>área kids</div></a>
-        <a href="program.html" aria-current="page" class="mobile_menu_link w-inline-block w--current"><div>programação</div></a>
+        <a href="program.html" aria-current="page" class="mobile_menu_link w-inline-block w--current"><div>programação musical</div></a>
         <a href="sobre.html" class="mobile_menu_link w-inline-block"><div>sobre</div></a>
         <a href="contato.html" class="mobile_menu_link w-inline-block"><div>contato</div></a>
       </div>
@@ -309,78 +242,41 @@ body.menu-open { overflow: hidden; touch-action: none; }
     </div>
   </div>
 
-  <section id="hero-section" class="hero_section">
-    <div class="hero_bg_video">
-      <img src="68a25157e0edb92947ffe4a2/68af49e2f002d2c50022786b_Story%20Image-min.avif" alt="Música ao vivo" loading="eager">
-    </div>
-    <div class="hero_content">
-      <div class="hero_headline">
-        <h1 text-split="" letters-fade-in="" class="h1_hero">Música ao Vivo</h1>
-        <h1 text-split="" letters-fade-in="" class="h1_hero" style="color: #d49653;">Sexta à Domingo</h1>
-      </div>
-      <div class="hero_subtitle" text-split="" letters-fade-in="">
-        MPB • Pop Rock • Voz e Violão
-      </div>
-    </div>
-  </section>
-
-  <section class="agenda_section">
-    <div class="agenda_container">
-      <div class="section_title_wrapper">
-        <h2 class="h2" text-split="" letters-fade-in="">Agenda da Semana</h2>
+  <div class="immersive_scroll_wrapper">
+    <div class="sticky_container">
+      
+      <div class="bg_video_wrapper">
+        <video autoplay loop muted playsinline>
+          <source src="68a25157e0edb92947ffe4a2fundoprogram.mp4" type="video/mp4">
+        </video>
       </div>
 
-      <div class="splide" id="music-slider">
-        <div class="splide__track">
-          <ul class="splide__list">
-            
-            <li class="splide__slide">
-              <div class="agenda_card">
-                <div class="card_date_badge">Hoje • 20:00</div>
-                <div class="card_image_wrapper">
-                  <img src=" " class="card_image" alt="Artista">
-                </div>
-                <div class="card_info">
-                  <div class="artist_name">Duo Acústico</div>
-                  <div class="music_genre">MPB & Clássicos</div>
-                  <div class="location_badge">Unidade Cidade</div>
-                </div>
-              </div>
-            </li>
+      <div class="content_layer layer_1">
+        <h1 class="h1_immersive">Música<br><span style="color: #d49653;">ao Vivo</span></h1>
+        <div class="scroll_indicator">Role para descobrir</div>
+      </div>
 
-            <li class="splide__slide">
-              <div class="agenda_card">
-                <div class="card_date_badge">Sexta • 20:30</div>
-                <div class="card_image_wrapper">
-                  <img src=" " class="card_image" alt="Artista">
-                </div>
-                <div class="card_info">
-                  <div class="artist_name">André Luvi</div>
-                  <div class="music_genre">Sertanejo Premium</div>
-                  <div class="location_badge">Unidade Meireles</div>
-                </div>
-              </div>
-            </li>
-
-            <li class="splide__slide">
-              <div class="agenda_card">
-                <div class="card_date_badge">Sábado • 13:00</div>
-                <div class="card_image_wrapper">
-                  <img src="  " class="card_image" alt="Artista">
-                </div>
-                <div class="card_info">
-                  <div class="artist_name">Samba da Vila</div>
-                  <div class="music_genre">Samba Raiz</div>
-                  <div class="location_badge">Unidade Itaperi</div>
-                </div>
-              </div>
-            </li>
-
-          </ul>
+      <div class="content_layer layer_2">
+        <h2 class="h2_immersive">Nossa Agenda</h2>
+        <div class="events_grid">
+          <div class="event_item">
+            <div class="event_day">Todos os Dias</div>
+            <div class="event_desc">Jantar a partir das 19:30</div>
+          </div>
+          <div class="event_item">
+            <div class="event_day">Sexta a Domingo</div>
+            <div class="event_desc">Almoço a partir das 12:30</div>
+          </div>
+          <div class="event_item">
+            <div class="event_day">Estilos</div>
+            <div class="event_desc">MPB • Pop Rock • Sertanejo</div>
+          </div>
         </div>
       </div>
+
     </div>
-  </section>
+  </div>
+
   <section class="footer">
     <div class="wrapper_footer">
       <div class="content_line">
@@ -401,24 +297,20 @@ body.menu-open { overflow: hidden; touch-action: none; }
           </div>
         </div>
 
-        <div id="w-node-fec112a8-dfda-1720-b88b-9e68da0a7250-da0a723d" class="middle_logo_footer">
+        <div class="middle_logo_footer">
           <img src="68a25157e0edb92947ffe4a2/pet.avif" loading="lazy" alt="divina picanha logo" class="image"/>
         </div>
 
         <div class="address_hours">
           <div class="flexbox_box footer_flex">
-            <div id="w-node-fec112a8-dfda-1720-b88b-9e68da0a7254-da0a723d" class="address_box address">
+            <div class="address_box address">
               <div class="title_footer">CONTATO</div>
               <div class="middle_links_footer">
-                <a fs-copyclip-message="Telefone copiado!" fs-copyclip-element="click" href="#" class="w-inline-block">
-                  <div class="txt_footer">(85) 3279-1111</div>
-                </a>
-                <a fs-copyclip-message="Telefone copiado!" fs-copyclip-element="click" href="#" class="w-inline-block">
-                  <div class="txt_footer">(85) 3249-4444</div>
-                </a>
+                <a href="#" class="w-inline-block"><div class="txt_footer">(85) 3279-1111</div></a>
+                <a href="#" class="w-inline-block"><div class="txt_footer">(85) 3249-4444</div></a>
               </div>
             </div>
-            <div id="w-node-fec112a8-dfda-1720-b88b-9e68da0a725c-da0a723d" class="right_fotoer_box newsletter">
+            <div class="right_fotoer_box newsletter">
               <div class="title_footer">INFORMAÇÕES</div>
               <div>
                 <div class="txt_footer">Vitrine Digital 2026</div>
@@ -430,40 +322,22 @@ body.menu-open { overflow: hidden; touch-action: none; }
       </div>
 
       <div class="links_footer">
-        <div id="w-node-fec112a8-dfda-1720-b88b-9e68da0a7265-da0a723d" class="links_footer_list">
+        <div class="links_footer_list">
           <div class="title_links"><div class="txt_footer">Navegação</div></div>
           <div class="footer_links">
             <a href="index.html" class="txt_footer w-inline-block"><div>Início</div></a>
             <a href="eventos.html" class="txt_footer w-inline-block"><div>Eventos</div></a>
             <a href="area-kids.html" class="txt_footer w-inline-block"><div>Área Kids</div></a>
-            <a href="program.html" class="txt_footer w-inline-block"><div>Programação Musical</div></a>
+            <a href="program.html" class="txt_footer w-inline-block"><div>Programação</div></a>
             <a href="sobre.html" class="txt_footer w-inline-block"><div>Sobre</div></a>
             <a href="contato.html" class="txt_footer w-inline-block"><div>Contato</div></a>
           </div>
         </div>
-
-        <div id="w-node-fec112a8-dfda-1720-b88b-9e68da0a7279-da0a723d" class="links_footer_list">
-          <div class="title_links"><div class="txt_footer">Termos Legais</div></div>
-          <div class="footer_links">
-            <a href="politica-de-privacidade.html" class="txt_footer w-inline-block"><div>Política de Privacidade</div></a>
-          </div>
-        </div>
-
-        <div class="empty_div"></div>
-
-        <div id="w-node-fec112a8-dfda-1720-b88b-9e68da0a7288-da0a723d" class="links_footer_list">
+        <div class="links_footer_list">
           <div class="title_links"><div class="txt_footer">Ações</div></div>
           <div class="footer_links">
-            <a href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" target="_blank" class="txt_footer w-inline-block"><div>Menu Completo</div></a>
+            <a href="https://heyzine.com/flip-book/dfcb818a5b.html" target="_blank" class="txt_footer w-inline-block"><div>Menu Completo</div></a>
             <a href="https://wa.me/5585996377401" target="_blank" class="txt_footer w-inline-block"><div>Reservas via WhatsApp</div></a>
-          </div>
-        </div>
-
-        <div id="w-node-fec112a8-dfda-1720-b88b-9e68da0a7299-da0a723d" class="links_footer_list">
-          <div class="title_links"><div class="txt_footer">Redes Sociais</div></div>
-          <div class="footer_links">
-            <a href="https://www.instagram.com/divina_picanha/" target="_blank" class="txt_footer w-inline-block"><div>Divina Cidade</div></a>
-            <a href="https://www.instagram.com/divinapicanhameireles/" target="_blank" class="txt_footer w-inline-block"><div>Divina Meireles</div></a>
           </div>
         </div>
       </div>
@@ -473,15 +347,9 @@ body.menu-open { overflow: hidden; touch-action: none; }
       </div>
 
       <div class="last_line">
-        <div class="copyright">
-          <div class="txt_footer">© <span data-year="">2026</span> DIVINA PICANHA</div>
-        </div>
-        <div class="reserved">
-          <div class="txt_footer">Todos os Direitos Reservados</div>
-        </div>
-        <div class="made_by">
-          <div class="txt_footer">Desenvolvido por <a href="#" target="_blank" class="spec_art_link">Erick Matias</a></div>
-        </div>
+        <div class="copyright"><div class="txt_footer">© 2026 DIVINA PICANHA</div></div>
+        <div class="reserved"><div class="txt_footer">Todos os Direitos Reservados</div></div>
+        <div class="made_by"><div class="txt_footer">Desenvolvido por <a href="#" target="_blank" class="spec_art_link">Erick Matias</a></div></div>
       </div>
     </div>
   </section>
@@ -491,84 +359,72 @@ body.menu-open { overflow: hidden; touch-action: none; }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/split-type"></script>
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@0.2.28/bundled/lenis.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-
 <script>
-  // 1. INICIALIZAÇÃO DO SLIDER (AGENDA)
-  document.addEventListener( 'DOMContentLoaded', function() {
-    var splide = new Splide( '#music-slider', {
-      type   : 'loop',
-      perPage: 3,
-      perMove: 1,
-      gap    : '30px',
-      autoplay: true,
-      interval: 3000,
-      pauseOnHover: true,
-      arrows: false,
-      pagination: true,
-      breakpoints: {
-        991: { perPage: 2, gap: '20px' },
-        767: { perPage: 1, gap: '15px', padding: '10%' }
-      }
-    } );
-    splide.mount();
-  });
+  gsap.registerPlugin(ScrollTrigger);
 
-  // 2. HEADER INTERATIVO (FICA ESCURO AO SAIR DO HERO)
-  document.addEventListener("DOMContentLoaded", () => {
-    const header = document.querySelector(".header");
-    const hero = document.getElementById("hero-section");
-
-    if (header && hero) {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry.isIntersecting) {
-            header.classList.add("is-scrolled");
-          } else {
-            header.classList.remove("is-scrolled");
-          }
-        },
-        { threshold: 0.1 }
-      );
-      observer.observe(hero);
+  // 1. ANIMAÇÃO DE SCROLL (THE FLIP EFFECT)
+  // Criamos uma timeline atrelada ao scroll do wrapper principal
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".immersive_scroll_wrapper",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1 // Suavidade no atrelamento do scroll
     }
   });
 
-  // 3. ANIMAÇÕES GSAP (TEXTO FADE IN)
-  window.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    const typeSplit = new SplitType("[text-split]", {
-      types: "words, chars",
-      tagName: "span"
-    });
-
-    $("[letters-fade-in]").each(function () {
-      const el = $(this);
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      });
-      
-      tl.from(el.find(".char"), {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: "power2.out",
-        stagger: { amount: 0.4 }
-      });
-    });
-    
-    gsap.set("[text-split]", { opacity: 1 });
+  // FASE 1: O Título inicial sobe e desaparece (Fade Out + Scale Down)
+  tl.to(".layer_1", {
+    opacity: 0,
+    scale: 0.8,
+    filter: "blur(10px)",
+    duration: 1,
+    ease: "power2.inOut"
   });
 
-  // 4. SMOOTH SCROLL (LENIS)
+  // FASE 2: O Texto de Eventos aparece vindo do fundo (Fade In + Scale Up)
+  tl.fromTo(".layer_2", 
+    { 
+      opacity: 0, 
+      scale: 1.2, 
+      filter: "blur(20px)" 
+    },
+    { 
+      opacity: 1, 
+      scale: 1, 
+      filter: "blur(0px)",
+      duration: 1,
+      ease: "power2.inOut"
+    }, 
+    "-=0.5" // Começa um pouco antes da fase anterior terminar (overlap)
+  );
+
+  // Pausa dramática com o texto na tela antes de soltar pro footer
+  tl.to(".layer_2", {
+    scale: 1, // Mantém escala (apenas consome tempo de scroll)
+    duration: 1
+  });
+
+  // FASE 3: Texto de Eventos sai para revelar o footer
+  tl.to(".layer_2", {
+    opacity: 0,
+    y: -50,
+    duration: 0.5
+  });
+
+  // 2. HEADER SHRINK EFFECT (Para ficar preto ao sair do topo)
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 50) {
+      header.classList.add('is-scrolled');
+    } else {
+      header.classList.remove('is-scrolled');
+    }
+  });
+
+  // 3. SMOOTH SCROLL (LENIS)
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -580,7 +436,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
   }
   requestAnimationFrame(raf);
 
-  // 5. MENU MOBILE
+  // 4. MENU MOBILE
   document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('.hamburger_menu');
     const menu = document.querySelector('.mobile_menu');
@@ -604,7 +460,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
     }
   });
   
-  // Data Copyright Atualizada
+  // COPYRIGHT YEAR
   document.addEventListener("DOMContentLoaded", () => {
     const yearEl = document.querySelector("[data-year]");
     if (yearEl) yearEl.textContent = new Date().getFullYear();

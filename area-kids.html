@@ -551,6 +551,27 @@ body.menu-open { overflow: hidden; touch-action: none; }
       });
     }
   });
+
+  window.addEventListener("DOMContentLoaded", () => {
+  const typeSplit = new SplitType("[text-split]", {
+    types: "words, chars",
+    tagName: "span"
+  });
+
+  $("[letters-fade-in]").each(function () {
+    const el = $(this);
+    gsap.from(el.find(".char"), {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      delay: 0.2,
+      ease: "power2.out",
+      stagger: { amount: 0.4 }
+    });
+  });
+  
+  gsap.set("[text-split]", { opacity: 1 });
+});
   
   // COPYRIGHT
   document.addEventListener("DOMContentLoaded", () => {

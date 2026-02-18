@@ -22,7 +22,7 @@
 ::-webkit-scrollbar-thumb {-webkit-border-radius: 0px;border-radius: 0px;background: transparent;opacity:0;}
 ::-webkit-resizer {width: 0px;height: 0px;}
 ::-webkit-scrollbar {width: 0px;}
-  
+
 [text-split] {opacity: 0;}
 html.w-editor [text-split] {opacity: 1;}
 
@@ -97,28 +97,28 @@ body.menu-open { overflow: hidden; touch-action: none; }
 .track-6-anim { animation: animSlide6 15s infinite ease-in-out; }
 .track-5-anim { animation: animSlide5 12.5s infinite ease-in-out; }
 @keyframes animSlide6 {
-  0%, 12%  { transform: translateX(0); }        
-  16%, 29% { transform: translateX(-100%); }   
-  33%, 46% { transform: translateX(-200%); }   
-  50%, 63% { transform: translateX(-300%); }   
-  66%, 79% { transform: translateX(-400%); }   
-  83%, 96% { transform: translateX(-500%); }   
-  100%     { transform: translateX(0); }        
+  0%, 12%  { transform: translateX(0); }
+  16%, 29% { transform: translateX(-100%); }
+  33%, 46% { transform: translateX(-200%); }
+  50%, 63% { transform: translateX(-300%); }
+  66%, 79% { transform: translateX(-400%); }
+  83%, 96% { transform: translateX(-500%); }
+  100%     { transform: translateX(0); }
 }
 @keyframes animSlide5 {
-  0%, 15%  { transform: translateX(0); }        
-  20%, 35% { transform: translateX(-100%); }   
-  40%, 55% { transform: translateX(-200%); }   
-  60%, 75% { transform: translateX(-300%); }   
-  80%, 95% { transform: translateX(-400%); }   
-  100%     { transform: translateX(0); }        
+  0%, 15%  { transform: translateX(0); }
+  20%, 35% { transform: translateX(-100%); }
+  40%, 55% { transform: translateX(-200%); }
+  60%, 75% { transform: translateX(-300%); }
+  80%, 95% { transform: translateX(-400%); }
+  100%     { transform: translateX(0); }
 }
 
 /* --- 1. ESTRUTURA DE SCROLL IMERSIVO (O MIOLO) --- */
 .immersive_scroll_wrapper {
   position: relative;
   width: 100%;
-  height: 350vh; /* Define a duração do scroll */
+  height: 350vh;
   background-color: #0c0c0c;
 }
 
@@ -136,18 +136,18 @@ body.menu-open { overflow: hidden; touch-action: none; }
 /* --- 2. VÍDEO DE FUNDO FIXO --- */
 .bg_video_wrapper {
   position: absolute;
-  top: 0; 
-  left: 0; 
-  width: 100%; 
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   z-index: 0;
 }
 
 .bg_video_wrapper video {
-  width: 100%; 
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.4); /* Escurece o vídeo para o texto aparecer */
+  filter: brightness(0.4);
 }
 
 /* --- 3. CAMADAS DE TEXTO (ANIMAÇÃO) --- */
@@ -157,14 +157,11 @@ body.menu-open { overflow: hidden; touch-action: none; }
   text-align: center;
   width: 100%;
   padding: 0 20px;
-  opacity: 0; /* Controlado via JS (GSAP) */
+  opacity: 0;
   will-change: transform, opacity;
 }
 
-/* Camada 1: Título Inicial */
-.layer_1 { 
-  opacity: 1; /* Começa visível */
-}
+.layer_1 { opacity: 1; }
 
 .h1_immersive {
   font-family: 'Cinzel', serif;
@@ -185,10 +182,8 @@ body.menu-open { overflow: hidden; touch-action: none; }
   animation: bounce 2s infinite;
 }
 
-/* Camada 2: Agenda / Informações */
-.layer_2 { 
-  max-width: 900px; 
-}
+/* Camada 2 */
+.layer_2 { max-width: 900px; }
 
 .h2_immersive {
   font-family: 'Cinzel', serif;
@@ -228,19 +223,14 @@ body.menu-open { overflow: hidden; touch-action: none; }
   color: #ccc;
 }
 
-/* Animação da setinha "Role para descobrir" */
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
   40% {transform: translateY(-10px);}
   60% {transform: translateY(-5px);}
 }
 
-/* --- 4. CABEÇALHO ESCURO AO ROLAR --- */
-/* Adicione a classe 'is-scrolled' via JS no header */
-.header {
-  transition: background-color 0.4s ease;
-}
-
+/* Header escuro ao rolar */
+.header { transition: background-color 0.4s ease; }
 .header.is-scrolled {
   background-color: rgba(0, 0, 0, 0.95) !important;
   border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -268,7 +258,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
             </div>
           </div>
         </div>
-        
+
         <div class="right-side">
           <div class="right_links">
             <a href="https://heyzine.com/flip-book/dfcb818a5b.html#page/1" target="_blank" class="link_header w-inline-block">
@@ -281,7 +271,7 @@ body.menu-open { overflow: hidden; touch-action: none; }
               <div class="icon_box"><img loading="lazy" src="68a25157e0edb92947ffe4a2/68ab6aad663e114eb608fb96_order-icon.png" class="image"/></div>
             </a>
           </div>
-          
+
           <div data-w-id="9bc12dab-df17-b710-61cc-660a5f09b787" class="hamburger_menu">
             <div class="menu_txt close">Fechar</div>
             <div class="menu_txt open">Menu</div>
@@ -339,16 +329,18 @@ body.menu-open { overflow: hidden; touch-action: none; }
 
   <div class="immersive_scroll_wrapper">
     <div class="sticky_container">
-      
+
       <div class="bg_video_wrapper">
         <video autoplay loop muted playsinline>
           <source src="68a25157e0edb92947ffe4a2/fundoprogram.mp4" type="video/mp4">
         </video>
       </div>
 
-    <h1 class="h1_immersive" text-split letters-fade-in>
-  Música<br>Ao Vivo
-</h1>
+      <div class="content_layer layer_1">
+        <!-- ✅ CORRIGIDO: removi o </span> sobrando -->
+        <h1 class="h1_immersive" text-split letters-fade-in>Música<br>Ao Vivo</h1>
+        <div class="scroll_indicator"></div>
+      </div>
 
       <div class="content_layer layer_2">
         <h2 class="h2_immersive" text-split letters-fade-in>Nossa Agenda</h2>
@@ -451,40 +443,21 @@ body.menu-open { overflow: hidden; touch-action: none; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@0.2.28/bundled/lenis.js"></script>
 
+<!-- ✅ ADICIONADO: SplitType (você usa SplitType no JS, então precisa carregar) -->
+<script src="https://unpkg.com/split-type"></script>
+
 <script>
-  // registra plugin (evita erro se ScrollTrigger não estiver pronto)
   gsap.registerPlugin(ScrollTrigger);
 
-  // quebra texto em letras
-  const typeSplit = new SplitType("[text-split]", {
-    types: "words, chars",
-    tagName: "span"
+  // 1. ANIMAÇÃO DE SCROLL (THE FLIP EFFECT)
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".immersive_scroll_wrapper",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1
+    }
   });
-
-  // anima letra por letra quando entra na tela
-  gsap.utils.toArray("[letters-fade-in]").forEach((el) => {
-    const chars = el.querySelectorAll(".char");
-
-    gsap.fromTo(
-      chars,
-      { opacity: 0, yPercent: 20 },
-      {
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.6,
-        ease: "power2.out",
-        stagger: 0.03,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none none"
-        }
-      }
-    );
-  });
-
-  // garante que nada fique invisível por causa do CSS [text-split]{opacity:0;}
-  gsap.set("[text-split]", { opacity: 1 });
 
   // FASE 1: Título desaparece
   tl.to(".layer_1", {
@@ -496,9 +469,9 @@ body.menu-open { overflow: hidden; touch-action: none; }
   });
 
   // FASE 2: Informações aparecem
-  tl.fromTo(".layer_2", 
+  tl.fromTo(".layer_2",
     { opacity: 0, scale: 1.2, filter: "blur(20px)" },
-    { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.inOut" }, 
+    { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.inOut" },
     "-=0.5"
   );
 
@@ -539,16 +512,16 @@ body.menu-open { overflow: hidden; touch-action: none; }
   document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('.hamburger_menu');
     const menu = document.querySelector('.mobile_menu');
-    
+
     if (btn && menu) {
       function toggleMenu() {
         menu.classList.toggle('is-open');
         btn.classList.toggle('is-open');
         document.body.classList.toggle('menu-open');
       }
-      
+
       btn.addEventListener('click', toggleMenu);
-      
+
       menu.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
           menu.classList.remove('is-open');
@@ -559,27 +532,29 @@ body.menu-open { overflow: hidden; touch-action: none; }
     }
   });
 
+  // 5. SPLIT + ANIMAÇÃO LETRA POR LETRA
   window.addEventListener("DOMContentLoaded", () => {
-  const typeSplit = new SplitType("[text-split]", {
-    types: "words, chars",
-    tagName: "span"
+    const typeSplit = new SplitType("[text-split]", {
+      types: "words, chars",
+      tagName: "span"
+    });
+
+    $("[letters-fade-in]").each(function () {
+      const el = $(this);
+      gsap.from(el.find(".char"), {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        delay: 0.2,
+        ease: "power2.out",
+        stagger: { amount: 0.4 }
+      });
+    });
+
+    // garante que o texto não fique invisível por causa do CSS [text-split]{opacity:0;}
+    gsap.set("[text-split]", { opacity: 1 });
   });
 
-  $("[letters-fade-in]").each(function () {
-    const el = $(this);
-    gsap.from(el.find(".char"), {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      delay: 0.2,
-      ease: "power2.out",
-      stagger: { amount: 0.4 }
-    });
-  });
-  
-  gsap.set("[text-split]", { opacity: 1 });
-});
-  
   // COPYRIGHT
   document.addEventListener("DOMContentLoaded", () => {
     const yearEl = document.querySelector("[data-year]");

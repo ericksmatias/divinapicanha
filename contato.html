@@ -47,6 +47,7 @@
         "name": "Divina Picanha",
         "logo": {
           "@type": "ImageObject",
+          "url": "https://cdn.prod.website-files.com/68a25157e0edb92947ffe4a2/68ab69d9e852bb71813eafdf_Logo.png"
         },
         "email": "contato@divinapicanha.com.br",
         "telephone": "+55-85-3279-1111",
@@ -370,7 +371,7 @@ body.menu-open {
   }
 }
 
-/* Customização dos Popups do Mapa */
+/* --- CORREÇÃO DAS CORES DOS POPUPS (Menu de Localização) --- */
 .custom-leaflet-popup .leaflet-popup-content-wrapper {
     border-radius: 4px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
@@ -386,8 +387,19 @@ body.menu-open {
 .custom-leaflet-popup .leaflet-popup-tip {
     background-color: #1a1a1a;
 }
-.custom-leaflet-popup a {
-    color: #d49653;
+
+/* FORÇA O TEXTO INTERNO DO POPUP A SER BRANCO */
+.custom-leaflet-popup .text-block, 
+.custom-leaflet-popup .locations-map_name,
+.custom-leaflet-popup .locations-map_population-wrapper div,
+.custom-leaflet-popup div {
+    color: #FFFFFF !important;
+}
+
+/* FORÇA O LINK (TELEFONE) A SER DOURADO */
+.custom-leaflet-popup a, 
+.custom-leaflet-popup a div {
+    color: #d49653 !important;
     text-decoration: none;
     font-weight: bold;
 }
@@ -519,7 +531,7 @@ body.menu-open {
               <div id="location-list" role="list" class="w-dyn-items">
                 <div role="listitem" class="w-dyn-item">
                     <div class="location-map_card">
-                        <div class="w-embed"><div class="location" data-id="cidade" data-lat="-3.7891" data-lng="-38.4872"></div></div>
+                        <div class="w-embed"><div class="location" data-id="cidade" data-lat="-3.7984" data-lng="-38.4998"></div></div>
                         <div class="locations-map_name"><div class="text-block">Av. Ulisses Bezerra, 1582 - Cidade dos Funcionários</div></div>
                         <div class="locations-map_population-wrapper"><div>Divina Picanha Cidade</div></div>
                         <div class="locations-map_website"><a href="tel:8532791111" class="phone_number_link w-inline-block"><div>(85) 3279-1111</div></a></div>
@@ -527,7 +539,7 @@ body.menu-open {
                 </div>
                 <div role="listitem" class="w-dyn-item">
                     <div class="location-map_card">
-                        <div class="w-embed"><div class="location" data-id="meireles" data-lat="-3.7324" data-lng="-38.4958"></div></div>
+                        <div class="w-embed"><div class="location" data-id="meireles" data-lat="-3.7285" data-lng="-38.4958"></div></div>
                         <div class="locations-map_name"><div class="text-block">Av. Senador Virgílio Távora, 211 - Meireles</div></div>
                         <div class="locations-map_population-wrapper"><div>Divina Picanha Meireles</div></div>
                         <div class="locations-map_website"><a href="tel:8532494444" class="phone_number_link w-inline-block"><div>(85) 3249-4444</div></a></div>
@@ -535,7 +547,7 @@ body.menu-open {
                 </div>
                 <div role="listitem" class="w-dyn-item">
                     <div class="location-map_card">
-                        <div class="w-embed"><div class="location" data-id="itaperi" data-lat="-3.7898" data-lng="-38.5535"></div></div>
+                        <div class="w-embed"><div class="location" data-id="itaperi" data-lat="-3.7960" data-lng="-38.5535"></div></div>
                         <div class="locations-map_name"><div class="text-block">Av. Dr. Silas Munguba, 2800 - Itaperi</div></div>
                         <div class="locations-map_population-wrapper"><div>Divina Picanha Grill</div></div>
                         <div class="locations-map_website"><a href="tel:8532791111" class="phone_number_link w-inline-block"><div>(85) 3279-1111</div></a></div>
@@ -550,7 +562,7 @@ body.menu-open {
           <div class="embed_map_code w-embed w-script">
             <script>
               function initMap() {
-                // Previne re-inicialização se o script rodar 2x
+                // Previne re-inicialização
                 if (window.mapInstance) return;
 
                 var mapContainer = document.getElementById('map');

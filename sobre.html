@@ -63,29 +63,6 @@ html.w-editor [text-split] {opacity: 1;}
 ::selection { background-color: #d49653; color: #2c2c2c; }
 ::-moz-selection { background-color: #d49653; color: #2c2c2c; }
 
-/* Correção da Animação ScrollFlip */
-body.scrollflip-relative [tr-scrollflip-sticky=true] { position: relative; }
-
-/* CORREÇÃO DE ALINHAMENTO DO HERO */
-.hero_headline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center !important;
-  justify-content: center;
-  width: 100%;
-  text-align: center;
-}
-
-.flex_heading, .flex_heading.our_story {
-  display: flex;
-  justify-content: center !important;
-  align-items: center;
-  width: 100%;
-  text-align: center;
-}
-
-/* FOOTER CORRIGIDO */
 .footer_logo_lg { width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; grid-column: 1 / -1; margin: 40px 0; }
 .footer_espeto_logo { display: block; margin: 0 auto; max-width: 420px; width: 100%; height: auto; opacity: 0.08; }
 
@@ -169,8 +146,6 @@ body.menu-open { overflow: hidden; touch-action: none; }
   80%, 95% { transform: translateX(-400%); }   
   100%     { transform: translateX(0); }        
 }
-</style>
-
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.2.2/dist/css/splide-core.min.css">
 <style>
 .splide__track { overflow: visible; }

@@ -411,20 +411,20 @@ body.menu-open { overflow: hidden; touch-action: none; }
 
       <div class="legal_block" text-split="" letters-fade-in="">
         <div class="heading_legal">
-          <div class="number_legals">05.</div>
-          <h2 class="h2 legal">Contato</h2>
+          <div class="number_legals">05.</div> <h2 class="h2 legal">Contato</h2>
         </div>
         <div class="txt_legal">
           <p>Se você tiver dúvidas sobre esta Política, entre em contato conosco:</p>
           <ul class="list_legal">
-            <a href="mailto:contato@divinapicanha.com.br">
-              contato@divinapicanha.com.br
-            </a>
-          </li>
-          <li>Endereço: Av. Ulisses Bezerra, 1582 - Cidade dos Funcionários, Fortaleza</li>
-          <li>Endereço: Av. Senador Virgílio Távora, 211 - Meireles, Fortaleza</li>
-          <li>Endereço: Av. Dr. Silas Munguba, 2800 - Itaperi, Fortaleza</li>
-        </ul>
+            <li>
+              <a href="mailto:contato@divinapicanha.com.br" style="color:#d49653; text-decoration:none;">
+                contato@divinapicanha.com.br
+              </a>
+            </li>
+            <li>Endereço: Av. Ulisses Bezerra, 1582 - Cidade dos Funcionários, Fortaleza</li>
+            <li>Endereço: Av. Senador Virgílio Távora, 211 - Meireles, Fortaleza</li>
+            <li>Endereço: Av. Dr. Silas Munguba, 2800 - Itaperi, Fortaleza</li>
+          </ul>
         </div>
       </div>
 
@@ -619,8 +619,6 @@ body.menu-open { overflow: hidden; touch-action: none; }
     lenis.raf(time * 1000);
   });
   gsap.ticker.lagSmoothing(0);
-}
-  requestAnimationFrame(raf);
 
   // 4. MENU MOBILE
   document.addEventListener('DOMContentLoaded', () => {

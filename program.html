@@ -120,8 +120,7 @@
 ::-webkit-resizer {width: 0px;height: 0px;}
 ::-webkit-scrollbar {width: 0px;}
 
-[text-split] {opacity: 0;}
-html.w-editor [text-split] {opacity: 1;}
+/* (regra de [text-split] movida para #split-safe-css, no fim do <head>) */
 
 .word { overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; transform-origin: bottom; }
 ::selection { background-color: #d49653; color: #2c2c2c; }
@@ -369,6 +368,37 @@ html body.menu-open .header {
   border-bottom-color: transparent !important;
 }
 </style>
+
+<!-- ===== ANTI-TEXTO-INVISÍVEL =====
+     O texto animado (atributo text-split) só é escondido quando o JS confirma que a animação vai rodar.
+     Se uma biblioteca falhar, o navegador for antigo ou o sistema estiver com "reduzir movimento", o texto aparece normalmente. -->
+<style id="split-safe-css">
+[text-split] { opacity: 1; }
+html.split-pending [text-split] { opacity: 0; }
+html.w-editor [text-split] { opacity: 1; }
+/* Se o GSAP não carregar, a seção imersiva vira um bloco estático e legível */
+html.no-gsap .immersive_scroll_wrapper { height: auto; }
+html.no-gsap .sticky_container { position: relative; height: auto; min-height: 100vh; flex-direction: column; padding: 120px 0 80px; }
+html.no-gsap .content_layer { position: relative; opacity: 1 !important; transform: none !important; filter: none !important; }
+html.no-gsap .layer_2 { margin-top: 48px; }
+</style>
+<script id="split-safe-js">
+(function () {
+  var h = document.documentElement, done = false, reduce = false;
+  try { reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+  window.__showSplitText = function () {
+    if (done) return;
+    done = true;
+    h.className = h.className.replace(/(^|\s)split-pending(?=\s|$)/g, "");
+  };
+  if (reduce) return;
+  h.className += " split-pending";
+  setTimeout(window.__showSplitText, 4000); /* rede de segurança final */
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () { if (!window.__splitReady) window.__showSplitText(); }, 400);
+  });
+})();
+</script>
 </head>
 
 <body data-w-id="program-body">
@@ -605,122 +635,109 @@ html body.menu-open .header {
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@0.2.28/bundled/lenis.js"></script>
 
 <!-- ✅ ADICIONADO: SplitType (você usa SplitType no JS, então precisa carregar) -->
-<script src="https://unpkg.com/split-type"></script>
+<script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
 
 <script>
-  gsap.registerPlugin(ScrollTrigger);
+  (function () {
+    var root = document.documentElement;
+    var hasGsap = !!(window.gsap && window.ScrollTrigger);
 
-  // 1. ANIMAÇÃO DE SCROLL (THE FLIP EFFECT)
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".immersive_scroll_wrapper",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1
-    }
-  });
-
-  // FASE 1: Título desaparece
-  tl.to(".layer_1", {
-    opacity: 0,
-    scale: 0.8,
-    filter: "blur(10px)",
-    duration: 1,
-    ease: "power2.inOut"
-  });
-
-  // FASE 2: Informações aparecem
-  tl.fromTo(".layer_2",
-    { opacity: 0, scale: 1.2, filter: "blur(20px)" },
-    { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.inOut" },
-    "-=0.5"
-  );
-
-  // Pausa dramática
-  tl.to(".layer_2", { scale: 1, duration: 1 });
-
-  // FASE 3: Informações saem
-  tl.to(".layer_2", {
-    opacity: 0,
-    y: -50,
-    duration: 0.5
-  });
-
-  // 2. HEADER COLOR CHANGE
-  window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 50) {
-      header.classList.add('is-scrolled');
-    } else {
-      header.classList.remove('is-scrolled');
-    }
-  });
-
-  // 3. SMOOTH SCROLL (Otimizado)
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smooth: true,
-    infinite: false
-  });
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-  // 4. MENU MOBILE
-  document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.querySelector('.hamburger_menu');
-    const menu = document.querySelector('.mobile_menu');
-
-    if (btn && menu) {
-      function toggleMenu() {
-        menu.classList.toggle('is-open');
-        btn.classList.toggle('is-open');
-        document.body.classList.toggle('menu-open');
+    // 1. ANIMAÇÃO DE SCROLL (só roda se o GSAP carregou; senão a seção vira um bloco estático legível)
+    if (hasGsap) {
+      try {
+        gsap.registerPlugin(ScrollTrigger);
+        var tl = gsap.timeline({
+          scrollTrigger: { trigger: ".immersive_scroll_wrapper", start: "top top", end: "bottom bottom", scrub: 1 }
+        });
+        // FASE 1: Título desaparece
+        tl.to(".layer_1", { opacity: 0, scale: 0.8, filter: "blur(10px)", duration: 1, ease: "power2.inOut" });
+        // FASE 2: Informações aparecem
+        tl.fromTo(".layer_2",
+          { opacity: 0, scale: 1.2, filter: "blur(20px)" },
+          { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.inOut" },
+          "-=0.5");
+        // Pausa dramática
+        tl.to(".layer_2", { scale: 1, duration: 1 });
+        // FASE 3: Informações saem
+        tl.to(".layer_2", { opacity: 0, y: -50, duration: 0.5 });
+      } catch (e) {
+        hasGsap = false;
+        try { gsap.set(".layer_1, .layer_2", { clearProps: "all" }); } catch (e2) {}
+        root.className += " no-gsap";
       }
+    } else {
+      root.className += " no-gsap";
+    }
 
-      btn.addEventListener('click', toggleMenu);
+    // 2. HEADER COLOR CHANGE
+    window.addEventListener("scroll", function () {
+      var header = document.querySelector(".header");
+      if (!header) return;
+      if (window.scrollY > 50) header.classList.add("is-scrolled");
+      else header.classList.remove("is-scrolled");
+    });
 
-      menu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          menu.classList.remove('is-open');
-          btn.classList.remove('is-open');
-          document.body.classList.remove('menu-open');
+    // 3. SMOOTH SCROLL (opcional: se o Lenis não carregar, a página segue funcionando com scroll normal)
+    if (window.Lenis) {
+      try {
+        var lenis = new Lenis({
+          duration: 1.2,
+          easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+          smooth: true,
+          infinite: false
+        });
+        var raf = function (time) { lenis.raf(time); requestAnimationFrame(raf); };
+        requestAnimationFrame(raf);
+      } catch (e) { if (window.console) console.error(e); }
+    }
+
+    // 4. MENU MOBILE
+    document.addEventListener("DOMContentLoaded", function () {
+      var btn = document.querySelector(".hamburger_menu");
+      var menu = document.querySelector(".mobile_menu");
+      if (!btn || !menu) return;
+      btn.addEventListener("click", function () {
+        menu.classList.toggle("is-open");
+        btn.classList.toggle("is-open");
+        document.body.classList.toggle("menu-open");
+      });
+      Array.prototype.forEach.call(menu.querySelectorAll("a"), function (a) {
+        a.addEventListener("click", function () {
+          menu.classList.remove("is-open");
+          btn.classList.remove("is-open");
+          document.body.classList.remove("menu-open");
         });
       });
-    }
-  });
-
-  // 5. SPLIT + ANIMAÇÃO LETRA POR LETRA
-  window.addEventListener("DOMContentLoaded", () => {
-    const typeSplit = new SplitType("[text-split]", {
-      types: "words, chars",
-      tagName: "span"
     });
 
-    $("[letters-fade-in]").each(function () {
-      const el = $(this);
-      gsap.from(el.find(".char"), {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        delay: 0.2,
-        ease: "power2.out",
-        stagger: { amount: 0.4 }
-      });
+    // 5. SPLIT + ANIMAÇÃO LETRA POR LETRA (com plano B: se algo falhar, o texto é exibido)
+    window.addEventListener("DOMContentLoaded", function () {
+      function showAll() { if (window.__showSplitText) window.__showSplitText(); }
+      try {
+        if (!window.gsap || !window.SplitType) { window.__splitReady = true; showAll(); return; }
+        new SplitType("[text-split]", { types: "words, chars", tagName: "span" });
+        Array.prototype.forEach.call(document.querySelectorAll("[letters-fade-in]"), function (el) {
+          var chars = el.querySelectorAll(".char");
+          if (!chars.length) return;
+          gsap.from(chars, { opacity: 0, y: 20, duration: 0.6, delay: 0.2, ease: "power2.out", stagger: { amount: 0.4 } });
+        });
+        gsap.set("[text-split]", { opacity: 1 });
+        window.__splitReady = true;
+        showAll();
+      } catch (err) {
+        window.__splitReady = true;
+        showAll();
+        try { var cs = document.querySelectorAll("[text-split] .char"); for (var i = 0; i < cs.length; i++) cs[i].style.opacity = 1; } catch (e2) {}
+        if (window.console) console.error(err);
+      }
     });
 
-    // garante que o texto não fique invisível por causa do CSS [text-split]{opacity:0;}
-    gsap.set("[text-split]", { opacity: 1 });
-  });
-
-  // COPYRIGHT
-  document.addEventListener("DOMContentLoaded", () => {
-    const yearEl = document.querySelector("[data-year]");
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-  });
+    // COPYRIGHT
+    document.addEventListener("DOMContentLoaded", function () {
+      var yearEl = document.querySelector("[data-year]");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    });
+  })();
 </script>
 
 

@@ -841,6 +841,7 @@ html body.menu-open .header {
 
   // 2. ANIMAÇÕES LEVES E FLUIDAS (SEM SPLIT-TYPE EM PARÁGRAFOS E SEM BLUR PESADO)
   window.addEventListener("DOMContentLoaded", () => {
+    if (!window.gsap || !window.ScrollTrigger) return; // sem GSAP: o conteúdo simplesmente aparece, sem animação
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.utils.toArray(".fade-up").forEach((el) => {
@@ -862,23 +863,24 @@ html body.menu-open .header {
   });
 
   // 3. SMOOTH SCROLL (LENIS)
-  const lenis = new Lenis({
-    duration: 1.15,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: "vertical",
-    gestureDirection: "vertical",
-    smooth: true,
-    mouseMultiplier: 1,
-    smoothTouch: false,
-    touchMultiplier: 2,
-    infinite: false,
-  });
-
-  function raf(time) {
-    lenis.raf(time);
+  if (window.Lenis) {
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: "vertical",
+      gestureDirection: "vertical",
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
     requestAnimationFrame(raf);
   }
-  requestAnimationFrame(raf);
 
   // 4. MENU MOBILE PADRONIZADO
   document.addEventListener("DOMContentLoaded", () => {

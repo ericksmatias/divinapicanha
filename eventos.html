@@ -135,8 +135,7 @@
 ::-webkit-resizer {width: 0px;height: 0px;}
 ::-webkit-scrollbar {width: 0px;}
   
-[text-split] {opacity: 0;}
-html.w-editor [text-split] {opacity: 1;}
+/* (regra de [text-split] movida para #split-safe-css, no fim do <head>) */
 
 .word {
 	overflow: hidden;
@@ -484,6 +483,32 @@ html body.menu-open .header {
   border-bottom-color: transparent !important;
 }
 </style>
+
+<!-- ===== ANTI-TEXTO-INVISÍVEL =====
+     O texto animado (atributo text-split) só é escondido quando o JS confirma que a animação vai rodar.
+     Se uma biblioteca falhar, o navegador for antigo ou o sistema estiver com "reduzir movimento", o texto aparece normalmente. -->
+<style id="split-safe-css">
+[text-split] { opacity: 1; }
+html.split-pending [text-split] { opacity: 0; }
+html.w-editor [text-split] { opacity: 1; }
+</style>
+<script id="split-safe-js">
+(function () {
+  var h = document.documentElement, done = false, reduce = false;
+  try { reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+  window.__showSplitText = function () {
+    if (done) return;
+    done = true;
+    h.className = h.className.replace(/(^|\s)split-pending(?=\s|$)/g, "");
+  };
+  if (reduce) return;
+  h.className += " split-pending";
+  setTimeout(window.__showSplitText, 4000); /* rede de segurança final */
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () { if (!window.__splitReady) window.__showSplitText(); }, 400);
+  });
+})();
+</script>
 </head>
 
 <body data-w-id="68ae5056bd348131b82ccf26">
@@ -1264,69 +1289,53 @@ html body.menu-open .header {
   });
 </script>
 
-<script src="https://unpkg.com/split-type"></script>
+<script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
 <script>
-  window.addEventListener("DOMContentLoaded", () => {
-    let mm = gsap.matchMedia();
-
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const typeSplit = new SplitType("[text-split]", {
-        types: "words, chars",
-        tagName: "span"
-      });
-
-      function createScrollTrigger(triggerElement, timeline) {
-        ScrollTrigger.create({
-          trigger: triggerElement,
-          start: "top 70%",
-          once: true,
-          onEnter: () => timeline.play()
-        });
+  /* Revelação letra por letra.
+     Qualquer falha (biblioteca fora do ar, navegador antigo, "reduzir movimento") => o texto é exibido, nunca fica invisível. */
+  window.addEventListener("DOMContentLoaded", function () {
+    function showAll() { if (window.__showSplitText) window.__showSplitText(); }
+    try {
+      var reduce = false;
+      try { reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+      if (reduce || !window.gsap || !window.ScrollTrigger || !window.SplitType) {
+        window.__splitReady = true; showAll(); return;
       }
 
-      $("[letters-fade-in]").each(function () {
-        const el = $(this);
-        const tl = gsap.timeline({ paused: true });
-        tl.from(el.find(".char"), {
-          opacity: 0,
-          duration: 0.25,
-          ease: "power1.out",
-          stagger: { amount: 0.8 }
-        });
-        createScrollTrigger(el, tl);
-        const rect = el[0].getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          tl.play();
-        }
+      gsap.registerPlugin(ScrollTrigger);
+      new SplitType("[text-split]", { types: "words, chars", tagName: "span" });
+
+      Array.prototype.forEach.call(document.querySelectorAll("[letters-fade-in]"), function (el) {
+        var chars = el.querySelectorAll(".char");
+        if (!chars.length) return;
+        var tl = gsap.timeline({ paused: true });
+        tl.from(chars, { opacity: 0, duration: 0.25, ease: "power1.out", stagger: { amount: 0.8 } });
+        ScrollTrigger.create({ trigger: el, start: "top 70%", once: true, onEnter: function () { tl.play(); } });
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) tl.play();
       });
 
-      $("[letters-fade-in-hover]").each(function () {
-        const el = $(this);
-        const chars = el.find(".char");
-
-        el.on("mouseenter", () => {
-          gsap.fromTo(chars, { opacity: 0 }, {
-            opacity: 1,
-            duration: 0.2,
-            ease: "power1.out",
-            stagger: { amount: 0.3 }
-          });
+      Array.prototype.forEach.call(document.querySelectorAll("[letters-fade-in-hover]"), function (el) {
+        var chars = el.querySelectorAll(".char");
+        el.addEventListener("mouseenter", function () {
+          gsap.fromTo(chars, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out", stagger: { amount: 0.3 } });
         });
-
-        el.on("mouseleave", () => {
-          gsap.to(chars, {
-            opacity: 1,
-            duration: 0.2,
-            ease: "power1.in",
-            stagger: { amount: 0.3 }
-          });
+        el.addEventListener("mouseleave", function () {
+          gsap.to(chars, { opacity: 1, duration: 0.2, ease: "power1.in", stagger: { amount: 0.3 } });
         });
       });
 
       gsap.set("[text-split]", { opacity: 1 });
-    });
+      window.__splitReady = true;
+      showAll();
+    } catch (err) {
+      window.__splitReady = true;
+      showAll();
+      try { var cs = document.querySelectorAll("[text-split] .char"); for (var i = 0; i < cs.length; i++) cs[i].style.opacity = 1; } catch (e2) {}
+      if (window.console) console.error(err);
+    }
   });
 </script>
 

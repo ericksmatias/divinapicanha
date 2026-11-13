@@ -1,43 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.divinapicanha.com.br/</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/restaurante/fachada-meireles.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/restaurante/salao-mesa-posta.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/costela-na-brasa.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/camarao-empanado.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/drink-gin-bulldog.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/fettuccine-grelhado.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/sobremesa-torta-banana.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/file-pure-arroz.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/cortes-fatiados.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/prato-grelhado-risoto.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/sobremesa-sorvete-bolo.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/cardapio/linguica-espiral.avif</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.divinapicanha.com.br/sobre.html</loc>
+    <loc>https://www.divinapicanha.com.br/sobre</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/restaurante/entrada-tapete-vermelho.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/restaurante/fachada-noite.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/restaurante/salao-arco-noite.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/restaurante/salao-mesa-posta.avif</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://www.divinapicanha.com.br/program</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.divinapicanha.com.br/program.html</loc>
+    <loc>https://www.divinapicanha.com.br/area-kids</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.divinapicanha.com.br/area-kids.html</loc>
+    <loc>https://www.divinapicanha.com.br/eventos</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/eventos/grand-divina-area-externa.avif</image:loc></image:image>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/eventos/casamento-noiva.avif</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.divinapicanha.com.br/eventos.html</loc>
+    <loc>https://www.divinapicanha.com.br/contato</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.divinapicanha.com.br/assets/img/restaurante/letreiro-divina-picanha.avif</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.divinapicanha.com.br/contato.html</loc>
-    <lastmod>2026-11-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.divinapicanha.com.br/politica-de-privacidade.html</loc>
+    <loc>https://www.divinapicanha.com.br/politica-de-privacidade</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
